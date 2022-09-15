@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CamScript : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class CamScript : MonoBehaviour
     void Update()
     {
         CamMovement();
+        Vector3Int cellPosition = gridLayout.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Debug.Log(cellPosition.GetType());
     }
     private void CamMovement()
     {
