@@ -11,6 +11,9 @@ public class CamScript : MonoBehaviour
     private int camMinSize = 2;
     private int camMaxSize = 10;
 
+    [SerializeField]
+    GridLayout gridLayout;
+
     void Update()
     {
         CamMovement();

@@ -6,19 +6,17 @@ public class PlayerUnitMovement : MobBase
 {
     void Update()
     {
-        MobMovement();
+        UnitMovement();
     }
-    private void MobMovement()
+    protected override void UnitMovement()
     {
-        bool isMoving = false;
-        if (Input.GetMouseButton(1))
+        if(Input.GetMouseButtonUp(0))
         {
-            isMoving = true;
-        }
-        while (isMoving)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 5 * Time.deltaTime);
-            if (transform.position == Camera.main.ScreenToWorldPoint(Input.mousePosition)) isMoving = false;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GridLayout gridLayout = transform.parent.GetComponentInParent<GridLayout>();
+            Vector3Int cellPosition = gridLayout.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            transform.position = gridLayout.CellToWorld(cellPosition);
+            transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f);
         }
     }
 }
