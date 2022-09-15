@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class PlayerUnitMovement : MobBase
 {
+    Vector3 targetPos = new Vector3();
+    bool isMoving = false;
     void Update()
     {
         UnitMovement();
     }
     protected override void UnitMovement()
     {
-        if(Input.GetMouseButtonUp(0))
+        GridLayout gridLayout;
+        Vector3Int cellPosition;
+        if (Input.GetMouseButtonUp(0))
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GridLayout gridLayout = transform.parent.GetComponentInParent<GridLayout>();
-            Vector3Int cellPosition = gridLayout.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            transform.position = gridLayout.CellToWorld(cellPosition);
-            transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f);
+            gridLayout = transform.parent.GetComponentInParent<GridLayout>();
+            cellPosition = gridLayout.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+            targetPos = gridLayout.CellToWorld(cellPosition);
+            targetPos = new Vector2(targetPos.x + 0.5f, targetPos.y + 0.5f);
+            isMoving = true;
         }
+        if (isMoving && transform.position != targetPos) transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        //else isMoving = false;
     }
 }

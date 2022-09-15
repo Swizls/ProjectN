@@ -2,7 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MobBase : MonoBehaviour
+public class MobBase : MonoBehaviour
 {
-    protected abstract void UnitMovement();
+    private int healthPoints = 100;
+    protected float speed = 5f;
+
+    private void Update()
+    {
+        Death();
+    }
+    protected virtual void UnitMovement() 
+    {
+    }
+    void Death()
+    {
+        if(healthPoints <=0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
