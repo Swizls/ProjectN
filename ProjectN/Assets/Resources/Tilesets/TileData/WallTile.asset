@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9cde0426e1a5f4887144fbaecb4d42, type: 3}
+  m_Name: WallTile
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 3e203d1dde0055f499aa16df5158233c, type: 2}
+  - {fileID: 11400000, guid: cb92e95a02e83604784fe9b19884464b, type: 2}
+  - {fileID: 11400000, guid: ea042b2afa9b0584787e29b3be7b94f5, type: 2}
+  - {fileID: 11400000, guid: 726a24df7c0fa6d44ba8734561c1aced, type: 2}
+  - {fileID: 11400000, guid: 453942c42a207db4cb39dcc0a5a3a881, type: 2}
+  - {fileID: 11400000, guid: 3933782c20558304c8634dff12f632ec, type: 2}
+  - {fileID: 11400000, guid: a14f0b23eecaf824fafea2473071171f, type: 2}
+  - {fileID: 11400000, guid: 4b87e3566739e8a46ac070cd32a8b385, type: 2}
+  isWalkable: 0

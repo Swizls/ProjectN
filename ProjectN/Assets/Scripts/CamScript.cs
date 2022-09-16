@@ -18,8 +18,6 @@ public class CamScript : MonoBehaviour
     void Update()
     {
         CamMovement();
-        Vector3Int cellPosition = gridLayout.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        Debug.Log(cellPosition.GetType());
     }
     private void CamMovement()
     {
