@@ -5,11 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class PlayerUnitControl : MobBase
 {
+    MapManager mapManager;
     GridLayout gridLayout;
     bool isMoving = false;
     void Update()
     {
         gridLayout = transform.parent.GetComponent<GridLayout>();
+        mapManager = FindObjectOfType<MapManager>();
         UnitMovement();
     }
 
@@ -18,7 +20,7 @@ public class PlayerUnitControl : MobBase
     {
         Tilemap tileMap;
         Vector3Int cellPosition;
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && mapManager.isWalkable(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
             isMoving = true;
             tileMap = GameObject.FindGameObjectWithTag("Floor").GetComponent<Tilemap>();
