@@ -46,6 +46,7 @@ public class MapManager : MonoBehaviour
         Vector3Int cellPosition = tileMap.WorldToCell(worldPos);
         TileBase clickedTile = tileMap.GetTile(cellPosition);
 
+        if (clickedTile == null) return false;
         return dataFromTiles[clickedTile].isWalkable;
     }
 }
