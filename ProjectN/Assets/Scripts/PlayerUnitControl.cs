@@ -6,12 +6,7 @@ using UnityEngine.Tilemaps;
 public class PlayerUnitControl : MobBase
 {
     GridLayout gridLayout;
-    private static bool isMoving = false;
-    public static bool IsMoving
-    {
-        get { return isMoving; }
-        set { isMoving = value; }
-    }
+
     private void Start()
     {
         gridLayout = transform.parent.GetComponent<GridLayout>();
@@ -22,11 +17,7 @@ public class PlayerUnitControl : MobBase
     }
     private void FixedUpdate()
     {
-        if (isMoving)
-        {
-            StartCoroutine(UnitMovement(PathCalc(cellPosition)));
-            Debug.Log(isMoving);
-        }
+
     }
 
 
@@ -37,6 +28,7 @@ public class PlayerUnitControl : MobBase
         {
             isMoving = true;
             cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            StartCoroutine(UnitMovement(PathCalc(cellPosition)));
         }
     }
 }

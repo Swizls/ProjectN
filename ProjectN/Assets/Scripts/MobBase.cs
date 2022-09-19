@@ -8,6 +8,7 @@ public class MobBase : MonoBehaviour
     private int healthPoints = 100;
     [SerializeField]
     protected float speed = 5f;
+    protected static bool isMoving = false;
     private Vector3Int mobPos;
     protected static MapManager mapManager;
     protected static Tilemap tileMap;
@@ -25,24 +26,21 @@ public class MobBase : MonoBehaviour
     {
         //while (transform.position != waypoints[waypoints.Count - 1])
         //{
-        //    for (; transform.position != waypoints[waypoints.Count - 1];)
+        //    for (int i = 0; i < waypoints.Count;)
         //    {
-        //        for (int i = 0; i < waypoints.Count;)
-        //        {
-        //            if (transform.position != waypoints[i]) transform.position = Vector2.MoveTowards(transform.position, waypoints[i], speed * Time.deltaTime);
-        //            else i++;
-        //            yield return new WaitForSeconds(1);
-        //        }
+        //        if (transform.position != waypoints[i]) transform.position = Vector2.MoveTowards(transform.position, waypoints[i], speed);
+        //        else i++;
+        //        yield return new WaitForSeconds(1);
         //    }
         //}
         foreach (Vector3 waypoint in waypoints)
         {
             if (transform.position != waypoints[waypoints.Count - 1])
             {
-                transform.position = Vector2.MoveTowards(transform.position, waypoint, speed * Time.deltaTime);
-                yield return new WaitForSeconds(1);
+                transform.position = Vector2.MoveTowards(transform.position, waypoint, speed);
+                yield return new WaitForSeconds(0.1f);
             }
-            else PlayerUnitControl.IsMoving = false;
+            else isMoving = false;
         }
     }
     void Death()
