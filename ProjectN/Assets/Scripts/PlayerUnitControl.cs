@@ -18,26 +18,25 @@ public class PlayerUnitControl : MobBase
     }
     void Update()
     {
-        UnitMovement();
+        UnitControl();
+    }
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            StartCoroutine(UnitMovement(PathCalc(cellPosition)));
+            Debug.Log(isMoving);
+        }
     }
 
-    
+
     Vector3Int cellPosition;
-    Vector3 targetPos = new Vector3();
-    protected override void UnitMovement()
+    protected void UnitControl()
     {
         if (Input.GetMouseButtonUp(0) && mapManager.isWalkable(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
             isMoving = true;
             cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            
-
-            targetPos = tileMap.GetCellCenterWorld(cellPosition);
         }
-        if (isMoving)
-        {
-            pathCalc(cellPosition);
-        }
-
     }
 }

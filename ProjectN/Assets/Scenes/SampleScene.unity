@@ -2685,7 +2685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e846275f2c7514a98f8051cd053898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMap: {fileID: 0}
+  tileMap: {fileID: 449749818}
   tileDatas:
   - {fileID: 11400000, guid: 410f8c4ced8f8a84694b330ee8f9389f, type: 2}
   - {fileID: 11400000, guid: d6987606aba5c224796a461f988bdeb1, type: 2}
@@ -2713,6 +2713,14 @@ PrefabInstance:
     - target: {fileID: 568893800191457386, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
       propertyPath: m_Name
       value: PlayerUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204531390163579740, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963979496997855299, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
+      propertyPath: speed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8115760274899358186, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
       propertyPath: m_RootOrder

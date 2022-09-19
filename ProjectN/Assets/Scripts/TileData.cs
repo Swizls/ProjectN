@@ -8,14 +8,4 @@ public class TileData : ScriptableObject
 {
     public TileBase[] tiles;
     public bool isWalkable;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
