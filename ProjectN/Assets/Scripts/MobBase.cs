@@ -54,19 +54,33 @@ public class MobBase : MonoBehaviour
     {
         List<Vector3> path = new List<Vector3>();
         Vector3Int targetCell = tileMap.WorldToCell(targetPos);
-        Vector3 cellPosInWorld = new Vector3();
-        mobPos = tileMap.WorldToCell(transform.position);
+        Vector3Int currentWaypoint = tileMap.WorldToCell(transform.position);
+        Vector3Int nextWaypointCheck;
+        Vector3Int nextWaypoint = currentWaypoint;
+        bool isTargetReachable = true;
 
-
+        while (nextWaypoint != targetCell && isTargetReachable)
         Vector3Int waypointProjection = mobPos;
         while (waypointProjection != targetCell)
         {
-            if (mobPos.x > targetCell.x)
+            currentWaypoint = nextWaypoint;
+            if (currentWaypoint.x != targetCell.x)
             {
-                mobPos = new Vector3Int(mobPos.x - 1, mobPos.y, 0);
-                cellPosInWorld = tileMap.GetCellCenterWorld(mobPos);
+                int direction = currentWaypoint.x > targetCell.x ? -1 : 1;
+                nextWaypointCheck = new Vector3Int(nextWaypoint.x + direction, nextWaypoint.y, 0);
+                if (!mapManager.isWalkable(tileMap.CellToWorld(nextWaypointCheck)))
+                {
+                    for (int i = 1; i < 20; i++)
+                    {
+                        nextWaypointCheck = new Vector3Int(nextWaypoint.x + direction, nextWaypoint.y + i, 0);
+                        if (mapManager.isWalkable(tileMap.CellToWorld(nextWaypointCheck))) break;
+                        nextWaypointCheck = new Vector3Int(nextWaypoint.x + direction, nextWaypoint.y - i, 0);
+                        if (mapManager.isWalkable(tileMap.CellToWorld(nextWaypointCheck))) break;
             }
-            else if (mobPos.x < targetCell.x)
+                }
+                if (mapManager.isWalkable(tileMap.CellToWorld(nextWaypointCheck))) nextWaypoint = new Vector3Int(nextWaypointCheck.x, nextWaypointCheck.y, 0);
+                else isTargetReachable = false;
+            }
             {
                 mobPos = new Vector3Int(mobPos.x + 1, mobPos.y, 0);
                 cellPosInWorld = tileMap.GetCellCenterWorld(mobPos);
