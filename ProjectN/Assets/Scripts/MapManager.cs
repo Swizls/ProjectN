@@ -24,23 +24,6 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        //if (Input.GetMouseButtonUp(0))
-        //{
-        //    Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //    TileBase clickedTile = tileMap.GetTile(cellPosition);
-
-        //    bool isWalkable = dataFromTiles[clickedTile].isWalkable;
-        //    Debug.Log("This tile is walkable: " + isWalkable);
-        //}
-    }
-    
     public bool isWalkable(Vector2 worldPos)
     {
         Vector3Int cellPosition = tileMap.WorldToCell(worldPos);

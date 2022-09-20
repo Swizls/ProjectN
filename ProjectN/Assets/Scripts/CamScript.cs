@@ -21,7 +21,8 @@ public class CamScript : MonoBehaviour
     }
     private void CamMovement()
     {
-        transform.position = new Vector3(transform.position.x + Input.GetAxis("Horizontal") * camSpeed * Time.deltaTime, transform.position.y + Input.GetAxis("Vertical") * camSpeed * Time.deltaTime, -10);
+        transform.position = new Vector3(transform.position.x + Input.GetAxis("Horizontal") * camSpeed * Time.deltaTime,
+            transform.position.y + Input.GetAxis("Vertical") * camSpeed * Time.deltaTime, -10);
 
         //Увеличиваеться масштаб
         if (Input.GetAxis("Mouse ScrollWheel") < 0f && Camera.main.orthographicSize < camMaxSize)

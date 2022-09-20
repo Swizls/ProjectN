@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: WallTile
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 3e203d1dde0055f499aa16df5158233c, type: 2}
-  - {fileID: 11400000, guid: cb92e95a02e83604784fe9b19884464b, type: 2}
-  - {fileID: 11400000, guid: ea042b2afa9b0584787e29b3be7b94f5, type: 2}
-  - {fileID: 11400000, guid: 726a24df7c0fa6d44ba8734561c1aced, type: 2}
-  - {fileID: 11400000, guid: 453942c42a207db4cb39dcc0a5a3a881, type: 2}
-  - {fileID: 11400000, guid: 3933782c20558304c8634dff12f632ec, type: 2}
-  - {fileID: 11400000, guid: a14f0b23eecaf824fafea2473071171f, type: 2}
-  - {fileID: 11400000, guid: 4b87e3566739e8a46ac070cd32a8b385, type: 2}
+  - {fileID: 11400000, guid: 9ad42c03202dcb8448a67ed4b016f418, type: 2}
+  - {fileID: 11400000, guid: 70eb8c5e2e9aeae4aa741d4d2f7d591a, type: 2}
+  - {fileID: 11400000, guid: 5cf291c370bae004e98c098a07f0c86f, type: 2}
+  - {fileID: 11400000, guid: f6f155b73a6c81b4b8c80bf55eb7652e, type: 2}
+  - {fileID: 11400000, guid: bea1c7e09e432b1499c82a5d06404c32, type: 2}
+  - {fileID: 11400000, guid: dba7a65db25e0174a892df87596f10b3, type: 2}
+  - {fileID: 11400000, guid: 0cabf9621ac5f7f4682ecacd65263d8d, type: 2}
+  - {fileID: 11400000, guid: e45d106a71e160b4c9e18b51969d5982, type: 2}
+  - {fileID: 11400000, guid: f28e0ebaa92a9284a932a624884c3c7d, type: 2}
+  - {fileID: 11400000, guid: f6d3e0356a9268046a0319ad1265dd28, type: 2}
+  - {fileID: 11400000, guid: e0c69ba7ec81bb44bae332bcdaebb44e, type: 2}
+  - {fileID: 11400000, guid: f01ef97c80b8f5848855d25aa9318c73, type: 2}
+  - {fileID: 11400000, guid: d52423ed8cf432543a61a2600fbd6fc0, type: 2}
+  - {fileID: 11400000, guid: 0139d8a72bf9bc14ebd44cf8d62678a6, type: 2}
+  - {fileID: 11400000, guid: 986c3a0c9486ed64ca3789765d051106, type: 2}
+  - {fileID: 11400000, guid: 67648aa2ab1d6ef4dacfd053bcfb35d5, type: 2}
+  - {fileID: 11400000, guid: 32debfabb188c01449542533bf00c053, type: 2}
   isWalkable: 0
