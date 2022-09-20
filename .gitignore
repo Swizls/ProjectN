@@ -3,3 +3,11 @@ ProjectN/Library/Artifacts/
 ProjectN/Logs/
 .sln
 ProjectN/Packages/
+
+ProjectN/Temp/
+
+ProjectN/obj/Debug/
+
+ProjectN/Assembly-CSharp.csproj
+
+ProjectN/obj/
