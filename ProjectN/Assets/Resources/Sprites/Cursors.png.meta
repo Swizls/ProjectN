@@ -99,7 +99,7 @@ TextureImporter:
       213: 1528843010476826544
     second: Cursors_31
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -120,6 +120,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -128,9 +129,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -151,11 +152,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -171,6 +175,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -866,6 +882,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Cursors_17: 7903086806783312543
+      Cursors_7: 24008416225126483
+      Cursors_23: -8947388221356017223
+      Cursors_19: -3206446080143189803
+      Cursors_21: 4987688298909019118
+      Cursors_2: 8589531035368735815
+      Cursors_24: -6680927956734524183
+      Cursors_0: -5838576953222009279
+      Cursors_13: -8577294681894124294
+      Cursors_3: -6438760948649367242
+      Cursors_30: -5518022570552370530
+      Cursors_9: 8969627946670346320
+      Cursors_20: 6667055773704236833
+      Cursors_16: 247686942398338234
+      Cursors_26: 7367125310401162726
+      Cursors_6: 6834432144004293403
+      Cursors_4: 421219122327388550
+      Cursors_18: -1786062589350392100
+      Cursors_1: -7040460436098977408
+      Cursors_14: 6462471925109258109
+      Cursors_15: 4656433139442834157
+      Cursors_31: 1528843010476826544
+      Cursors_29: 2730551746204945307
+      Cursors_12: -4136486425201259179
+      Cursors_22: 8369286911679057592
+      Cursors_11: 3367831564768301754
+      Cursors_25: -5424318687170525433
+      Cursors_8: -1796601595124212925
+      Cursors_10: 4355142188203278704
+      Cursors_27: -4958436035940997038
+      Cursors_28: -8009354659982814627
+      Cursors_5: -7201537006902290262
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

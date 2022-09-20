@@ -1,0 +1,605 @@
+fileFormatVersion: 2
+guid: a5d4f22b8329ebd4fb96fc2802823b7c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5367596630024612521
+    second: Wall2_0
+  - first:
+      213: 6191778019618925955
+    second: Wall2_1
+  - first:
+      213: -2600560975786441760
+    second: Wall2_2
+  - first:
+      213: -2799298768527999857
+    second: Wall2_3
+  - first:
+      213: 8759684361886917468
+    second: Wall2_4
+  - first:
+      213: 2177932403470336435
+    second: Wall2_5
+  - first:
+      213: -4017645211627974467
+    second: Wall2_6
+  - first:
+      213: -573339097965479678
+    second: Wall2_7
+  - first:
+      213: -6346433435984658870
+    second: Wall2_8
+  - first:
+      213: -7873902638956688402
+    second: Wall2_9
+  - first:
+      213: -5091688180335787681
+    second: Wall2_10
+  - first:
+      213: 5829506508510409085
+    second: Wall2_11
+  - first:
+      213: -7269933327177363824
+    second: Wall2_12
+  - first:
+      213: 1794482901706650387
+    second: Wall2_13
+  - first:
+      213: 6825138302190821099
+    second: Wall2_14
+  - first:
+      213: -9074417020404296979
+    second: Wall2_15
+  - first:
+      213: 8871765197735460079
+    second: Wall2_16
+  - first:
+      213: -426004497229932770
+    second: Wall2_17
+  - first:
+      213: 8469522678730671689
+    second: concrete walls_0
+  - first:
+      213: 1602250824271055607
+    second: concrete walls_1
+  - first:
+      213: -6008320220133387795
+    second: concrete walls_2
+  - first:
+      213: -2583007534181901624
+    second: concrete walls_3
+  - first:
+      213: -1901793464841650908
+    second: concrete walls_4
+  - first:
+      213: -6915653932674442004
+    second: concrete walls_5
+  - first:
+      213: -331821457813769541
+    second: concrete walls_6
+  - first:
+      213: 2384435513111676748
+    second: concrete walls_7
+  - first:
+      213: 8470273957223882258
+    second: concrete walls_8
+  - first:
+      213: -5709778684384291841
+    second: concrete walls_9
+  - first:
+      213: -1318482490717572693
+    second: concrete walls_10
+  - first:
+      213: 1443407067852527151
+    second: concrete walls_11
+  - first:
+      213: 9075394194885884676
+    second: concrete walls_12
+  - first:
+      213: 4551349700986455640
+    second: concrete walls_13
+  - first:
+      213: -8625358553785987580
+    second: concrete walls_14
+  - first:
+      213: 3795002289595230353
+    second: concrete walls_15
+  - first:
+      213: -3808555741131127951
+    second: concrete walls_16
+  - first:
+      213: -82701256520027881
+    second: concrete walls_17
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: concrete walls_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9464bdab00ac98570800000000000000
+      internalID: 8469522678730671689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fac0c5b2a65c3610800000000000000
+      internalID: 1602250824271055607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de1172ed7982e9ca0800000000000000
+      internalID: -6008320220133387795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42d34fb7be87b95e0800000000000000
+      internalID: -1901793464841650908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec18619369a600a0800000000000000
+      internalID: -6915653932674442004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb278266422256bf0800000000000000
+      internalID: -331821457813769541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4709d44777371120800000000000000
+      internalID: 2384435513111676748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e529269457c8570800000000000000
+      internalID: 8470273957223882258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff35d2bc98ac2c0b0800000000000000
+      internalID: -5709778684384291841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba1f43a092fc3bde0800000000000000
+      internalID: -1318482490717572693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2653a9a413080410800000000000000
+      internalID: 1443407067852527151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40bb0decfe642fd70800000000000000
+      internalID: 9075394194885884676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 856c0ef5074a92f30800000000000000
+      internalID: 4551349700986455640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40e853d28129c4880800000000000000
+      internalID: -8625358553785987580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_15
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1982e11c97e8aa430800000000000000
+      internalID: 3795002289595230353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_16
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173ca966bba452bc0800000000000000
+      internalID: -3808555741131127951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: concrete walls_17
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71135a635af2adef0800000000000000
+      internalID: -82701256520027881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      concrete walls_1: 1602250824271055607
+      concrete walls_13: 4551349700986455640
+      concrete walls_10: -1318482490717572693
+      concrete walls_17: -82701256520027881
+      concrete walls_2: -6008320220133387795
+      concrete walls_8: 8470273957223882258
+      concrete walls_16: -3808555741131127951
+      concrete walls_12: 9075394194885884676
+      concrete walls_6: -331821457813769541
+      concrete walls_15: 3795002289595230353
+      concrete walls_11: 1443407067852527151
+      concrete walls_5: -6915653932674442004
+      concrete walls_14: -8625358553785987580
+      concrete walls_7: 2384435513111676748
+      concrete walls_0: 8469522678730671689
+      concrete walls_9: -5709778684384291841
+      concrete walls_4: -1901793464841650908
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

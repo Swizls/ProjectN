@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FloorTile
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 8cc92b3e0d2b0004ba5fae5436a710cc, type: 2}
+  - {fileID: 11400000, guid: 0cabf9621ac5f7f4682ecacd65263d8d, type: 2}
   isWalkable: 1

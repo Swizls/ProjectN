@@ -11,7 +11,7 @@ public class PlayerUnitControl : MobBase
     }
     protected void UnitControl()
     {
-        if (Input.GetMouseButtonUp(0) && mapManager.isWalkable(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+        if (Input.GetMouseButtonUp(0) && mapManager.isWalkable(Camera.main.ScreenToWorldPoint(Input.mousePosition)) && !isMoving)
         {
             isMoving = true;
             Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
