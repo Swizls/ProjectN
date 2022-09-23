@@ -24,7 +24,7 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-    public bool isWalkable(Vector2 worldPos)
+    public bool IsWalkable(Vector2 worldPos)
     {
         Vector3Int cellPosition = tileMap.WorldToCell(worldPos);
         TileBase clickedTile = tileMap.GetTile(cellPosition);

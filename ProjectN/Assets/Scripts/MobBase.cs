@@ -26,11 +26,11 @@ public class MobBase : MonoBehaviour
         unitPos = tileMap.WorldToCell(transform.position);
         Death();
     }
-    protected virtual IEnumerator UnitMovement(List<PathNode> pathNodes)
+    protected virtual IEnumerator UnitMovement(List<Vector3> path)
     {
-        foreach (PathNode pathNode in pathNodes)
+        foreach (Vector3 waypoint in path)
         {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(pathNode.x, pathNode.y), speed);
+            transform.position = Vector2.MoveTowards(transform.position, waypoint, speed);
             yield return new WaitForSeconds(0.1f);
         }
         isMoving = false;

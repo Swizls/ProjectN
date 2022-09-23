@@ -16,12 +16,8 @@ public class PlayerUnitControl : MobBase
         {
             isMoving = true;
             Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            List<Vector3> path = pathFinder.FindPath(cellPosition, unitPos, tileMap);
-            if (path != null)
-            {
-                for (int i = 0; i < path.Count - 1; i++)
-                    Debug.DrawLine(path[i], path[i + 1], Color.red, 2f);
-            }
+            List<Vector3> path = pathFinder.FindPath(cellPosition, unitPos, tileMap, mapManager);
+            StartCoroutine(UnitMovement(path));
         }
     }
 }
