@@ -59,9 +59,9 @@
     <Compile Include="Assets\Scripts\MobBase.cs" />
     <Compile Include="Assets\Scripts\CamScript.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
+    <Compile Include="Assets\Scripts\BaseTile.cs" />
+    <Compile Include="Assets\Scripts\WallTile.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
-    <Compile Include="Assets\Scripts\TileData.cs" />
-    <Compile Include="Assets\Scripts\MapManager.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitControl.cs" />
   </ItemGroup>
   <ItemGroup>

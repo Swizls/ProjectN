@@ -14,11 +14,11 @@ public class MobBase : MonoBehaviour
     protected static Vector3Int unitPos;
 
     //Компоненты
-    protected static MapManager mapManager;
     protected static Tilemap tileMap;
+    [SerializeField]
+    protected static ITilemap iTilemap;
     private void Start()
     {
-        mapManager = FindObjectOfType<MapManager>();
         tileMap = FindObjectOfType<Tilemap>();
     }
     private void Update()

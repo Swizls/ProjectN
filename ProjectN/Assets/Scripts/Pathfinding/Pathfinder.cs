@@ -13,7 +13,7 @@ public class Pathfinder
     List<PathNode> closedList;
 
 
-    public List<Vector3> FindPath(Vector3Int startPos, Vector3Int endPos, Tilemap tileMap, MapManager mapManager)
+    public List<Vector3> FindPath(Vector3Int startPos, Vector3Int endPos, Tilemap tileMap)
     {
         PathNode startNode = new PathNode(startPos.x, startPos.y);
         PathNode endNode = new PathNode(endPos.x, endPos.y);
@@ -24,7 +24,7 @@ public class Pathfinder
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
         startNode.CalculateFCost();
 
-        while(openList.Count > 0)
+        while(openList.Count > 0 && openList.Count < 30000)
         {
             PathNode currentNode = GetLowestFCostNode();
             if (currentNode.x == endNode.x && currentNode.y == endNode.y)
@@ -34,7 +34,7 @@ public class Pathfinder
             openList.Remove(currentNode);
             closedList.Add(currentNode);
 
-            foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap, mapManager))
+            foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
             {
                 if (closedList.Contains(neighbourNode)) continue;
 
@@ -61,44 +61,48 @@ public class Pathfinder
             path.Add(tileMap.GetCellCenterWorld(new Vector3Int(currentNode.x, currentNode.y, 0)));
             currentNode = currentNode.cameFromNode;
         }
-        Debug.Log("Path is builded");
         return path;
     }
 
-    /// <summary>
-    /// Проверяет все клетки, можно ли на них встать, вокруг текущего нода
-    /// </summary>
-    /// <param name="currentNode">Текущий нод</param>
-    /// <param name="tileMap">Тайлмапа, на которой метод проверяет клетки</param>
-    /// <param name="mapManager"></param>
-    /// <returns>Возвращает список клеток вокруг текущего нода</returns>
-    private List<PathNode> GetNeighboursList(PathNode currentNode, Tilemap tileMap, MapManager mapManager)
+    private List<PathNode> GetNeighboursList(PathNode currentNode, Tilemap tileMap)
     {
         List<PathNode> neighbourList = new List<PathNode>();
+        BaseTile tile;
 
         //Left
-        if(mapManager.IsWalkable(new Vector2(currentNode.x -1, currentNode.y))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y, 0));
+        if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y));
+        }
         //Left up
-        if (mapManager.IsWalkable(new Vector2(currentNode.x - 1, currentNode.y + 1))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
         //Left down
-        if (mapManager.IsWalkable(new Vector2(currentNode.x - 1, currentNode.y - 1))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
+        Debug.Log(tile.isPassable);
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
         //Right
-        if (mapManager.IsWalkable(new Vector2(currentNode.x + 1, currentNode.y))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y, 0));
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y));
         //Right up
-        if (mapManager.IsWalkable(new Vector2(currentNode.x + 1, currentNode.y + 1))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y + 1));
         //Right down
-        if (mapManager.IsWalkable(new Vector2(currentNode.x + 1, currentNode.y - 1))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y - 1));
         //Up
-        if (mapManager.IsWalkable(new Vector2(currentNode.x, currentNode.y + 1))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y + 1));
         //Down
-        if (mapManager.IsWalkable(new Vector2(currentNode.x, currentNode.y - 1))) 
+        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y - 1, 0));
+        if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y - 1));
 
         foreach(PathNode neighbourNode in neighbourList)
