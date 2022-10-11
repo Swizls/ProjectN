@@ -4065,6 +4065,22 @@ PrefabInstance:
       propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2908097303932418220, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908097303932418220, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908097303932418220, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908097303932418220, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3739080196130330081, guid: 2a59c58013aaf9149837ad6cf8e7a29d, type: 3}
       propertyPath: m_SortingOrder
       value: 1

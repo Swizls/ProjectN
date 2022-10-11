@@ -28,10 +28,13 @@ public class MobBase : MonoBehaviour
     }
     protected virtual IEnumerator UnitMovement(List<Vector3> path)
     {
-        foreach (Vector3 waypoint in path)
+        if(path != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, waypoint, speed);
-            yield return new WaitForSeconds(0.1f);
+            foreach (Vector3 waypoint in path)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, waypoint, speed);
+                yield return new WaitForSeconds(0.1f);
+            }
         }
         isMoving = false;
     }
