@@ -14,7 +14,6 @@ public class CamScript : MonoBehaviour
 
     [SerializeField]
     GridLayout gridLayout;
-
     void Update()
     {
         CamMovement();

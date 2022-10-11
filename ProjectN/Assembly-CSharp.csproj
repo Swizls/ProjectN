@@ -62,7 +62,7 @@
     <Compile Include="Assets\Scripts\WallTile.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitControl.cs" />
-    <Compile Include="Assets\Scripts\MobBase.cs" />
+    <Compile Include="Assets\Scripts\UnitBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

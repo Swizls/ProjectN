@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerUnitControl : MobBase
+public class PlayerUnitControl : UnitBase
 {
     Pathfinder pathFinder = new Pathfinder();
     void Update()
@@ -16,9 +16,8 @@ public class PlayerUnitControl : MobBase
         {
             Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-            List<Vector3> path = pathFinder.FindPath(cellPosition, unitPos, tileMap);
+            pathList = pathFinder.FindPath(cellPosition, unitPos, tileMap);
             isMoving = true;
-            StartCoroutine(UnitMovement(path));
         }
     }
 }

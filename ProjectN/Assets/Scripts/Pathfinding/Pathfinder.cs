@@ -81,7 +81,6 @@ public class Pathfinder
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
         //Left down
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
-        Debug.Log(tile.isPassable);
         if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
         //Right
