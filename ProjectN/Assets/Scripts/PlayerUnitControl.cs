@@ -16,7 +16,7 @@ public class PlayerUnitControl : UnitBase
         {
             Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-            pathList = pathFinder.FindPath(cellPosition, unitPos, tileMap);
+            pathList = pathFinder.FindPath(unitPos, cellPosition, tileMap);
             isMoving = true;
         }
     }

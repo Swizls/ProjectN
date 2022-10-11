@@ -61,6 +61,7 @@ public class Pathfinder
             path.Add(tileMap.GetCellCenterWorld(new Vector3Int(currentNode.x, currentNode.y, 0)));
             currentNode = currentNode.cameFromNode;
         }
+        path.Reverse();
         return path;
     }
 
