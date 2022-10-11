@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class MobBase : MonoBehaviour
 {
-    //Характеристики
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private int healthPoints = 100;
     [SerializeField]
     private float speed = 5f;
@@ -13,7 +13,7 @@ public class MobBase : MonoBehaviour
     protected static bool isMoving = false;
     protected static Vector3Int unitPos;
 
-    //Компоненты
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     protected static Tilemap tileMap;
     [SerializeField]
     protected static ITilemap iTilemap;
