@@ -6,6 +6,13 @@ using UnityEngine.Tilemaps;
 public class PlayerUnitControl : UnitBase
 {
     Pathfinder pathFinder = new Pathfinder();
+    PathfinderDebug pathfinderDebug = new PathfinderDebug();
+    LineRenderer lineRenderer;
+
+    private void Start()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+    }
     void Update()
     {
         UnitControl();
@@ -18,6 +25,12 @@ public class PlayerUnitControl : UnitBase
 
             pathList = pathFinder.FindPath(unitPos, cellPosition, tileMap);
             isMoving = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+            StartCoroutine(pathfinderDebug.FindPath(unitPos, cellPosition, tileMap));
         }
     }
 }

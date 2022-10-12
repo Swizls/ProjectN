@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitControl.cs" />
     <Compile Include="Assets\Scripts\UnitBase.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\PathfinderDebug.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
