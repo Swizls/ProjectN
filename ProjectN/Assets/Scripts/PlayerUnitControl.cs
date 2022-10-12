@@ -3,25 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerUnitControl : MobBase
+public class PlayerUnitControl : UnitBase
 {
     Pathfinder pathFinder = new Pathfinder();
+    PathfinderDebug pathfinderDebug = new PathfinderDebug();
+    LineRenderer lineRenderer;
+
+    private void Start()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+    }
     void Update()
     {
         UnitControl();
     }
     protected void UnitControl()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isMoving)
         {
-            isMoving = true;
             Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-            //BaseTile test = tileMap.GetTile<BaseTile>(cellPosition);
-            //Debug.Log(test.isPassable);
+            pathList = pathFinder.FindPath(unitPos, cellPosition, tileMap);
+            isMoving = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-            List<Vector3> path = pathFinder.FindPath(cellPosition, unitPos, tileMap);
-            StartCoroutine(UnitMovement(path));
+            StartCoroutine(pathfinderDebug.FindPath(unitPos, cellPosition, tileMap));
         }
     }
 }
