@@ -23,16 +23,14 @@ public class Pathfinder
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
         startNode.CalculateFCost();
 
-        while(openList.Count > 0 && openList.Count < 30000)
+        while(openList.Count > 0 && openList.Count < 3000)
         {
             PathNode currentNode = GetLowestFCostNode();
+
             if (currentNode.x == endNode.x && currentNode.y == endNode.y)
             {
                 return CalculatePath(currentNode, tileMap);
             }
-
-            openList.Remove(currentNode);
-            closedList.Add(currentNode);
 
             foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
             {
@@ -40,13 +38,14 @@ public class Pathfinder
                 foreach(PathNode node in closedList)
                 {
                     if (neighbourNode.x == node.x && neighbourNode.y == node.y) isNeighbourNodeInList = true;
+                    break;
                 }
                 if (isNeighbourNodeInList)
                 {
                     continue;
                 }
 
-                int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
+                    int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
                 if(tentativGCost < neighbourNode.gCost)
                 {
                     neighbourNode.cameFromNode = currentNode;
@@ -54,11 +53,21 @@ public class Pathfinder
                     neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
                     neighbourNode.CalculateFCost();
                 }
-                if (!openList.Contains(neighbourNode))
+                isNeighbourNodeInList = false;
+                foreach (PathNode node in openList)
+                {
+                    if (neighbourNode.x == node.x && neighbourNode.y == node.y)
+                    {
+                        isNeighbourNodeInList = true;
+                    }
+                }
+                if (!isNeighbourNodeInList)
                 {
                     openList.Add(neighbourNode);
                 }
             }
+            openList.Remove(currentNode);
+            closedList.Add(currentNode);
         }
         return null;
     }
@@ -84,19 +93,27 @@ public class Pathfinder
         //Left
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y, 0));
         if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y));
+        }
         //Left up
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
         if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
+        }
         //Left down
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
         if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
+        }
         //Right
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y, 0));
         if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y));
+        }
         //Right up
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
         if (tile.isPassable)
@@ -108,11 +125,15 @@ public class Pathfinder
         //Up
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
         if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y + 1));
+        }
         //Down
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y - 1, 0));
         if (tile.isPassable)
+        {
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y - 1));
+        }
 
         foreach(PathNode neighbourNode in neighbourList)
         {
@@ -124,8 +145,10 @@ public class Pathfinder
     private PathNode GetLowestFCostNode()
     {
         PathNode lowestFCostNode = openList[0];
-        foreach(PathNode node in openList) 
+        foreach(PathNode node in openList)
+        {
             if(lowestFCostNode.fCost > node.fCost) lowestFCostNode = node;
+        }
         return lowestFCostNode;
     }
     private int CalculateDistanceCost(PathNode a, PathNode b)

@@ -32,9 +32,9 @@ public class UnitBase : MonoBehaviour
     int currentPathIndex = 0;
     protected void UnitMovement()
     {
-        if (pathList != null && Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > 0.01f)
+        if (pathList != null && pathList.Count != 0)
         {
-            if (isMoving)
+            if (isMoving && Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > 0.01f)
             {
                 if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > 0.05f)
                 {
@@ -51,10 +51,14 @@ public class UnitBase : MonoBehaviour
                     isMoving = false;
                 }
             }
+            else
+            {
+                currentPathIndex = 0;
+                isMoving = false;
+            }
         }
         else
         {
-            currentPathIndex = 0;
             isMoving = false;
         }
     }

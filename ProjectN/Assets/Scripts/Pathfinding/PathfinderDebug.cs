@@ -9,8 +9,8 @@ public class PathfinderDebug : MonoBehaviour
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
 
-    [SerializeField]
-    private float updateSpeed = 0.001f;
+    [SerializeField] private float _updateSpeed = 0.001f;
+    [SerializeField] private bool _isDebugging = false;
 
     List<PathNode> openList;
     List<PathNode> closedList;
@@ -18,70 +18,77 @@ public class PathfinderDebug : MonoBehaviour
 
     public IEnumerator FindPath(Vector3Int startPos, Vector3Int endPos, Tilemap tileMap)
     {
-        PathNode startNode = new PathNode(startPos.x, startPos.y);
-        PathNode endNode = new PathNode(endPos.x, endPos.y);
-        openList = new List<PathNode> { startNode };
-        closedList = new List<PathNode>();
-        debugObjects = new List<GameObject>();
+        if(_isDebugging)
+        { 
+            PathNode startNode = new PathNode(startPos.x, startPos.y);
+            PathNode endNode = new PathNode(endPos.x, endPos.y);
+            openList = new List<PathNode> { startNode };
+            closedList = new List<PathNode>();
+            debugObjects = new List<GameObject>();
 
-        startNode.gCost = 0;
-        startNode.hCost = CalculateDistanceCost(startNode, endNode);
-        startNode.CalculateFCost();
+            startNode.gCost = 0;
+            startNode.hCost = CalculateDistanceCost(startNode, endNode);
+            startNode.CalculateFCost();
 
-        while (openList.Count > 0 && openList.Count < 30000)
-        {
-            PathNode currentNode = GetLowestFCostNode();
-            if (currentNode.x == endNode.x && currentNode.y == endNode.y)
+            while (openList.Count > 0 && openList.Count < 3000)
             {
-                Debug.Log("Target is reached!");
-                break;
-            }
-
-            openList.Remove(currentNode);
-            closedList.Add(currentNode);
-
-            int j = 0;
-            bool nodeInList;
-            foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
-            {
-                nodeInList = false;
-                foreach(PathNode node in closedList)
+                PathNode currentNode = GetLowestFCostNode();
+                if (currentNode.x == endNode.x && currentNode.y == endNode.y)
                 {
-                    if (neighbourNode.x == node.x && neighbourNode.y == node.y) nodeInList = true;
+                    Debug.Log("Target is reached!");
+                    yield break;
                 }
-                if (nodeInList) continue;
 
-                //DEBUG
+                int j = 0;
+                foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
+                {
+                    bool nodeInList = false;
+                    foreach(PathNode node in closedList)
+                    {
+                        if (neighbourNode.x == node.x && neighbourNode.y == node.y) nodeInList = true;
+                    }
+                    if (nodeInList) continue;
+
+                    //DEBUG
                     GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
                     quad.transform.position = new Vector3(neighbourNode.x + 0.5f, neighbourNode.y + 0.5f, -1);
                     quad.name = "Quad " + j;
                     j++;
                     debugObjects.Add(quad);
-                //DEBUG
+                    //DEBUG
 
-                int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
-                if (tentativGCost < neighbourNode.gCost)
-                {
-                    neighbourNode.cameFromNode = currentNode;
-                    neighbourNode.gCost = tentativGCost;
-                    neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
-                    neighbourNode.CalculateFCost();
+                    int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
+                    if (tentativGCost < neighbourNode.gCost)
+                    {
+                        neighbourNode.cameFromNode = currentNode;
+                        neighbourNode.gCost = tentativGCost;
+                        neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
+                        neighbourNode.CalculateFCost();
+                    }
+                    nodeInList = false;
+                    foreach (PathNode node in openList)
+                    {
+                        if (neighbourNode.x == node.x && neighbourNode.y == node.y)
+                        {
+                            nodeInList = true;
+                        }
+                    }
+                    if(!nodeInList) openList.Add(neighbourNode);
+                    yield return new WaitForSeconds(_updateSpeed);
                 }
-                if (!openList.Contains(neighbourNode))
-                {
-                    openList.Add(neighbourNode);
-                }
-                yield return new WaitForSeconds(updateSpeed);
-            }
 
-            foreach (GameObject obj in debugObjects)
-            {
-                Destroy(obj);
+                openList.Remove(currentNode);
+                closedList.Add(currentNode);
+
+                foreach (GameObject obj in debugObjects)
+                {
+                    Destroy(obj);
+                }
+                debugObjects.Clear();
             }
-            debugObjects.Clear();
+            Debug.Log("There is no path!");
+            yield break;
         }
-        Debug.Log("There is no path!");
-        yield return null;
     }
 
     //private List<Vector3> CalculatePath(PathNode endNode, Tilemap tileMap)
