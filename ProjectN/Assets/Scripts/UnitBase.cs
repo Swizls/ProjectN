@@ -1,36 +1,37 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class UnitBase : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 5f;
+    [SerializeField] private float _speed = 5f;
 
-    protected static bool isMoving = false;
-    protected static Vector3Int unitPos;
+    private bool isMoving = false;
+    private Tilemap tileMap;
+    private List<Vector3> pathList;
 
-    protected static Tilemap tileMap;
-    [SerializeField]
-    protected static ITilemap iTilemap;
+    public bool IsMoving
+    {
+        get { return isMoving; }
+    }
+    public Tilemap TileMap
+    {
+        get { return tileMap; }
+    }
 
-    protected static List<Vector3> pathList;
     private void Start()
     {
         tileMap = FindObjectOfType<Tilemap>();
     }
     private void Update()
     {
-        unitPos = tileMap.WorldToCell(transform.position);
         if (isMoving)
         {
             UnitMovement();
         }
     }
     int currentPathIndex = 0;
-    protected void UnitMovement()
+    private void UnitMovement()
     {
         if (pathList != null && pathList.Count != 0)
         {
@@ -39,7 +40,7 @@ public class UnitBase : MonoBehaviour
                 if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > 0.05f)
                 {
                     Vector3 moveDir = (pathList[currentPathIndex] - transform.position).normalized;
-                    transform.position = transform.position + moveDir * speed * Time.deltaTime;
+                    transform.position = transform.position + moveDir * _speed * Time.deltaTime;
                 }
                 else
                 {
@@ -47,19 +48,27 @@ public class UnitBase : MonoBehaviour
                 }
                 if(currentPathIndex >= pathList.Count)
                 {
-                    currentPathIndex = 0;
-                    isMoving = false;
+                    StopMoving();
                 }
             }
             else
             {
-                currentPathIndex = 0;
-                isMoving = false;
+                StopMoving();
             }
         }
         else
         {
-            isMoving = false;
+            StopMoving();
         }
+    }
+    private void StopMoving()
+    {
+        currentPathIndex = 0;
+        isMoving = false;
+    }
+    public void SetPath(List<Vector3> pathList)
+    {
+        this.pathList = pathList;
+        isMoving = true;
     }
 }

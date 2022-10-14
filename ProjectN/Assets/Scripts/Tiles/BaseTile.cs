@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "BaseTile", menuName = "Tiles")]
+[CreateAssetMenu(menuName = "Tiles/Base Tile")]
 public class BaseTile : Tile
 {
     public bool isPassable;

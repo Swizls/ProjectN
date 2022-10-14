@@ -1,36 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class PlayerUnitControl : UnitBase
+public class PlayerUnitControl : MonoBehaviour
 {
-    Pathfinder pathFinder = new Pathfinder();
-    PathfinderDebug pathfinderDebug = new PathfinderDebug();
-    LineRenderer lineRenderer;
+    private Pathfinder pathFinder = new Pathfinder();
+    private PlayerUnit[] allPlayerUnits;
+    private PlayerUnit selectedUnit;
 
     private void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        allPlayerUnits = FindObjectsOfType<PlayerUnit>();
+        selectedUnit = allPlayerUnits[0];
     }
-    void Update()
+
+    private void Update()
     {
         UnitControl();
     }
-    protected void UnitControl()
+    private void UnitControl()
     {
-        if (Input.GetMouseButtonDown(0) && !isMoving)
+        if (Input.GetMouseButtonDown(1) && !selectedUnit.IsMoving)
         {
-            Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-            pathList = pathFinder.FindPath(unitPos, cellPosition, tileMap);
-            isMoving = true;
+            selectedUnit.SetPath(GetPath());
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3Int cellPosition = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-            StartCoroutine(pathfinderDebug.FindPath(unitPos, cellPosition, tileMap));
+            SelectUnit();
         }
+    }
+    private void SelectUnit()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(0, 0, -10),
+                                            Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        if (hit.collider != null)
+        {
+            selectedUnit = hit.collider.GetComponent<PlayerUnit>();
+        }
+    }
+    private List<Vector3> GetPath()
+    {
+        Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        List<Vector3> path = pathFinder.FindPath(selectedUnit.transform.position, clickPos, selectedUnit.TileMap);
+
+        return path;
     }
 }
