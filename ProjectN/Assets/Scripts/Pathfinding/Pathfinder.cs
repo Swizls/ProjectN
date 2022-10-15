@@ -125,7 +125,9 @@ public class Pathfinder
         //Right down
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
         if (tile.isPassable)
+        { 
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y - 1));
+        }
         //Up
         tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
         if (tile.isPassable)

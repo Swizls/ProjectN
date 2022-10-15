@@ -4,7 +4,9 @@ using UnityEngine.Tilemaps;
 
 public class UnitBase : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private int healthPoints;
+    [SerializeField] private int unitDamage;
 
     private bool isMoving = false;
     private Tilemap tileMap;
@@ -17,6 +19,10 @@ public class UnitBase : MonoBehaviour
     public Tilemap TileMap
     {
         get { return tileMap; }
+    }
+    public int UnitDamage
+    {
+        get { return unitDamage; }
     }
 
     private void Start()
@@ -40,7 +46,7 @@ public class UnitBase : MonoBehaviour
                 if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > 0.05f)
                 {
                     Vector3 moveDir = (pathList[currentPathIndex] - transform.position).normalized;
-                    transform.position = transform.position + moveDir * _speed * Time.deltaTime;
+                    transform.position = transform.position + moveDir * speed * Time.deltaTime;
                 }
                 else
                 {
@@ -70,5 +76,22 @@ public class UnitBase : MonoBehaviour
     {
         this.pathList = pathList;
         isMoving = true;
+    }
+    private void Death()
+    {
+        Destroy(gameObject);
+    }
+    public void ShootAtTarget(UnitBase target)
+    {
+        target.TakeDamage(unitDamage);
+    }
+    public void TakeDamage(int damage)
+    {
+        healthPoints -= damage;
+        Debug.Log('"'+ tag + '"' + " health points: " + healthPoints);
+        if(healthPoints <= 0)
+        {
+            Death();
+        }
     }
 }

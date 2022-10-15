@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8115760274899358186}
   - component: {fileID: 5690119482139021200}
-  - component: {fileID: 5590657777517360585}
   - component: {fileID: 6260055253261080707}
   m_Layer: 0
   m_Name: PlayerUnit
@@ -47,19 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3617187bcc9a1e9428e79459c95c282b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
---- !u!114 &5590657777517360585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568893800191457386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7dbe824db6ce459b54e3a9bb596ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  speed: 5
+  healthPoints: 100
+  unitDamage: 25
 --- !u!61 &6260055253261080707
 BoxCollider2D:
   m_ObjectHideFlags: 0
