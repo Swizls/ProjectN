@@ -4,31 +4,25 @@ using UnityEngine.Tilemaps;
 
 public class UnitBase : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed;
+
     [SerializeField] private int healthPoints;
     [SerializeField] private int unitDamage;
 
     private bool isMoving = false;
+
     private Tilemap tileMap;
     private List<Vector3> pathList;
 
-    public bool IsMoving
-    {
-        get { return isMoving; }
-    }
-    public Tilemap TileMap
-    {
-        get { return tileMap; }
-    }
-    public int UnitDamage
-    {
-        get { return unitDamage; }
-    }
+    public bool IsMoving => isMoving;
+    public Tilemap TileMap => tileMap;
+    public int UnitDamage => unitDamage;
 
     private void Start()
     {
         tileMap = FindObjectOfType<Tilemap>();
     }
+
     private void Update()
     {
         if (isMoving)
@@ -36,6 +30,7 @@ public class UnitBase : MonoBehaviour
             UnitMovement();
         }
     }
+
     int currentPathIndex = 0;
     private void UnitMovement()
     {
@@ -43,7 +38,7 @@ public class UnitBase : MonoBehaviour
         {
             if (isMoving && Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > 0.01f)
             {
-                if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > 0.05f)
+                if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > 0.03f)
                 {
                     Vector3 moveDir = (pathList[currentPathIndex] - transform.position).normalized;
                     transform.position = transform.position + moveDir * speed * Time.deltaTime;
@@ -77,14 +72,17 @@ public class UnitBase : MonoBehaviour
         this.pathList = pathList;
         isMoving = true;
     }
+
     private void Death()
     {
         Destroy(gameObject);
     }
-    public void ShootAtTarget(UnitBase target)
+
+    public void ShootAtTarget(GameObject target)
     {
-        target.TakeDamage(unitDamage);
+        target.GetComponent<UnitBase>().TakeDamage(unitDamage);
     }
+
     public void TakeDamage(int damage)
     {
         healthPoints -= damage;

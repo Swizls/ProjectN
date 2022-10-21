@@ -5,25 +5,32 @@ using UnityEngine;
 public class PlayerUnitControl : MonoBehaviour
 {
     private Pathfinder pathFinder = new Pathfinder();
-    private IEnumerable<UnitBase> allPlayerUnits;
+
+    private List<UnitBase> allPlayerUnits;
     private UnitBase selectedUnit;
 
-    private void Start()
+    public List<UnitBase> AllPlayerUnits => allPlayerUnits;
+
+    private void Awake()
     {
-        allPlayerUnits = FindObjectsOfType<UnitBase>().ToList().Where(unit => unit.tag != "Enemy");
-        selectedUnit = allPlayerUnits.First();
+        allPlayerUnits = FindObjectsOfType<UnitBase>().Where(unit => unit.tag != "Enemy").ToList();
+        selectedUnit = allPlayerUnits[0];
     }
 
     private void Update()
     {
         UnitControl();
     }
+
     private void UnitControl()
     {
+        //Rigth mouse button
         if (Input.GetMouseButtonDown(1) && !selectedUnit.IsMoving)
         {
-            selectedUnit.SetPath(GetPath());
+            List<Vector3> path = GetPath();
+            selectedUnit.SetPath(path);
         }
+        //Left mouse button
         if (Input.GetMouseButtonDown(0))
         {
             if (!IsEnemeyInCell())
@@ -32,13 +39,14 @@ public class PlayerUnitControl : MonoBehaviour
             }
             else
             {
-                selectedUnit.ShootAtTarget(GetTarget());
+                GameObject enemy = GetTarget();
+                selectedUnit.ShootAtTarget(enemy);
             }
         }
     }
     private void SelectUnit()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(0, 0, -10),
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                              Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
@@ -48,6 +56,10 @@ public class PlayerUnitControl : MonoBehaviour
             }
         }
     }
+    public void SelectUnit(UnitBase unit)
+    {
+        selectedUnit = unit;
+    }
     private List<Vector3> GetPath()
     {
         Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -55,22 +67,22 @@ public class PlayerUnitControl : MonoBehaviour
 
         return path;
     }
-    private UnitBase GetTarget()
+    private GameObject GetTarget()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(0, 0, -10),
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                              Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
             if(hit.collider.tag == "Enemy")
             { 
-                return hit.collider.GetComponent<UnitBase>();
+                return hit.collider.gameObject;
             }
         }
         return null;
     }
     private bool IsEnemeyInCell()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(0, 0, -10),
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                              Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
