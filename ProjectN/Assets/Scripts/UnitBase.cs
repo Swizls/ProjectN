@@ -9,18 +9,25 @@ public class UnitBase : MonoBehaviour
     [SerializeField] private int healthPoints;
     [SerializeField] private int unitDamage;
 
+    private readonly int startActionPoints = 20;
+    private int currentActionPoints;
+
     private bool isMoving = false;
 
     private Tilemap tileMap;
     private List<Vector3> pathList;
+    private SpriteRenderer sprite;
 
     public bool IsMoving => isMoving;
     public Tilemap TileMap => tileMap;
     public int UnitDamage => unitDamage;
+    public int ActionPoints => currentActionPoints;
 
     private void Start()
     {
+        currentActionPoints = startActionPoints;
         tileMap = FindObjectOfType<Tilemap>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -42,6 +49,11 @@ public class UnitBase : MonoBehaviour
                 {
                     Vector3 moveDir = (pathList[currentPathIndex] - transform.position).normalized;
                     transform.position = transform.position + moveDir * speed * Time.deltaTime;
+                    if(moveDir.x < 0f)
+                        sprite.flipX = true;
+                    else if(moveDir.x >= 0f)
+                        sprite.flipX = false;
+
                 }
                 else
                 {
@@ -76,6 +88,10 @@ public class UnitBase : MonoBehaviour
     private void Death()
     {
         Destroy(gameObject);
+    }
+    private void OnTurnEnd()
+    {
+        currentActionPoints = startActionPoints;
     }
 
     public void ShootAtTarget(GameObject target)

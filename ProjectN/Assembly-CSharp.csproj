@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\Tiles\BaseTile.cs" />
     <Compile Include="Assets\Scripts\Tiles\WallTile.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
-    <Compile Include="Assets\Scripts\UI\UnitSelectionPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerUnitSelectionPanel.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitControl.cs" />
     <Compile Include="Assets\Scripts\UnitBase.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathfinderDebug.cs" />
@@ -338,6 +338,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.10f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.10f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.10f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

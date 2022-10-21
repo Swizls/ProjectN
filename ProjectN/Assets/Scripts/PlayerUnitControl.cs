@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerUnitControl : MonoBehaviour
 {
-    private Pathfinder pathFinder = new Pathfinder();
+    private static Pathfinder pathFinder = new Pathfinder();
 
-    private List<UnitBase> allPlayerUnits;
-    private UnitBase selectedUnit;
+    private static List<UnitBase> allPlayerUnits;
+    private static UnitBase selectedUnit;
 
-    public List<UnitBase> AllPlayerUnits => allPlayerUnits;
+    public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerUnitControl : MonoBehaviour
             selectedUnit.SetPath(path);
         }
         //Left mouse button
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !selectedUnit.IsMoving)
         {
             if (!IsEnemeyInCell())
             {
@@ -39,10 +39,21 @@ public class PlayerUnitControl : MonoBehaviour
             }
             else
             {
-                GameObject enemy = GetTarget();
-                selectedUnit.ShootAtTarget(enemy);
+                if(ObstacleCheckForShot())
+                {
+                    GameObject enemy = GetTarget();
+                    selectedUnit.ShootAtTarget(enemy);
+                }
+                else
+                {
+                    Debug.Log("Unit can't shoot, because there is obstacle");
+                }
             }
         }
+    }
+    public static void SelectUnit(UnitBase unit)
+    {
+        selectedUnit = unit;
     }
     private void SelectUnit()
     {
@@ -55,10 +66,6 @@ public class PlayerUnitControl : MonoBehaviour
                 selectedUnit = hit.collider.GetComponent<UnitBase>();
             }
         }
-    }
-    public void SelectUnit(UnitBase unit)
-    {
-        selectedUnit = unit;
     }
     private List<Vector3> GetPath()
     {
@@ -92,5 +99,9 @@ public class PlayerUnitControl : MonoBehaviour
             }
         }
         return false;
+    }
+    private bool ObstacleCheckForShot()
+    {
+        return true;
     }
 }

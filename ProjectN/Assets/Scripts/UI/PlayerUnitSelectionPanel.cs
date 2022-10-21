@@ -3,31 +3,27 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class UnitSelectionPanel : MonoBehaviour
+public class PlayerUnitSelectionPanel : MonoBehaviour
 {
-    [SerializeField] private GameObject unitSelectionButtonPrefab;
+    [SerializeField] private GameObject buttonPrefab;
 
     private Dictionary<GameObject, UnitBase> unitSelectionButtons = new Dictionary<GameObject, UnitBase>();
-
     private List<UnitBase> allPlayerUnits;
-
-    private PlayerUnitControl playerUnitControl;
 
     private void Start()
     {
-        playerUnitControl = FindObjectOfType<PlayerUnitControl>();
-        allPlayerUnits = playerUnitControl.AllPlayerUnits;
+        allPlayerUnits = PlayerUnitControl.AllPlayerUnits;
         CreateButtons();
     }
     
     private void CreateButtons()
     {
-        unitSelectionButtons.Add(unitSelectionButtonPrefab, allPlayerUnits[0]);
-        RectTransform lastButtonPos = unitSelectionButtonPrefab.GetComponent<RectTransform>();
+        unitSelectionButtons.Add(buttonPrefab, allPlayerUnits[0]);
+        RectTransform lastButtonPos = buttonPrefab.GetComponent<RectTransform>();
 
         for(int i = 1; i <= allPlayerUnits.Count - 1; i++)
         {
-            GameObject unitSelectionButton = Instantiate(unitSelectionButtonPrefab);
+            GameObject unitSelectionButton = Instantiate(buttonPrefab);
             unitSelectionButton.transform.SetParent(transform);
 
             Button buttonComponent = unitSelectionButton.GetComponent<Button>();
@@ -44,6 +40,6 @@ public class UnitSelectionPanel : MonoBehaviour
 
     public void SelectUnit(GameObject button)
     {
-        playerUnitControl.SelectUnit(unitSelectionButtons[button]);
+        PlayerUnitControl.SelectUnit(unitSelectionButtons[button]);
     }
 }

@@ -7187,6 +7187,10 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 325732685949711600, guid: 2792dd3183974ed4993678080e138b50, type: 3}
+      propertyPath: buttonPrefab
+      value: 
+      objectReference: {fileID: 1279790678}
+    - target: {fileID: 325732685949711600, guid: 2792dd3183974ed4993678080e138b50, type: 3}
       propertyPath: unitSelectionButton
       value: 
       objectReference: {fileID: 1564762922}
