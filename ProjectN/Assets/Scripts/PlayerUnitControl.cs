@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerUnitControl : MonoBehaviour
 {
@@ -39,9 +40,9 @@ public class PlayerUnitControl : MonoBehaviour
             }
             else
             {
-                if(ObstacleCheckForShot())
+                GameObject enemy = GetTarget();
+                if (ObstacleCheckForShot(enemy.transform.position))
                 {
-                    GameObject enemy = GetTarget();
                     selectedUnit.ShootAtTarget(enemy);
                 }
                 else
@@ -58,11 +59,11 @@ public class PlayerUnitControl : MonoBehaviour
     private void SelectUnit()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                                                Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
-            if(hit.collider.tag == "PlayerUnit")
-            { 
+            if (hit.collider.tag == "PlayerUnit")
+            {
                 selectedUnit = hit.collider.GetComponent<UnitBase>();
             }
         }
@@ -77,11 +78,11 @@ public class PlayerUnitControl : MonoBehaviour
     private GameObject GetTarget()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                                                Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
-            if(hit.collider.tag == "Enemy")
-            { 
+            if (hit.collider.tag == "Enemy")
+            {
                 return hit.collider.gameObject;
             }
         }
@@ -90,7 +91,7 @@ public class PlayerUnitControl : MonoBehaviour
     private bool IsEnemeyInCell()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                                                Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
             if (hit.collider.tag == "Enemy")
@@ -100,7 +101,7 @@ public class PlayerUnitControl : MonoBehaviour
         }
         return false;
     }
-    private bool ObstacleCheckForShot()
+    private bool ObstacleCheckForShot(Vector3 targetPos)
     {
         return true;
     }

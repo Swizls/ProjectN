@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33e7cc2f168798542970ac3aa7b9dbee, type: 3}
-  m_Name: Floor
+  m_Name: WallTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 2384435513111676748, guid: a5d4f22b8329ebd4fb96fc2802823b7c, type: 3}
+  m_DefaultSprite: {fileID: 1602250824271055607, guid: a5d4f22b8329ebd4fb96fc2802823b7c, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []
-  isPassable: 1
+  isPassable: 0
