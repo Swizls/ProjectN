@@ -48,7 +48,7 @@ public class Pathfinder
                         continue;
                     }
 
-                        int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
+                    int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
                     if(tentativGCost < neighbourNode.gCost)
                     {
                         neighbourNode.cameFromNode = currentNode;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -53,12 +54,12 @@ public class UnitBase : MonoBehaviour
                         sprite.flipX = true;
                     else if(moveDir.x >= 0f)
                         sprite.flipX = false;
-
                 }
                 else
                 {
                     currentPathIndex++;
                 }
+
                 if(currentPathIndex >= pathList.Count)
                 {
                     StopMoving();

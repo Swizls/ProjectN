@@ -9,11 +9,14 @@ public class PlayerUnitControl : MonoBehaviour
 
     private static List<UnitBase> allPlayerUnits;
     private static UnitBase selectedUnit;
+    private static Tilemap tileMap;
 
     public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
 
-    private void Awake()
+    private void Start()
     {
+        tileMap = FindObjectOfType<Tilemap>();
+
         allPlayerUnits = FindObjectsOfType<UnitBase>().Where(unit => unit.tag != "Enemy").ToList();
         selectedUnit = allPlayerUnits[0];
     }
@@ -41,17 +44,14 @@ public class PlayerUnitControl : MonoBehaviour
             else
             {
                 GameObject enemy = GetTarget();
-                if (ObstacleCheckForShot(enemy.transform.position))
+                if (ObstacleCheckForShot(selectedUnit.transform.position, enemy.transform.position))
                 {
                     selectedUnit.ShootAtTarget(enemy);
-                }
-                else
-                {
-                    Debug.Log("Unit can't shoot, because there is obstacle");
                 }
             }
         }
     }
+
     public static void SelectUnit(UnitBase unit)
     {
         selectedUnit = unit;
@@ -91,7 +91,7 @@ public class PlayerUnitControl : MonoBehaviour
     private bool IsEnemeyInCell()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                                Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
             if (hit.collider.tag == "Enemy")
@@ -101,8 +101,42 @@ public class PlayerUnitControl : MonoBehaviour
         }
         return false;
     }
-    private bool ObstacleCheckForShot(Vector3 targetPos)
+    private bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat)
     {
+        List<Vector3Int> pointsList = GetShotTrajectory(startPosFloat, targetPosFloat);
+
+        foreach (Vector3Int point in pointsList)
+        {
+            RuleBaseTile tile = selectedUnit.TileMap.GetTile<RuleBaseTile>(point);
+            if (!tile.isPassable)
+            {
+                Debug.LogWarning("There is obstacle!");
+                return false;
+            }
+        }
         return true;
+    }
+    private List<Vector3Int> GetShotTrajectory(Vector3 startPosFloat, Vector3 targetPosFloat)
+    {
+        List<Vector3Int> pointsList = new();
+
+        Vector3Int startPosInt = tileMap.WorldToCell(startPosFloat);
+        Vector3Int targetPosInt = tileMap.WorldToCell(targetPosFloat);
+
+        Vector3 normalizedDireciton = (targetPosFloat - startPosFloat).normalized;
+
+        Vector3Int roundedDirection = tileMap.WorldToCell(new Vector3(Mathf.Round(normalizedDireciton.x), 
+                                                                      Mathf.Round(normalizedDireciton.y),
+                                                                      normalizedDireciton.z));
+
+        Vector3Int tileForCheck = startPosInt;
+
+        while ((tileForCheck.x != targetPosInt.x || tileForCheck.y != targetPosInt.y) && pointsList.Count < 1000)
+        {
+            pointsList.Add(tileForCheck);
+            if (tileForCheck.x != targetPosInt.x) tileForCheck.x += roundedDirection.x;
+            if (tileForCheck.y != targetPosInt.y) tileForCheck.y += roundedDirection.y;
+        }
+        return pointsList;
     }
 }
