@@ -5,20 +5,22 @@ using UnityEngine.Tilemaps;
 
 public class PlayerUnitControl : MonoBehaviour
 {
-    private static Pathfinder pathFinder = new Pathfinder();
+    private Pathfinder pathFinder = new Pathfinder();
 
     private static List<UnitBase> allPlayerUnits;
-    private static UnitBase selectedUnit;
-    private static Tilemap tileMap;
+    private static UnitBase currentSelectedUnit;
+
+    private Tilemap tileMap;
 
     public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
+    public static UnitBase CurrentSelectedUnit => currentSelectedUnit;
 
-    private void Start()
+    private void Awake()
     {
         tileMap = FindObjectOfType<Tilemap>();
 
         allPlayerUnits = FindObjectsOfType<UnitBase>().Where(unit => unit.tag != "Enemy").ToList();
-        selectedUnit = allPlayerUnits[0];
+        currentSelectedUnit = allPlayerUnits[0];
     }
 
     private void Update()
@@ -29,13 +31,13 @@ public class PlayerUnitControl : MonoBehaviour
     private void UnitControl()
     {
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !selectedUnit.IsMoving)
+        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving)
         {
             List<Vector3> path = GetPath();
-            selectedUnit.SetPath(path);
+            currentSelectedUnit.SetPath(path);
         }
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !selectedUnit.IsMoving)
+        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving)
         {
             if (!IsEnemeyInCell())
             {
@@ -44,9 +46,9 @@ public class PlayerUnitControl : MonoBehaviour
             else
             {
                 GameObject enemy = GetTarget();
-                if (ObstacleCheckForShot(selectedUnit.transform.position, enemy.transform.position))
+                if (ObstacleCheckForShot(currentSelectedUnit.transform.position, enemy.transform.position))
                 {
-                    selectedUnit.ShootAtTarget(enemy);
+                    currentSelectedUnit.ShootAtTarget(enemy);
                 }
             }
         }
@@ -54,7 +56,7 @@ public class PlayerUnitControl : MonoBehaviour
 
     public static void SelectUnit(UnitBase unit)
     {
-        selectedUnit = unit;
+        currentSelectedUnit = unit;
     }
     private void SelectUnit()
     {
@@ -64,14 +66,14 @@ public class PlayerUnitControl : MonoBehaviour
         {
             if (hit.collider.tag == "PlayerUnit")
             {
-                selectedUnit = hit.collider.GetComponent<UnitBase>();
+                currentSelectedUnit = hit.collider.GetComponent<UnitBase>();
             }
         }
     }
     private List<Vector3> GetPath()
     {
         Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        List<Vector3> path = pathFinder.FindPath(selectedUnit.transform.position, clickPos, selectedUnit.TileMap);
+        List<Vector3> path = pathFinder.FindPath(currentSelectedUnit.transform.position, clickPos, tileMap);
 
         return path;
     }
@@ -107,10 +109,11 @@ public class PlayerUnitControl : MonoBehaviour
 
         foreach (Vector3Int point in pointsList)
         {
-            RuleBaseTile tile = selectedUnit.TileMap.GetTile<RuleBaseTile>(point);
+            RuleBaseTile tile = currentSelectedUnit.TileMap.GetTile<RuleBaseTile>(point);
             if (!tile.isPassable)
             {
                 Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle.");
+                Debug.Log("Obstacle position: " + point);
                 return false;
             }
         }
@@ -124,14 +127,11 @@ public class PlayerUnitControl : MonoBehaviour
         Vector3Int targetPosInt = tileMap.WorldToCell(targetPosFloat);
 
         Vector3 normalizedDireciton = (targetPosFloat - startPosFloat).normalized;
-
-        Vector3Int roundedDirection = tileMap.WorldToCell(new Vector3(Mathf.Round(normalizedDireciton.x), 
-                                                                      Mathf.Round(normalizedDireciton.y),
-                                                                      normalizedDireciton.z));
+        Vector3Int roundedDirection = new((int)Mathf.Sign(normalizedDireciton.x), (int)Mathf.Sign(normalizedDireciton.y), 0);
 
         Vector3Int tileForCheck = startPosInt;
 
-        while ((tileForCheck.x != targetPosInt.x || tileForCheck.y != targetPosInt.y) && pointsList.Count < 1000)
+        while (tileForCheck.x != targetPosInt.x || tileForCheck.y != targetPosInt.y)
         {
             pointsList.Add(tileForCheck);
             if (tileForCheck.x != targetPosInt.x) tileForCheck.x += roundedDirection.x;

@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 public class UnitBase : MonoBehaviour
 {
     [SerializeField] private float speed;
-
     [SerializeField] private int healthPoints;
     [SerializeField] private int unitDamage;
 
@@ -42,17 +41,18 @@ public class UnitBase : MonoBehaviour
     int currentPathIndex = 0;
     private void UnitMovement()
     {
+        const float MIN_DISTANCE = 0.05f;
         if (pathList != null && pathList.Count != 0)
         {
-            if (isMoving && Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > 0.01f)
+            if (isMoving && Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > MIN_DISTANCE)
             {
-                if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > 0.03f)
+                if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > MIN_DISTANCE)
                 {
-                    Vector3 moveDir = (pathList[currentPathIndex] - transform.position).normalized;
-                    transform.position = transform.position + moveDir * speed * Time.deltaTime;
-                    if(moveDir.x < 0f)
-                        sprite.flipX = true;
-                    else if(moveDir.x >= 0f)
+                    Vector3 moveDirerction = (pathList[currentPathIndex] - transform.position).normalized;
+                    transform.position = transform.position + moveDirerction * speed * Time.deltaTime;
+                    if(Mathf.Round(moveDirerction.x) != 1)
+                        sprite.flipX = true ;
+                    else
                         sprite.flipX = false;
                 }
                 else
