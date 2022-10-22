@@ -25,6 +25,7 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
         {
             GameObject unitSelectionButton = Instantiate(buttonPrefab);
             unitSelectionButton.transform.SetParent(transform);
+            unitSelectionButton.transform.localScale = Vector3.one;
 
             Button buttonComponent = unitSelectionButton.GetComponent<Button>();
             buttonComponent.onClick.AddListener(() => SelectUnit(unitSelectionButton));

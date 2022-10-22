@@ -110,7 +110,7 @@ public class PlayerUnitControl : MonoBehaviour
             RuleBaseTile tile = selectedUnit.TileMap.GetTile<RuleBaseTile>(point);
             if (!tile.isPassable)
             {
-                Debug.LogWarning("There is obstacle!");
+                Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle.");
                 return false;
             }
         }
