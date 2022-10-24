@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8042326826160798109}
   - component: {fileID: 8278774162565882846}
   m_Layer: 5
-  m_Name: UnitSelectionPanel
+  m_Name: Unit Selection Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 2192352289997142173}
   - component: {fileID: 6481435745957244618}
   m_Layer: 5
-  m_Name: UnitStats
+  m_Name: Unit Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,8 +772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fbee3851d0145c42bdd4018c702b43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthTextValue: {fileID: 2192352288825227241}
-  actionUnitsTextValue: {fileID: 2192352290331622199}
+  health: {fileID: 0}
+  actionUnits: {fileID: 0}
 --- !u!1 &2192352290146897285
 GameObject:
   m_ObjectHideFlags: 0

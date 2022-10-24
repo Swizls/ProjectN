@@ -12,14 +12,19 @@ public class UnitBase : MonoBehaviour
     [SerializeField] private int unitHealth;
     [SerializeField] private int unitDamage;
 
+    [SerializeField] private AudioClip walkClip;
+    [SerializeField] private AudioClip shotClip;
+
     private readonly int startActionPoints = 20;
     private int currentActionUnits;
 
     private bool isMoving = false;
 
-    private Tilemap tileMap;
     private List<Vector3> pathList;
+
+    private Tilemap tileMap;
     private SpriteRenderer sprite;
+    private new AudioSource audio;
 
     public Action unitValuesUpdated;
 
@@ -33,6 +38,8 @@ public class UnitBase : MonoBehaviour
     private void Start()
     {
         currentActionUnits = startActionPoints;
+
+        audio = GetComponent<AudioSource>();
         tileMap = FindObjectOfType<Tilemap>();
         sprite = GetComponentInChildren<SpriteRenderer>();
 
@@ -57,10 +64,17 @@ public class UnitBase : MonoBehaviour
         }
     }
 
-    int currentPathIndex = 0;
+    private int currentPathIndex = 0;
+    private bool isAudioPlayed = false;
     private void UnitMovement()
     {
         const float MIN_DISTANCE = 0.05f;
+        if (!isAudioPlayed)
+        {
+            audio.clip = walkClip;
+            audio.Play();
+            isAudioPlayed = true;
+        }
         if (pathList != null &&pathList.Count != 0 && isMoving && currentActionUnits > 0)
         {
             if (Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > MIN_DISTANCE)
@@ -102,6 +116,7 @@ public class UnitBase : MonoBehaviour
     {
         currentPathIndex = 0;
         isMoving = false;
+        isAudioPlayed = false;
     }
     public void SetPath(List<Vector3> pathList)
     {
@@ -122,6 +137,11 @@ public class UnitBase : MonoBehaviour
     public void ShootAtTarget(GameObject target)
     {
         target.GetComponent<UnitBase>().TakeDamage(unitDamage);
+        if(!audio.isPlaying)
+        {
+            audio.clip = shotClip;
+            audio.Play();
+        }
     }
 
     public void TakeDamage(int damage)

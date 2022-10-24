@@ -7072,6 +7072,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2102668957}
     m_Modifications:
+    - target: {fileID: 1569647518906189006, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
+      propertyPath: m_Name
+      value: Unit Selection Panel
+      objectReference: {fileID: 0}
     - target: {fileID: 2192352288825227247, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
       propertyPath: m_Name
       value: HealthValue
