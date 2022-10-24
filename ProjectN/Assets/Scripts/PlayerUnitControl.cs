@@ -12,6 +12,7 @@ public class PlayerUnitControl : MonoBehaviour
     private static UnitBase currentSelectedUnit;
 
     private static Tilemap tileMap;
+    private static LineRenderer lineRenderer;
 
     public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
     public static UnitBase CurrentSelectedUnit => currentSelectedUnit;
@@ -19,6 +20,7 @@ public class PlayerUnitControl : MonoBehaviour
     private void Awake()
     {
         tileMap = FindObjectOfType<Tilemap>();
+        lineRenderer = GetComponent<LineRenderer>();
 
         allPlayerUnits = FindObjectsOfType<UnitBase>().Where(unit => unit.tag != "Enemy").ToList();
         currentSelectedUnit = allPlayerUnits[0];
@@ -26,16 +28,41 @@ public class PlayerUnitControl : MonoBehaviour
 
     private void Update()
     {
+        ShowPath();
         UnitControl();
+    }
+
+    private void ShowPath()
+    {
+        Vector3[] path = GetPath()?.ToArray();
+        if(path != null)
+        {
+            for (int i = 0; i < path.Length; i++)
+            {
+                path[i] = new Vector3(path[i].x, path[i].y, -1);
+            }
+
+            lineRenderer.positionCount = path.Length;
+            lineRenderer.SetPositions(path);
+
+            if (currentSelectedUnit.ActionUnits >= path.Length * UnitBase.MOVE_COST)
+            {
+                lineRenderer.startColor = Color.green;
+                lineRenderer.endColor = Color.green;
+            }
+            else
+            {
+                lineRenderer.startColor = Color.red;
+                lineRenderer.endColor = Color.red;
+            }
+        }
+        else
+        {
+            lineRenderer.positionCount = 0;
+        }
     }
     private void UnitControl()
     {
-        //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
-        {
-            List<Vector3> path = GetPath();
-            currentSelectedUnit.SetPath(path);
-        }
         //Left mouse button
         if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving)
         {
@@ -52,6 +79,12 @@ public class PlayerUnitControl : MonoBehaviour
                     currentSelectedUnit.ShootAtTarget(enemy);
                 }
             }
+        }
+        //Rigth mouse button
+        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
+        {
+            List<Vector3> path = GetPath();
+            currentSelectedUnit.SetPath(path);
         }
     }
 
@@ -76,6 +109,7 @@ public class PlayerUnitControl : MonoBehaviour
     private List<Vector3> GetPath()
     {
         Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         List<Vector3> path = pathFinder.FindPath(currentSelectedUnit.transform.position, clickPos, tileMap);
 
         return path;

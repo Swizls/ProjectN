@@ -15,7 +15,7 @@ public class Pathfinder
         Vector3Int startPos = tileMap.WorldToCell(startPosFloat);
         Vector3Int endPos = tileMap.WorldToCell(endPosFloat);
         RuleBaseTile targetTile = tileMap.GetTile<RuleBaseTile>(endPos);
-        if (targetTile.isPassable && targetTile != null)
+        if (targetTile != null && targetTile.isPassable)
         {
             PathNode startNode = new PathNode(startPos.x, startPos.y);
             PathNode endNode = new PathNode(endPos.x, endPos.y);
