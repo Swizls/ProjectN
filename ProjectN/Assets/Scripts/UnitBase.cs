@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class UnitBase : MonoBehaviour
 {
-    private const int MOVE_COST = 2;
+    public const int MOVE_COST = 2;
 
     [SerializeField] private float speed;
 
@@ -21,6 +21,8 @@ public class UnitBase : MonoBehaviour
     private List<Vector3> pathList;
     private SpriteRenderer sprite;
 
+    public Action unitValuesUpdated;
+
     public bool IsMoving => isMoving;
     public Tilemap TileMap => tileMap;
     public int UnitDamage => unitDamage;
@@ -33,6 +35,8 @@ public class UnitBase : MonoBehaviour
         currentActionUnits = startActionPoints;
         tileMap = FindObjectOfType<Tilemap>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+
+        unitValuesUpdated?.Invoke();
     }
 
     private void OnEnable()
@@ -57,7 +61,7 @@ public class UnitBase : MonoBehaviour
     private void UnitMovement()
     {
         const float MIN_DISTANCE = 0.05f;
-        if (pathList != null && pathList.Count != 0 && isMoving && currentActionUnits > 0)
+        if (pathList != null &&pathList.Count != 0 && isMoving && currentActionUnits > 0)
         {
             if (Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > MIN_DISTANCE)
             {
@@ -73,6 +77,7 @@ public class UnitBase : MonoBehaviour
                 else
                 {
                     currentActionUnits -= MOVE_COST;
+                    unitValuesUpdated.Invoke();
                     currentPathIndex++;
                 }
 
@@ -83,6 +88,8 @@ public class UnitBase : MonoBehaviour
             }
             else
             {
+                currentActionUnits -= MOVE_COST;
+                unitValuesUpdated.Invoke();
                 StopMoving();
             }
         }
@@ -109,6 +116,7 @@ public class UnitBase : MonoBehaviour
     private void OnTurnEnd()
     {
         currentActionUnits = startActionPoints;
+        unitValuesUpdated?.Invoke();
     }
 
     public void ShootAtTarget(GameObject target)
@@ -119,7 +127,8 @@ public class UnitBase : MonoBehaviour
     public void TakeDamage(int damage)
     {
         unitHealth -= damage;
-        Debug.Log('"'+ tag + '"' + " health points: " + unitHealth);
+        unitValuesUpdated?.Invoke();
+
         if(unitHealth <= 0)
         {
             Death();

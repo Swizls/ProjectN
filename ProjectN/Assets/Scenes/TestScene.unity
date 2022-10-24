@@ -6665,6 +6665,17 @@ Transform:
   m_Father: {fileID: 868591081}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742513235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2192352290331622199, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
+  m_PrefabInstance: {fileID: 2192352290763747637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &868591080
 GameObject:
   m_ObjectHideFlags: 0
@@ -6901,6 +6912,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2192352289589507163, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
   m_PrefabInstance: {fileID: 2192352290763747637}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1349565371 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2192352288825227241, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
+  m_PrefabInstance: {fileID: 2192352290763747637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1437406650
 GameObject:
   m_ObjectHideFlags: 0
@@ -7178,6 +7200,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6481435745957244618, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1349565371}
+    - target: {fileID: 6481435745957244618, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
+      propertyPath: actionUnits
+      value: 
+      objectReference: {fileID: 742513235}
     - target: {fileID: 8073236220024891375, guid: 27ccae9791f621e4f8dfa782ee75fe81, type: 3}
       propertyPath: m_Name
       value: UnitSelectionPanel

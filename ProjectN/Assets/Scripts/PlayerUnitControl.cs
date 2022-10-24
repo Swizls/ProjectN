@@ -31,13 +31,13 @@ public class PlayerUnitControl : MonoBehaviour
     private void UnitControl()
     {
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving)
+        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits > 0)
         {
             List<Vector3> path = GetPath();
             currentSelectedUnit.SetPath(path);
         }
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits > 0)
+        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving)
         {
             if (!IsEnemeyInCell())
             {
@@ -57,6 +57,7 @@ public class PlayerUnitControl : MonoBehaviour
     public static void SelectUnit(UnitBase unit)
     {
         currentSelectedUnit = unit;
+        currentSelectedUnit.unitValuesUpdated.Invoke();
     }
     private void SelectUnit()
     {
@@ -69,6 +70,7 @@ public class PlayerUnitControl : MonoBehaviour
                 currentSelectedUnit = hit.collider.GetComponent<UnitBase>();
             }
         }
+        currentSelectedUnit.unitValuesUpdated.Invoke();
     }
     private List<Vector3> GetPath()
     {
