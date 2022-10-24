@@ -31,7 +31,7 @@ public class PlayerUnitControl : MonoBehaviour
     private void UnitControl()
     {
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits > 0)
+        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
         {
             List<Vector3> path = GetPath();
             currentSelectedUnit.SetPath(path);
@@ -46,7 +46,8 @@ public class PlayerUnitControl : MonoBehaviour
             else
             {
                 GameObject enemy = GetTarget();
-                if (ObstacleCheckForShot(currentSelectedUnit.transform.position, enemy.transform.position))
+                if (ObstacleCheckForShot(currentSelectedUnit.transform.position, enemy.transform.position) 
+                    && currentSelectedUnit.ActionUnits >= UnitBase.SHOT_COST)
                 {
                     currentSelectedUnit.ShootAtTarget(enemy);
                 }

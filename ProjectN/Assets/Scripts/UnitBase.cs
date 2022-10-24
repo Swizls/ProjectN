@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class UnitBase : MonoBehaviour
 {
     public const int MOVE_COST = 2;
+    public const int SHOT_COST = 5;
 
     [SerializeField] private float speed;
 
@@ -116,6 +117,7 @@ public class UnitBase : MonoBehaviour
     {
         currentPathIndex = 0;
         isMoving = false;
+        audio.Stop();
         isAudioPlayed = false;
     }
     public void SetPath(List<Vector3> pathList)
@@ -137,11 +139,13 @@ public class UnitBase : MonoBehaviour
     public void ShootAtTarget(GameObject target)
     {
         target.GetComponent<UnitBase>().TakeDamage(unitDamage);
-        if(!audio.isPlaying)
-        {
-            audio.clip = shotClip;
-            audio.Play();
-        }
+        currentActionUnits -= SHOT_COST;
+
+        unitValuesUpdated?.Invoke();
+
+        audio.Stop();
+        audio.clip = shotClip;
+        audio.Play();
     }
 
     public void TakeDamage(int damage)
