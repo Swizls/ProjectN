@@ -5,12 +5,15 @@ using UnityEngine.Tilemaps;
 
 public class UnitBase : MonoBehaviour
 {
+    private const int MOVE_COST = 2;
+
     [SerializeField] private float speed;
-    [SerializeField] private int healthPoints;
+
+    [SerializeField] private int unitHealth;
     [SerializeField] private int unitDamage;
 
     private readonly int startActionPoints = 20;
-    private int currentActionPoints;
+    private int currentActionUnits;
 
     private bool isMoving = false;
 
@@ -21,13 +24,25 @@ public class UnitBase : MonoBehaviour
     public bool IsMoving => isMoving;
     public Tilemap TileMap => tileMap;
     public int UnitDamage => unitDamage;
-    public int ActionPoints => currentActionPoints;
+    public int UnitHealth => unitHealth;
+    public int ActionUnits => currentActionUnits;
+
 
     private void Start()
     {
-        currentActionPoints = startActionPoints;
+        currentActionUnits = startActionPoints;
         tileMap = FindObjectOfType<Tilemap>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        EndTurnHandler.turnEnd += OnTurnEnd;
+    }
+
+    private void OnDisable()
+    {
+        EndTurnHandler.turnEnd -= OnTurnEnd;
     }
 
     private void Update()
@@ -42,9 +57,9 @@ public class UnitBase : MonoBehaviour
     private void UnitMovement()
     {
         const float MIN_DISTANCE = 0.05f;
-        if (pathList != null && pathList.Count != 0)
+        if (pathList != null && pathList.Count != 0 && isMoving && currentActionUnits > 0)
         {
-            if (isMoving && Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > MIN_DISTANCE)
+            if (Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > MIN_DISTANCE)
             {
                 if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > MIN_DISTANCE)
                 {
@@ -57,6 +72,7 @@ public class UnitBase : MonoBehaviour
                 }
                 else
                 {
+                    currentActionUnits -= MOVE_COST;
                     currentPathIndex++;
                 }
 
@@ -92,7 +108,7 @@ public class UnitBase : MonoBehaviour
     }
     private void OnTurnEnd()
     {
-        currentActionPoints = startActionPoints;
+        currentActionUnits = startActionPoints;
     }
 
     public void ShootAtTarget(GameObject target)
@@ -102,9 +118,9 @@ public class UnitBase : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        healthPoints -= damage;
-        Debug.Log('"'+ tag + '"' + " health points: " + healthPoints);
-        if(healthPoints <= 0)
+        unitHealth -= damage;
+        Debug.Log('"'+ tag + '"' + " health points: " + unitHealth);
+        if(unitHealth <= 0)
         {
             Death();
         }

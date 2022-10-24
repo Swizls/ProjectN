@@ -2,16 +2,15 @@ ProjectN/Library/
 ProjectN/Library/Artifacts/
 ProjectN/Logs/
 .sln
+.csproj
 ProjectN/Packages/
 
 ProjectN/Temp/
 
 ProjectN/obj/Debug/
 
-ProjectN/Assembly-CSharp.csproj
 
 ProjectN/obj/
-ProjectN/.vs/
+ProjectN/.vs/ProjectN/v17/
 ProjectN/UserSettings/
 
-ProjectN/.vs/ProjectN/v17/

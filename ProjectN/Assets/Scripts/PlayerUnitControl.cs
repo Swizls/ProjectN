@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class PlayerUnitControl : MonoBehaviour
     private static List<UnitBase> allPlayerUnits;
     private static UnitBase currentSelectedUnit;
 
-    private Tilemap tileMap;
+    private static Tilemap tileMap;
 
     public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
     public static UnitBase CurrentSelectedUnit => currentSelectedUnit;
@@ -27,7 +28,6 @@ public class PlayerUnitControl : MonoBehaviour
     {
         UnitControl();
     }
-
     private void UnitControl()
     {
         //Rigth mouse button
@@ -37,7 +37,7 @@ public class PlayerUnitControl : MonoBehaviour
             currentSelectedUnit.SetPath(path);
         }
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving)
+        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits > 0)
         {
             if (!IsEnemeyInCell())
             {
@@ -61,7 +61,7 @@ public class PlayerUnitControl : MonoBehaviour
     private void SelectUnit()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                                Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
             if (hit.collider.tag == "PlayerUnit")
@@ -80,7 +80,7 @@ public class PlayerUnitControl : MonoBehaviour
     private GameObject GetTarget()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                                Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
             if (hit.collider.tag == "Enemy")
