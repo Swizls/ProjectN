@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -9,65 +7,71 @@ public class Pathfinder
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
 
-    List<PathNode> openList;
-    List<PathNode> closedList;
+    private List<PathNode> openList;
+    private List<PathNode> closedList;
 
-    public List<Vector3> FindPath(Vector3Int startPos, Vector3Int endPos, Tilemap tileMap)
+    public List<Vector3> FindPath(Vector3 startPosFloat, Vector3 endPosFloat, Tilemap tileMap)
     {
-        PathNode startNode = new PathNode(startPos.x, startPos.y);
-        PathNode endNode = new PathNode(endPos.x, endPos.y);
-        openList = new List<PathNode> { startNode };
-        closedList = new List<PathNode>();
-
-        startNode.gCost = 0;
-        startNode.hCost = CalculateDistanceCost(startNode, endNode);
-        startNode.CalculateFCost();
-
-        while(openList.Count > 0 && openList.Count < 3000)
+        Vector3Int startPos = tileMap.WorldToCell(startPosFloat);
+        Vector3Int endPos = tileMap.WorldToCell(endPosFloat);
+        RuleBaseTile targetTile = tileMap.GetTile<RuleBaseTile>(endPos);
+        if (targetTile != null && targetTile.isPassable)
         {
-            PathNode currentNode = GetLowestFCostNode();
+            PathNode startNode = new PathNode(startPos.x, startPos.y);
+            PathNode endNode = new PathNode(endPos.x, endPos.y);
+            openList = new List<PathNode> { startNode };
+            closedList = new List<PathNode>();
 
-            if (currentNode.x == endNode.x && currentNode.y == endNode.y)
+            startNode.gCost = 0;
+            startNode.hCost = CalculateDistanceCost(startNode, endNode);
+            startNode.CalculateFCost();
+
+            while(openList.Count > 0)
             {
-                return CalculatePath(currentNode, tileMap);
-            }
+                PathNode currentNode = GetLowestFCostNode();
 
-            foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
-            {
-                bool isNeighbourNodeInList = false;
-                foreach(PathNode node in closedList)
+                if (currentNode.x == endNode.x && currentNode.y == endNode.y)
                 {
-                    if (neighbourNode.x == node.x && neighbourNode.y == node.y) isNeighbourNodeInList = true;
-                    break;
-                }
-                if (isNeighbourNodeInList)
-                {
-                    continue;
+                    return CalculatePath(currentNode, tileMap);
                 }
 
-                int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
-                if(tentativGCost < neighbourNode.gCost)
+                foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
                 {
-                    neighbourNode.cameFromNode = currentNode;
-                    neighbourNode.gCost = tentativGCost;
-                    neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
-                    neighbourNode.CalculateFCost();
-                }
-                isNeighbourNodeInList = false;
-                foreach (PathNode node in openList)
-                {
-                    if (neighbourNode.x == node.x && neighbourNode.y == node.y)
+                    bool isNeighbourNodeInList = false;
+                    foreach(PathNode node in closedList)
                     {
-                        isNeighbourNodeInList = true;
+                        if (neighbourNode.x == node.x && neighbourNode.y == node.y) isNeighbourNodeInList = true;
+                        break;
+                    }
+                    if (isNeighbourNodeInList)
+                    {
+                        continue;
+                    }
+
+                    int tentativGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
+                    if(tentativGCost < neighbourNode.gCost)
+                    {
+                        neighbourNode.cameFromNode = currentNode;
+                        neighbourNode.gCost = tentativGCost;
+                        neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
+                        neighbourNode.CalculateFCost();
+                    }
+                    isNeighbourNodeInList = false;
+                    foreach (PathNode node in openList)
+                    {
+                        if (neighbourNode.x == node.x && neighbourNode.y == node.y)
+                        {
+                            isNeighbourNodeInList = true;
+                        }
+                    }
+                    if (!isNeighbourNodeInList)
+                    {
+                        openList.Add(neighbourNode);
                     }
                 }
-                if (!isNeighbourNodeInList)
-                {
-                    openList.Add(neighbourNode);
-                }
+                openList.Remove(currentNode);
+                closedList.Add(currentNode);
             }
-            openList.Remove(currentNode);
-            closedList.Add(currentNode);
         }
         return null;
     }
@@ -88,48 +92,50 @@ public class Pathfinder
     private List<PathNode> GetNeighboursList(PathNode currentNode, Tilemap tileMap)
     {
         List<PathNode> neighbourList = new List<PathNode>();
-        BaseTile tile;
+        RuleBaseTile tile;
 
         //Left
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y, 0));
         if (tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y));
         }
         //Left up
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
         if (tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
         }
         //Left down
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
         if (tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
         }
         //Right
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y, 0));
         if (tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y));
         }
         //Right up
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
         if (tile.isPassable)
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y + 1));
         //Right down
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
         if (tile.isPassable)
+        { 
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y - 1));
+        }
         //Up
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
         if (tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y + 1));
         }
         //Down
-        tile = tileMap.GetTile<BaseTile>(new Vector3Int(currentNode.x, currentNode.y - 1, 0));
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x, currentNode.y - 1, 0));
         if (tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y - 1));
