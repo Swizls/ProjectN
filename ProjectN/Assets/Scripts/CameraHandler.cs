@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CamScript : MonoBehaviour
+public class CameraHandler : MonoBehaviour
 {
     private const int CAM_MIN_SIZE = 2;
     private const int CAM_MAX_SIZE = 10;

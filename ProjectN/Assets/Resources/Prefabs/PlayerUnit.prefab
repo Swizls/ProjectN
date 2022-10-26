@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8115760274899358186}
   - component: {fileID: 6260055253261080707}
+  - component: {fileID: 1007935285814966958}
   - component: {fileID: 5690119482139021200}
   - component: {fileID: 1853709071470991123}
-  - component: {fileID: 1007935285814966958}
+  - component: {fileID: 2215461817019343689}
   m_Layer: 0
   m_Name: PlayerUnit
   m_TagString: PlayerUnit
@@ -63,37 +64,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5690119482139021200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568893800191457386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3617187bcc9a1e9428e79459c95c282b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  unitHealth: 100
-  unitDamage: 25
-  walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
-  shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
---- !u!114 &1853709071470991123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568893800191457386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd1266bcd835e844b3a645a131f8275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 3311738852754781303}
-  actionUnits: {fileID: 8119727449051815793}
 --- !u!82 &1007935285814966958
 AudioSource:
   m_ObjectHideFlags: 0
@@ -190,6 +160,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5690119482139021200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568893800191457386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3617187bcc9a1e9428e79459c95c282b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  unitHealth: 100
+  unitDamage: 25
+  walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
+  shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
+--- !u!114 &1853709071470991123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568893800191457386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd1266bcd835e844b3a645a131f8275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 3311738852754781303}
+  actionUnits: {fileID: 8119727449051815793}
+--- !u!114 &2215461817019343689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568893800191457386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f6bb877c9489d47b692b27fb193c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1 &3028391365772410580
 GameObject:
   m_ObjectHideFlags: 0

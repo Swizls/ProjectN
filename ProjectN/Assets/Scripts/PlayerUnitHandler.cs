@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerUnitControl : MonoBehaviour
+[RequireComponent(typeof(LineRenderer))]
+public class PlayerUnitHandler : MonoBehaviour
 {
     private Pathfinder pathFinder = new Pathfinder();
 
@@ -84,7 +85,11 @@ public class PlayerUnitControl : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
         {
             List<Vector3> path = GetPath();
-            currentSelectedUnit.SetPath(path);
+            currentSelectedUnit.StartMove(path);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentSelectedUnit.Inventory.LogInventoryInConsole();
         }
     }
 

@@ -18,7 +18,9 @@ public class UnitBase : MonoBehaviour
 
     private readonly int startActionPoints = 20;
     private int currentActionUnits;
+    private int currentPathIndex = 0;
 
+    private bool isAudioPlayed = false;
     private bool isMoving = false;
 
     private List<Vector3> pathList;
@@ -26,6 +28,7 @@ public class UnitBase : MonoBehaviour
     private Tilemap tileMap;
     private SpriteRenderer sprite;
     private new AudioSource audio;
+    private UnitInventory inventory;
 
     public Action unitValuesUpdated;
 
@@ -34,6 +37,7 @@ public class UnitBase : MonoBehaviour
     public int UnitDamage => unitDamage;
     public int UnitHealth => unitHealth;
     public int ActionUnits => currentActionUnits;
+    public UnitInventory Inventory => inventory;
 
 
     private void Start()
@@ -43,6 +47,7 @@ public class UnitBase : MonoBehaviour
         audio = GetComponent<AudioSource>();
         tileMap = FindObjectOfType<Tilemap>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        inventory = GetComponent<UnitInventory>();
 
         unitValuesUpdated?.Invoke();
     }
@@ -65,8 +70,6 @@ public class UnitBase : MonoBehaviour
         }
     }
 
-    private int currentPathIndex = 0;
-    private bool isAudioPlayed = false;
     private void UnitMovement()
     {
         const float MIN_DISTANCE = 0.05f;
@@ -120,7 +123,7 @@ public class UnitBase : MonoBehaviour
         audio.Stop();
         isAudioPlayed = false;
     }
-    public void SetPath(List<Vector3> pathList)
+    public void StartMove(List<Vector3> pathList)
     {
         this.pathList = pathList;
         isMoving = true;

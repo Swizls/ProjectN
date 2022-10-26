@@ -12,7 +12,7 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
 
     private void Start()
     {
-        allPlayerUnits = PlayerUnitControl.AllPlayerUnits;
+        allPlayerUnits = PlayerUnitHandler.AllPlayerUnits;
         CreateButtons();
     }
     
@@ -41,7 +41,7 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
 
     public void SelectUnit(GameObject button)
     {
-        if(!PlayerUnitControl.CurrentSelectedUnit.IsMoving)
-            PlayerUnitControl.SelectUnit(unitSelectionButtons[button]);
+        if(!PlayerUnitHandler.CurrentSelectedUnit.IsMoving)
+            PlayerUnitHandler.SelectUnit(unitSelectionButtons[button]);
     }
 }

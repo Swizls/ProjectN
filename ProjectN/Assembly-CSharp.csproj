@@ -56,15 +56,17 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CamScript.cs" />
+    <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Item.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
-    <Compile Include="Assets\Scripts\UI\UnitStatsDisplay.cs" />
+    <Compile Include="Assets\Scripts\UI\UnitStatsUI.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerUnitSelectionPanel.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Tiles\RuleBaseTile.cs" />
-    <Compile Include="Assets\Scripts\PlayerUnitControl.cs" />
+    <Compile Include="Assets\Scripts\UnitInventory.cs" />
+    <Compile Include="Assets\Scripts\PlayerUnitHandler.cs" />
     <Compile Include="Assets\Scripts\UnitBase.cs" />
   </ItemGroup>
   <ItemGroup>
