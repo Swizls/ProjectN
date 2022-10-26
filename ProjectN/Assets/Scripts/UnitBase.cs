@@ -7,6 +7,7 @@ public class UnitBase : MonoBehaviour
 {
     public const int MOVE_COST = 2;
     public const int SHOT_COST = 5;
+    public const int INTERACTION_COST = 3;
 
     [SerializeField] private float speed;
 
@@ -136,6 +137,14 @@ public class UnitBase : MonoBehaviour
     private void OnTurnEnd()
     {
         currentActionUnits = startActionPoints;
+        unitValuesUpdated?.Invoke();
+    }
+
+    public void PickUpItem(GameObject item)
+    {
+        inventory.AddItem(item.GetComponent<Item>().Info);
+        Destroy(item);
+        currentActionUnits -= INTERACTION_COST;
         unitValuesUpdated?.Invoke();
     }
 

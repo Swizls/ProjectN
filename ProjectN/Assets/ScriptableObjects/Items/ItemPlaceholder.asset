@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd3e0ba4298aab14dab4a6c99053de2b, type: 3}
-  m_Name: Default Weapon
+  m_Name: ItemPlaceholder
   m_EditorClassIdentifier: 
-  itemType: 1
+  itemType: 0
   icon: {fileID: 21300000, guid: e4452d39298a6ea4abfc9e5d0bed8180, type: 3}
-  itemWheight: 0
+  itemWheight: 10
   isWeapon: 0
-  itemName: testItem
+  itemName: Placeholder

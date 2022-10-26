@@ -1,25 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitInventory : MonoBehaviour
 {
-    [SerializeField] private List<Item> items = new();
+    private const int MAX_ITEMS_COUNT = 5;
 
-    public int ItemCount()
+    private readonly float maxCarringWeight = 50f;
+    private float currentCarringWeight = 0f;
+
+    [SerializeField] private List<ItemInfo> items = new();
+
+    public Action<ItemInfo> newItemAdded;
+
+    public int ItemsCount()
     {
         return items.Count;
     }
-    public void AddItem(Item item)
+    public void AddItem(ItemInfo item)
     {
-        items.Add(item);
+        if(currentCarringWeight + item.Weight <= maxCarringWeight)
+        {
+            items.Add(item);
+            currentCarringWeight += item.Weight;
+        }
+        Debug.Log(currentCarringWeight);
     }
-    public void RemoveItem(Item item)
+    public void RemoveItem(ItemInfo item)
     {
         items.Remove(item);
-    }
-    public void LogInventoryInConsole()
-    {
-        Debug.Log(items);
+        currentCarringWeight -= item.Weight;
     }
 }

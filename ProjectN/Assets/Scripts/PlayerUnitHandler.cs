@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(LineRenderer))]
 public class PlayerUnitHandler : MonoBehaviour
 {
+    private const float PICKABLE_RANGE = 1.5f;
+
     private Pathfinder pathFinder = new Pathfinder();
 
     private static List<UnitBase> allPlayerUnits;
@@ -66,20 +69,31 @@ public class PlayerUnitHandler : MonoBehaviour
     {
         //Left mouse button
         if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving)
-        {
-            if (!IsEnemeyInCell())
+        { 
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                                                 Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if(hit.collider != null)
             {
-                SelectUnit();
-            }
-            else
-            {
-                GameObject enemy = GetTarget();
-                if (ObstacleCheckForShot(currentSelectedUnit.transform.position, enemy.transform.position) 
-                    && currentSelectedUnit.ActionUnits >= UnitBase.SHOT_COST)
+                if (IsUnit(hit))
                 {
-                    currentSelectedUnit.ShootAtTarget(enemy);
+                    SelectUnit(hit);
                 }
-            }
+                else if (IsEnemey(hit) && currentSelectedUnit.ActionUnits >= UnitBase.SHOT_COST)
+                {
+                    GameObject enemy = GetTarget();
+                    if (ObstacleCheckForShot(currentSelectedUnit.transform.position, enemy.transform.position))
+                    {
+                        currentSelectedUnit.ShootAtTarget(enemy);
+                    }
+                }
+                else if (IsItem(hit) && currentSelectedUnit.ActionUnits >= UnitBase.INTERACTION_COST)
+                {
+                    if (Vector3.Distance(currentSelectedUnit.transform.position, hit.collider.transform.position) < PICKABLE_RANGE)
+                    {
+                        currentSelectedUnit.PickUpItem(hit.collider.gameObject);
+                    }
+                }
+            }    
         }
         //Rigth mouse button
         if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
@@ -89,26 +103,50 @@ public class PlayerUnitHandler : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            currentSelectedUnit.Inventory.LogInventoryInConsole();
+            currentSelectedUnit.Inventory.AddItem(new ItemInfo(ItemInfo.ItemType.weapon, 10f));
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EndTurnHandler.EndTurn();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
+    private bool IsUnit(RaycastHit2D hit)
+    {
+        if (hit.collider.tag == "PlayerUnit") 
+            return true;
+        return false;
+    }
+
+    private bool IsItem(RaycastHit2D hit)
+    {
+        if (hit.collider.gameObject.GetComponent<Item>() != null)
+            return true;
+        return false;
+    }
+    private bool IsEnemey(RaycastHit2D hit)
+    {
+        if (hit.collider.tag == "Enemy")
+            return true;
+        return false;
+    }
     public static void SelectUnit(UnitBase unit)
     {
         currentSelectedUnit = unit;
         currentSelectedUnit.unitValuesUpdated.Invoke();
     }
-    private void SelectUnit()
+    private void SelectUnit(RaycastHit2D hit)
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        if (hit.collider != null)
-        {
-            if (hit.collider.tag == "PlayerUnit")
-            {
-                currentSelectedUnit = hit.collider.GetComponent<UnitBase>();
-            }
-        }
+        if (hit.collider.tag == "PlayerUnit")
+            currentSelectedUnit = hit.collider.GetComponent<UnitBase>();
         currentSelectedUnit.unitValuesUpdated.Invoke();
     }
     private List<Vector3> GetPath()
@@ -131,19 +169,6 @@ public class PlayerUnitHandler : MonoBehaviour
             }
         }
         return null;
-    }
-    private bool IsEnemeyInCell()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                                             Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        if (hit.collider != null)
-        {
-            if (hit.collider.tag == "Enemy")
-            {
-                return true;
-            }
-        }
-        return false;
     }
     private bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat)
     {
