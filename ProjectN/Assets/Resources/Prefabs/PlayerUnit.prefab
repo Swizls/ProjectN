@@ -177,6 +177,7 @@ MonoBehaviour:
   unitDamage: 25
   walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
   shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
+  pickupClip: {fileID: 8300000, guid: 2f2ddaf46d3212d4fa98a0e9f9de5f0c, type: 3}
 --- !u!114 &1853709071470991123
 MonoBehaviour:
   m_ObjectHideFlags: 0

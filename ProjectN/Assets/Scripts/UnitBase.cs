@@ -16,6 +16,7 @@ public class UnitBase : MonoBehaviour
 
     [SerializeField] private AudioClip walkClip;
     [SerializeField] private AudioClip shotClip;
+    [SerializeField] private AudioClip pickupClip;
 
     private readonly int startActionPoints = 20;
     private int currentActionUnits;
@@ -28,7 +29,7 @@ public class UnitBase : MonoBehaviour
 
     private Tilemap tileMap;
     private SpriteRenderer sprite;
-    private new AudioSource audio;
+    private AudioSource audioComponent;
     private UnitInventory inventory;
 
     public Action unitValuesUpdated;
@@ -45,7 +46,7 @@ public class UnitBase : MonoBehaviour
     {
         currentActionUnits = startActionPoints;
 
-        audio = GetComponent<AudioSource>();
+        audioComponent = GetComponent<AudioSource>();
         tileMap = FindObjectOfType<Tilemap>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         inventory = GetComponent<UnitInventory>();
@@ -76,8 +77,8 @@ public class UnitBase : MonoBehaviour
         const float MIN_DISTANCE = 0.05f;
         if (!isAudioPlayed)
         {
-            audio.clip = walkClip;
-            audio.Play();
+            audioComponent.clip = walkClip;
+            audioComponent.Play();
             isAudioPlayed = true;
         }
         if (pathList != null &&pathList.Count != 0 && isMoving && currentActionUnits > 0)
@@ -121,7 +122,7 @@ public class UnitBase : MonoBehaviour
     {
         currentPathIndex = 0;
         isMoving = false;
-        audio.Stop();
+        audioComponent.Stop();
         isAudioPlayed = false;
     }
     public void StartMove(List<Vector3> pathList)
@@ -140,11 +141,15 @@ public class UnitBase : MonoBehaviour
         unitValuesUpdated?.Invoke();
     }
 
-    public void PickUpItem(GameObject item)
+    public void PickupItem(GameObject item)
     {
         inventory.AddItem(item.GetComponent<Item>().Info);
         Destroy(item);
         currentActionUnits -= INTERACTION_COST;
+
+        audioComponent.clip = pickupClip;
+        audioComponent.Play();
+
         unitValuesUpdated?.Invoke();
     }
 
@@ -155,9 +160,9 @@ public class UnitBase : MonoBehaviour
 
         unitValuesUpdated?.Invoke();
 
-        audio.Stop();
-        audio.clip = shotClip;
-        audio.Play();
+        audioComponent.Stop();
+        audioComponent.clip = shotClip;
+        audioComponent.Play();
     }
 
     public void TakeDamage(int damage)

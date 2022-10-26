@@ -90,7 +90,7 @@ public class PlayerUnitHandler : MonoBehaviour
                 {
                     if (Vector3.Distance(currentSelectedUnit.transform.position, hit.collider.transform.position) < PICKABLE_RANGE)
                     {
-                        currentSelectedUnit.PickUpItem(hit.collider.gameObject);
+                        currentSelectedUnit.PickupItem(hit.collider.gameObject);
                     }
                 }
             }    
