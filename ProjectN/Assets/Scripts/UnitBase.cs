@@ -9,47 +9,47 @@ public class UnitBase : MonoBehaviour
     public const int SHOT_COST = 5;
     public const int INTERACTION_COST = 3;
 
-    [SerializeField] private float speed;
+    [SerializeField] private float _speed;
 
-    [SerializeField] private int unitHealth;
-    [SerializeField] private int unitDamage;
+    [SerializeField] private int _unitHealth;
+    [SerializeField] private int _unitDamage;
 
-    [SerializeField] private AudioClip walkClip;
-    [SerializeField] private AudioClip shotClip;
-    [SerializeField] private AudioClip pickupClip;
+    [SerializeField] private AudioClip _walkClip;
+    [SerializeField] private AudioClip _shotClip;
+    [SerializeField] private AudioClip _pickupClip;
 
-    private readonly int startActionPoints = 20;
-    private int currentActionUnits;
-    private int currentPathIndex = 0;
+    private readonly int _startActionPoints = 20;
+    private int _currentActionUnits;
+    private int _currentPathIndex = 0;
 
-    private bool isAudioPlayed = false;
-    private bool isMoving = false;
+    private bool _isAudioPlayed = false;
+    private bool _isMoving = false;
 
-    private List<Vector3> pathList;
+    private List<Vector3> _pathList;
 
-    private Tilemap tileMap;
-    private SpriteRenderer sprite;
-    private AudioSource audioComponent;
-    private UnitInventory inventory;
+    private Tilemap _tileMap;
+    private SpriteRenderer _sprite;
+    private AudioSource _audioComponent;
+    private UnitInventory _inventory;
 
     public Action unitValuesUpdated;
 
-    public bool IsMoving => isMoving;
-    public Tilemap TileMap => tileMap;
-    public int UnitDamage => unitDamage;
-    public int UnitHealth => unitHealth;
-    public int ActionUnits => currentActionUnits;
-    public UnitInventory Inventory => inventory;
+    public bool IsMoving => _isMoving;
+    public Tilemap TileMap => _tileMap;
+    public int UnitDamage => _unitDamage;
+    public int UnitHealth => _unitHealth;
+    public int ActionUnits => _currentActionUnits;
+    public UnitInventory Inventory => _inventory;
 
 
     private void Start()
     {
-        currentActionUnits = startActionPoints;
+        _currentActionUnits = _startActionPoints;
 
-        audioComponent = GetComponent<AudioSource>();
-        tileMap = FindObjectOfType<Tilemap>();
-        sprite = GetComponentInChildren<SpriteRenderer>();
-        inventory = GetComponent<UnitInventory>();
+        _audioComponent = GetComponent<AudioSource>();
+        _tileMap = FindObjectOfType<Tilemap>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
+        _inventory = GetComponent<UnitInventory>();
 
         unitValuesUpdated?.Invoke();
     }
@@ -66,7 +66,7 @@ public class UnitBase : MonoBehaviour
 
     private void Update()
     {
-        if (isMoving)
+        if (_isMoving)
         {
             UnitMovement();
         }
@@ -74,41 +74,41 @@ public class UnitBase : MonoBehaviour
 
     private void UnitMovement()
     {
-        const float MIN_DISTANCE = 0.05f;
-        if (!isAudioPlayed)
+        const float MIN_DISTANCE = 0.07f;
+        if (!_isAudioPlayed)
         {
-            audioComponent.clip = walkClip;
-            audioComponent.Play();
-            isAudioPlayed = true;
+            _audioComponent.clip = _walkClip;
+            _audioComponent.Play();
+            _isAudioPlayed = true;
         }
-        if (pathList != null &&pathList.Count != 0 && isMoving && currentActionUnits > 0)
+        if (_pathList != null &&_pathList.Count != 0 && _isMoving && _currentActionUnits > 0)
         {
-            if (Vector3.Distance(transform.position, pathList[pathList.Count - 1]) > MIN_DISTANCE)
+            if (Vector3.Distance(transform.position, _pathList[_pathList.Count - 1]) > MIN_DISTANCE)
             {
-                if (Vector3.Distance(transform.position, pathList[currentPathIndex]) > MIN_DISTANCE)
+                if (Vector3.Distance(transform.position, _pathList[_currentPathIndex]) > MIN_DISTANCE)
                 {
-                    Vector3 moveDirerction = (pathList[currentPathIndex] - transform.position).normalized;
-                    transform.position = transform.position + moveDirerction * speed * Time.deltaTime;
+                    Vector3 moveDirerction = (_pathList[_currentPathIndex] - transform.position).normalized;
+                    transform.position = transform.position + moveDirerction * _speed * Time.deltaTime;
                     if(Mathf.Round(moveDirerction.x) != 1)
-                        sprite.flipX = true ;
+                        _sprite.flipX = true ;
                     else
-                        sprite.flipX = false;
+                        _sprite.flipX = false;
                 }
                 else
                 {
-                    currentActionUnits -= MOVE_COST;
+                    _currentActionUnits -= MOVE_COST;
                     unitValuesUpdated.Invoke();
-                    currentPathIndex++;
+                    _currentPathIndex++;
                 }
 
-                if(currentPathIndex >= pathList.Count)
+                if(_currentPathIndex >= _pathList.Count)
                 {
                     StopMoving();
                 }
             }
             else
             {
-                currentActionUnits -= MOVE_COST;
+                _currentActionUnits -= MOVE_COST;
                 unitValuesUpdated.Invoke();
                 StopMoving();
             }
@@ -120,15 +120,15 @@ public class UnitBase : MonoBehaviour
     }
     private void StopMoving()
     {
-        currentPathIndex = 0;
-        isMoving = false;
-        audioComponent.Stop();
-        isAudioPlayed = false;
+        _currentPathIndex = 0;
+        _isMoving = false;
+        _audioComponent.Stop();
+        _isAudioPlayed = false;
     }
     public void StartMove(List<Vector3> pathList)
     {
-        this.pathList = pathList;
-        isMoving = true;
+        this._pathList = pathList;
+        _isMoving = true;
     }
 
     private void Death()
@@ -137,40 +137,40 @@ public class UnitBase : MonoBehaviour
     }
     private void OnTurnEnd()
     {
-        currentActionUnits = startActionPoints;
+        _currentActionUnits = _startActionPoints;
         unitValuesUpdated?.Invoke();
     }
 
     public void PickupItem(GameObject item)
     {
-        inventory.AddItem(item.GetComponent<Item>().Info);
+        _inventory.AddItem(item.GetComponent<ItemScenePresenter>().Info);
         Destroy(item);
-        currentActionUnits -= INTERACTION_COST;
+        _currentActionUnits -= INTERACTION_COST;
 
-        audioComponent.clip = pickupClip;
-        audioComponent.Play();
+        _audioComponent.clip = _pickupClip;
+        _audioComponent.Play();
 
         unitValuesUpdated?.Invoke();
     }
 
     public void ShootAtTarget(GameObject target)
     {
-        target.GetComponent<UnitBase>().TakeDamage(unitDamage);
-        currentActionUnits -= SHOT_COST;
+        target.GetComponent<UnitBase>().TakeDamage(_unitDamage);
+        _currentActionUnits -= SHOT_COST;
 
         unitValuesUpdated?.Invoke();
 
-        audioComponent.Stop();
-        audioComponent.clip = shotClip;
-        audioComponent.Play();
+        _audioComponent.Stop();
+        _audioComponent.clip = _shotClip;
+        _audioComponent.Play();
     }
 
     public void TakeDamage(int damage)
     {
-        unitHealth -= damage;
+        _unitHealth -= damage;
         unitValuesUpdated?.Invoke();
 
-        if(unitHealth <= 0)
+        if(_unitHealth <= 0)
         {
             Death();
         }

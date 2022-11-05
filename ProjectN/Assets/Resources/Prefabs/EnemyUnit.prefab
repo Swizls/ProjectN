@@ -429,9 +429,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3617187bcc9a1e9428e79459c95c282b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  unitHealth: 100
-  unitDamage: 10
+  _speed: 5
+  _unitHealth: 100
+  _unitDamage: 10
+  _walkClip: {fileID: 0}
+  _shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
+  _pickupClip: {fileID: 0}
 --- !u!114 &7215463631897397175
 MonoBehaviour:
   m_ObjectHideFlags: 0

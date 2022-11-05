@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,12 +16,15 @@ public class PlayerUnitHandler : MonoBehaviour
 
     private static Tilemap tileMap;
     private static LineRenderer lineRenderer;
+    private static GameObject inventoryUI;
+    private bool isInvetoryOpen = false;
 
     public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
     public static UnitBase CurrentSelectedUnit => currentSelectedUnit;
 
     private void Awake()
     {
+        inventoryUI = Resources.FindObjectsOfTypeAll<InventoryUI>().First().gameObject;
         tileMap = FindObjectOfType<Tilemap>();
         lineRenderer = GetComponent<LineRenderer>();
 
@@ -32,7 +34,10 @@ public class PlayerUnitHandler : MonoBehaviour
 
     private void Update()
     {
-        ShowPath();
+        if(!isInvetoryOpen)
+        {
+            ShowPath();
+        }
         UnitControl();
     }
 
@@ -68,7 +73,7 @@ public class PlayerUnitHandler : MonoBehaviour
     private void UnitControl()
     {
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving)
+        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving && !isInvetoryOpen)
         { 
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                                  Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -96,14 +101,19 @@ public class PlayerUnitHandler : MonoBehaviour
             }    
         }
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
-        {
+        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && !isInvetoryOpen)
+        {   
             List<Vector3> path = GetPath();
-            currentSelectedUnit.StartMove(path);
+            if(path != null)
+            { 
+                if(currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
+                    currentSelectedUnit.StartMove(path);
+            }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            currentSelectedUnit.Inventory.AddItem(new ItemInfo(ItemInfo.ItemType.weapon, 10f));
+            isInvetoryOpen = !isInvetoryOpen;
+            inventoryUI.SetActive(isInvetoryOpen);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -128,7 +138,7 @@ public class PlayerUnitHandler : MonoBehaviour
 
     private bool IsItem(RaycastHit2D hit)
     {
-        if (hit.collider.gameObject.GetComponent<Item>() != null)
+        if (hit.collider.gameObject.GetComponent<ItemScenePresenter>() != null)
             return true;
         return false;
     }
@@ -179,8 +189,7 @@ public class PlayerUnitHandler : MonoBehaviour
             RuleBaseTile tile = currentSelectedUnit.TileMap.GetTile<RuleBaseTile>(point);
             if (!tile.isPassable)
             {
-                Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle.");
-                Debug.Log("Obstacle position: " + point);
+                Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle. Obstacle position: " + point);
                 return false;
             }
         }

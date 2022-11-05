@@ -1,39 +1,26 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Default Item", menuName ="Items/Item")]
-public class ItemInfo : ScriptableObject
+public class ItemInfo : ScriptableObject, IItemInfo
 {
-    public enum ItemType
+
+    [SerializeField] private string _itemName = "Default Name";
+
+    [SerializeField] private Sprite _sprite;
+
+    [SerializeField] private IItemInfo.ItemType _type;
+
+    [SerializeField] private float _weight;
+
+    public IItemInfo.ItemType Type => _type;
+    public Sprite Sprite => _sprite;
+    public float Weight => _weight;
+    public string Name => _itemName;
+
+    public ItemInfo(IItemInfo.ItemType type, float weight)
     {
-        undefined,
-        weapon,
-        food
-    }
-
-    [SerializeField] private ItemType itemType;
-
-    [SerializeField] private Sprite sprite;
-
-    [SerializeField] private float weight;
-
-    [SerializeField] private bool isWeapon;
-
-    [SerializeField] private string itemName = "Default Name";
-
-    public ItemType ItemType1 => itemType;
-    public Sprite Sprite => sprite;
-    public float Weight => weight;
-    public bool IsWeapon => isWeapon;
-    public string ItemName => itemName;
-
-    public ItemInfo()
-    {
-
-    }
-    public ItemInfo(ItemType type, float weight)
-    {
-        itemType = type;
-        this.weight = Mathf.Abs(weight);
+        _type = type;
+        _weight = Mathf.Abs(weight);
     }
 
 }
