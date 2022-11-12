@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -6,9 +7,14 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
     private Transform _draggingParent;
     private Transform _originalParent;
 
+    private InventoryUI _inventory;
+
+    public IItemInfo _itemInfo;
+
     private void Start()
     {
-        _draggingParent = FindObjectOfType<InventoryUI>().transform;
+        _inventory = FindObjectOfType<InventoryUI>();
+        _draggingParent = _inventory.transform;
         _originalParent = transform.parent;
     }
     public void OnBeginDrag(PointerEventData eventData)
@@ -21,6 +27,26 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.SetParent(_originalParent);
+        if(In(_originalParent))
+        {
+            transform.SetParent(_originalParent);
+        }
+        else if (In(_inventory.ArmorAreaUI))
+        {
+            transform.SetParent(_inventory.ArmorAreaUI);
+        }
+        else
+        {
+            Eject();
+        }
+    }
+    private bool In(Transform rectForCheck)
+    {
+        return RectTransformUtility.RectangleContainsScreenPoint((RectTransform)rectForCheck, transform.position);
+    }
+    private void Eject()
+    {
+        Destroy(gameObject);
+        PlayerUnitHandler.CurrentSelectedUnit.Inventory.RemoveItem(_itemInfo);
     }
 }

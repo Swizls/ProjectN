@@ -5,11 +5,21 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private GameObject _inventoryItemPrefab;
-    [SerializeField] private Transform _backpackAreaUI;
 
-    private List<ItemInfo> _itemsInBackpack = new();
+    [SerializeField] private Transform _backpackAreaUI;
+    [SerializeField] private Transform _armorAreaUI;
+    [SerializeField] private Transform _externalAreaUI;
+
+    [SerializeField] private Transform _currentWeaponUI;
+
+    private List<IItemInfo> _itemsInBackpack = new();
+    private List<IItemInfo> _itemsInArmor = new();
+
     private List<GameObject> _renderedItems = new();
-    private ItemInfo _currentWeapon;
+
+    public Transform BackpackAreaUI => _backpackAreaUI;
+    public Transform ArmorAreaUI => _armorAreaUI;
+    public Transform ExternalAreaUI => _externalAreaUI;
 
     private void Start()
     {
@@ -38,6 +48,7 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject createdItem = Instantiate(_inventoryItemPrefab, _backpackAreaUI);
             createdItem.name = _itemsInBackpack[i].Name;
+            createdItem.GetComponent<ItemInventoryPresenter>()._itemInfo = _itemsInBackpack[i];
             createdItem.GetComponent<Image>().sprite = _itemsInBackpack[i].Sprite;
             _renderedItems.Add(createdItem);
         }

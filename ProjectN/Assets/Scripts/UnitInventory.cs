@@ -8,7 +8,7 @@ public class UnitInventory : MonoBehaviour
     private readonly float maxCarringWeight = 50f;
     private float currentCarringWeight = 0f;
 
-    [SerializeField] private List<ItemInfo> items = new();
+    [SerializeField] private List<IItemInfo> items = new();
 
     private ItemInfo currentBackpack;
     private ItemInfo currentWeapon;
@@ -17,22 +17,21 @@ public class UnitInventory : MonoBehaviour
 
     public ItemInfo CurrentBackpack => currentBackpack;
     public ItemInfo CurrentWeapon => currentWeapon;
-    public List<ItemInfo> Items => items;
+    public List<IItemInfo> Items => items;
 
     public int ItemsCount()
     {
         return items.Count;
     }
-    public void AddItem(ItemInfo item)
+    public void AddItem(IItemInfo item)
     {
         if(currentCarringWeight + item.Weight <= maxCarringWeight)
         {
             items.Add(item);
             currentCarringWeight += item.Weight;
         }
-        Debug.Log(currentCarringWeight);
     }
-    public void RemoveItem(ItemInfo item)
+    public void RemoveItem(IItemInfo item)
     {
         items.Remove(item);
         currentCarringWeight -= item.Weight;

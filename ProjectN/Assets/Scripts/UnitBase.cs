@@ -125,11 +125,6 @@ public class UnitBase : MonoBehaviour
         _audioComponent.Stop();
         _isAudioPlayed = false;
     }
-    public void StartMove(List<Vector3> pathList)
-    {
-        this._pathList = pathList;
-        _isMoving = true;
-    }
 
     private void Death()
     {
@@ -139,6 +134,12 @@ public class UnitBase : MonoBehaviour
     {
         _currentActionUnits = _startActionPoints;
         unitValuesUpdated?.Invoke();
+    }
+
+    public void StartMove(List<Vector3> pathList)
+    {
+        this._pathList = pathList;
+        _isMoving = true;
     }
 
     public void PickupItem(GameObject item)
@@ -151,6 +152,14 @@ public class UnitBase : MonoBehaviour
         _audioComponent.Play();
 
         unitValuesUpdated?.Invoke();
+    }
+
+    public void DropItem(IItemInfo item)
+    {
+        if (item != null)
+        {
+            _inventory.RemoveItem(item);
+        }
     }
 
     public void ShootAtTarget(GameObject target)
