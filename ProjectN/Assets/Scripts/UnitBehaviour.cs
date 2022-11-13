@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class UnitBase : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(UnitInventory))]
+public class UnitBehaviour : MonoBehaviour
 {
     public const int MOVE_COST = 2;
     public const int SHOT_COST = 5;
@@ -89,8 +91,9 @@ public class UnitBase : MonoBehaviour
                 {
                     Vector3 moveDirerction = (_pathList[_currentPathIndex] - transform.position).normalized;
                     transform.position = transform.position + moveDirerction * _speed * Time.deltaTime;
+
                     if(Mathf.Round(moveDirerction.x) != 1)
-                        _sprite.flipX = true ;
+                        _sprite.flipX = true;
                     else
                         _sprite.flipX = false;
                 }
@@ -100,7 +103,6 @@ public class UnitBase : MonoBehaviour
                     unitValuesUpdated.Invoke();
                     _currentPathIndex++;
                 }
-
                 if(_currentPathIndex >= _pathList.Count)
                 {
                     StopMoving();
@@ -136,9 +138,46 @@ public class UnitBase : MonoBehaviour
         unitValuesUpdated?.Invoke();
     }
 
+    private List<Vector3Int> GetShotTrajectory(Vector3 startPosFloat, Vector3 targetPosFloat)
+    {
+        List<Vector3Int> pointsList = new();
+
+        Vector3Int startPosInt = _tileMap.WorldToCell(startPosFloat);
+        Vector3Int targetPosInt = _tileMap.WorldToCell(targetPosFloat);
+
+        Vector3 normalizedDireciton = (targetPosFloat - startPosFloat).normalized;
+        Vector3Int roundedDirection = new((int)Mathf.Sign(normalizedDireciton.x), (int)Mathf.Sign(normalizedDireciton.y), 0);
+
+        Vector3Int tileForCheck = startPosInt;
+
+        while (tileForCheck.x != targetPosInt.x || tileForCheck.y != targetPosInt.y)
+        {
+            pointsList.Add(tileForCheck);
+            if (tileForCheck.x != targetPosInt.x) tileForCheck.x += roundedDirection.x;
+            if (tileForCheck.y != targetPosInt.y) tileForCheck.y += roundedDirection.y;
+        }
+        return pointsList;
+    }
+
+    public bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat)
+    {
+        List<Vector3Int> pointsList = GetShotTrajectory(startPosFloat, targetPosFloat);
+
+        foreach (Vector3Int point in pointsList)
+        {
+            RuleBaseTile tile = _tileMap.GetTile<RuleBaseTile>(point);
+            if (!tile.isPassable)
+            {
+                Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle. Obstacle position: " + point);
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void StartMove(List<Vector3> pathList)
     {
-        this._pathList = pathList;
+        _pathList = pathList;
         _isMoving = true;
     }
 
@@ -157,14 +196,15 @@ public class UnitBase : MonoBehaviour
     public void DropItem(IItemInfo item)
     {
         if (item != null)
-        {
             _inventory.RemoveItem(item);
-        }
     }
 
     public void ShootAtTarget(GameObject target)
     {
-        target.GetComponent<UnitBase>().TakeDamage(_unitDamage);
+        if (!ObstacleCheckForShot(transform.position, target.transform.position))
+            return;
+        _sprite.flipX = transform.position.x > target.transform.position.x;
+        target.GetComponent<UnitBehaviour>().TakeDamage(_unitDamage);
         _currentActionUnits -= SHOT_COST;
 
         unitValuesUpdated?.Invoke();

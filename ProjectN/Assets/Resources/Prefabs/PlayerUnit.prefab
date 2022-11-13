@@ -135,7 +135,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 568893800191457386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3617187bcc9a1e9428e79459c95c282b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e842764f386ea0458dd22d817d0eebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f6bb877c9489d47b692b27fb193c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
 --- !u!1 &3028391365772410580
 GameObject:
   m_ObjectHideFlags: 0

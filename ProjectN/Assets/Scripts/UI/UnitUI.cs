@@ -1,17 +1,17 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(UnitBase))]
+[RequireComponent(typeof(UnitBehaviour))]
 public class UnitUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI health;
     [SerializeField] private TextMeshProUGUI actionUnits;
 
-    private UnitBase unitBase;
+    private UnitBehaviour unitBase;
 
     private void Start()
     {
-        unitBase = GetComponent<UnitBase>();
+        unitBase = GetComponent<UnitBehaviour>();
         unitBase.unitValuesUpdated += SetValues;
         SetValues();
     }

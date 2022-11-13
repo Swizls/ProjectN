@@ -9,32 +9,32 @@ public class PlayerUnitHandler : MonoBehaviour
 {
     private const float PICKABLE_RANGE = 1.5f;
 
-    private Pathfinder pathFinder = new Pathfinder();
+    private Pathfinder _pathFinder = new Pathfinder();
 
-    private static List<UnitBase> allPlayerUnits;
-    private static UnitBase currentSelectedUnit;
+    private static List<UnitBehaviour> allPlayerUnits;
+    private static UnitBehaviour _currentSelectedUnit;
 
-    private static Tilemap tileMap;
-    private static LineRenderer lineRenderer;
-    private static GameObject inventoryUI;
-    private bool isInvetoryOpen = false;
+    private static Tilemap _tileMap;
+    private static LineRenderer _lineRenderer;
+    private static GameObject _inventoryUI;
+    private bool _isInvetoryOpen = false;
 
-    public static List<UnitBase> AllPlayerUnits => allPlayerUnits;
-    public static UnitBase CurrentSelectedUnit => currentSelectedUnit;
+    public static List<UnitBehaviour> AllPlayerUnits => allPlayerUnits;
+    public static UnitBehaviour CurrentSelectedUnit => _currentSelectedUnit;
 
     private void Awake()
     {
-        inventoryUI = Resources.FindObjectsOfTypeAll<InventoryUI>().First().gameObject;
-        tileMap = FindObjectOfType<Tilemap>();
-        lineRenderer = GetComponent<LineRenderer>();
+        _inventoryUI = Resources.FindObjectsOfTypeAll<InventoryUI>().First().gameObject;
+        _tileMap = FindObjectOfType<Tilemap>();
+        _lineRenderer = GetComponent<LineRenderer>();
 
-        allPlayerUnits = FindObjectsOfType<UnitBase>().Where(unit => unit.tag != "Enemy").ToList();
-        currentSelectedUnit = allPlayerUnits[0];
+        allPlayerUnits = FindObjectsOfType<UnitBehaviour>().Where(unit => unit.tag != "Enemy").ToList();
+        _currentSelectedUnit = allPlayerUnits[0];
     }
 
     private void Update()
     {
-        if(!isInvetoryOpen)
+        if (!_isInvetoryOpen && _currentSelectedUnit != null)
         {
             ShowPath();
         }
@@ -51,29 +51,29 @@ public class PlayerUnitHandler : MonoBehaviour
                 path[i] = new Vector3(path[i].x, path[i].y, -1);
             }
 
-            lineRenderer.positionCount = path.Length;
-            lineRenderer.SetPositions(path);
+            _lineRenderer.positionCount = path.Length;
+            _lineRenderer.SetPositions(path);
 
-            if (currentSelectedUnit.ActionUnits >= path.Length * UnitBase.MOVE_COST)
+            if (_currentSelectedUnit.ActionUnits >= path.Length * UnitBehaviour.MOVE_COST)
             {
-                lineRenderer.startColor = Color.green;
-                lineRenderer.endColor = Color.green;
+                _lineRenderer.startColor = Color.green;
+                _lineRenderer.endColor = Color.green;
             }
             else
             {
-                lineRenderer.startColor = Color.red;
-                lineRenderer.endColor = Color.red;
+                _lineRenderer.startColor = Color.red;
+                _lineRenderer.endColor = Color.red;
             }
         }
         else
         {
-            lineRenderer.positionCount = 0;
+            _lineRenderer.positionCount = 0;
         }
     }
     private void UnitControl()
     {
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !currentSelectedUnit.IsMoving && !isInvetoryOpen)
+        if (Input.GetMouseButtonDown(0) && !_currentSelectedUnit.IsMoving && !_isInvetoryOpen)
         { 
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                                  Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -83,37 +83,37 @@ public class PlayerUnitHandler : MonoBehaviour
                 {
                     SelectUnit(hit);
                 }
-                else if (IsEnemey(hit) && currentSelectedUnit.ActionUnits >= UnitBase.SHOT_COST)
+                else if (IsEnemey(hit) && _currentSelectedUnit.ActionUnits >= UnitBehaviour.SHOT_COST)
                 {
                     GameObject enemy = GetTarget();
-                    if (ObstacleCheckForShot(currentSelectedUnit.transform.position, enemy.transform.position))
+                    if(_currentSelectedUnit.ObstacleCheckForShot(_currentSelectedUnit.transform.position, enemy.transform.position))
                     {
-                        currentSelectedUnit.ShootAtTarget(enemy);
+                        _currentSelectedUnit.ShootAtTarget(enemy);
                     }
                 }
-                else if (IsItem(hit) && currentSelectedUnit.ActionUnits >= UnitBase.INTERACTION_COST)
+                else if (IsItem(hit) && _currentSelectedUnit.ActionUnits >= UnitBehaviour.INTERACTION_COST)
                 {
-                    if (Vector3.Distance(currentSelectedUnit.transform.position, hit.collider.transform.position) < PICKABLE_RANGE)
+                    if (Vector3.Distance(_currentSelectedUnit.transform.position, hit.collider.transform.position) < PICKABLE_RANGE)
                     {
-                        currentSelectedUnit.PickupItem(hit.collider.gameObject);
+                        _currentSelectedUnit.PickupItem(hit.collider.gameObject);
                     }
                 }
             }    
         }
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !currentSelectedUnit.IsMoving && !isInvetoryOpen)
+        if (Input.GetMouseButtonDown(1) && !_currentSelectedUnit.IsMoving && !_isInvetoryOpen)
         {   
             List<Vector3> path = GetPath();
             if(path != null)
             { 
-                if(currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBase.MOVE_COST)
-                    currentSelectedUnit.StartMove(path);
+                if(_currentSelectedUnit.ActionUnits >= GetPath().Count * UnitBehaviour.MOVE_COST)
+                    _currentSelectedUnit.StartMove(path);
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            isInvetoryOpen = !isInvetoryOpen;
-            inventoryUI.SetActive(isInvetoryOpen);
+            _isInvetoryOpen = !_isInvetoryOpen;
+            _inventoryUI.SetActive(_isInvetoryOpen);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -148,22 +148,22 @@ public class PlayerUnitHandler : MonoBehaviour
             return true;
         return false;
     }
-    public static void SelectUnit(UnitBase unit)
+    public static void SelectUnit(UnitBehaviour unit)
     {
-        currentSelectedUnit = unit;
-        currentSelectedUnit.unitValuesUpdated.Invoke();
+        _currentSelectedUnit = unit;
+        _currentSelectedUnit.unitValuesUpdated.Invoke();
     }
     private void SelectUnit(RaycastHit2D hit)
     {
         if (hit.collider.tag == "PlayerUnit")
-            currentSelectedUnit = hit.collider.GetComponent<UnitBase>();
-        currentSelectedUnit.unitValuesUpdated.Invoke();
+            _currentSelectedUnit = hit.collider.GetComponent<UnitBehaviour>();
+        _currentSelectedUnit.unitValuesUpdated.Invoke();
     }
     private List<Vector3> GetPath()
     {
         Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        List<Vector3> path = pathFinder.FindPath(currentSelectedUnit.transform.position, clickPos, tileMap);
+        List<Vector3> path = _pathFinder.FindPath(_currentSelectedUnit.transform.position, clickPos, _tileMap);
 
         return path;
     }
@@ -179,40 +179,5 @@ public class PlayerUnitHandler : MonoBehaviour
             }
         }
         return null;
-    }
-    private bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat)
-    {
-        List<Vector3Int> pointsList = GetShotTrajectory(startPosFloat, targetPosFloat);
-
-        foreach (Vector3Int point in pointsList)
-        {
-            RuleBaseTile tile = currentSelectedUnit.TileMap.GetTile<RuleBaseTile>(point);
-            if (!tile.isPassable)
-            {
-                Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle. Obstacle position: " + point);
-                return false;
-            }
-        }
-        return true;
-    }
-    private List<Vector3Int> GetShotTrajectory(Vector3 startPosFloat, Vector3 targetPosFloat)
-    {
-        List<Vector3Int> pointsList = new();
-
-        Vector3Int startPosInt = tileMap.WorldToCell(startPosFloat);
-        Vector3Int targetPosInt = tileMap.WorldToCell(targetPosFloat);
-
-        Vector3 normalizedDireciton = (targetPosFloat - startPosFloat).normalized;
-        Vector3Int roundedDirection = new((int)Mathf.Sign(normalizedDireciton.x), (int)Mathf.Sign(normalizedDireciton.y), 0);
-
-        Vector3Int tileForCheck = startPosInt;
-
-        while (tileForCheck.x != targetPosInt.x || tileForCheck.y != targetPosInt.y)
-        {
-            pointsList.Add(tileForCheck);
-            if (tileForCheck.x != targetPosInt.x) tileForCheck.x += roundedDirection.x;
-            if (tileForCheck.y != targetPosInt.y) tileForCheck.y += roundedDirection.y;
-        }
-        return pointsList;
     }
 }

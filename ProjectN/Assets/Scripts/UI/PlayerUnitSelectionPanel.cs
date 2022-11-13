@@ -7,8 +7,8 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
 {
     [SerializeField] private GameObject buttonPrefab;
 
-    private Dictionary<GameObject, UnitBase> unitSelectionButtons = new Dictionary<GameObject, UnitBase>();
-    private List<UnitBase> allPlayerUnits;
+    private Dictionary<GameObject, UnitBehaviour> unitSelectionButtons = new Dictionary<GameObject, UnitBehaviour>();
+    private List<UnitBehaviour> allPlayerUnits;
 
     private void Start()
     {
