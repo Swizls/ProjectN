@@ -8,7 +8,6 @@ public interface IStorableItem
     public float CurrentCarringWeight { get; }
     public List<BaseItemInfo> StoredItems { get; }
 
-    public void TryToAddItem(BaseItemInfo item);
-    public void TryToTransitItem(BaseItemInfo item, IStorableItem container);
+    public bool TryToAddItem(BaseItemInfo item);
     public void RemoveItem(BaseItemInfo item);
 }

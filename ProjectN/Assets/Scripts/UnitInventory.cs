@@ -14,13 +14,21 @@ public class UnitInventory : MonoBehaviour
     public IStorableItem Backpack => _backpack;
     public IStorableItem Armor => _armor;
     public WeaponInfo Weapon => _weapon;
+    
+    public bool TryToTransit(BaseItemInfo item, IStorableItem from, IStorableItem to)
+    {
+        if(from != to && to.TryToAddItem(item))
+        {
+            from.RemoveItem(item);
+            return true;
+        }
+        return false;
+    }
 
     public BaseItemInfo[] GetItemsOnGround()
     {
-
         ItemScenePresenter[] items = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), MAX_PICKUP_RADIUS).
                                                              GetComponents<ItemScenePresenter>();
-
         List<BaseItemInfo> itemsInfo = new();
 
         foreach(var item in items) 

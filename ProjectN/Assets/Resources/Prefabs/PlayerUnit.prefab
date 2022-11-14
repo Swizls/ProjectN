@@ -204,8 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f6bb877c9489d47b692b27fb193c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentBackpack: {fileID: 11400000, guid: 6a3e47806da88ff4489bd315f869acf0, type: 2}
-  _currentArmor: {fileID: 11400000, guid: 6a3e47806da88ff4489bd315f869acf0, type: 2}
+  _backpack: {fileID: 11400000, guid: fe2ec17dc164a7e478d59a5f1fe591c2, type: 2}
+  _armor: {fileID: 11400000, guid: ea8160b4d1c358b42817c7cac3f5b5ca, type: 2}
+  _weapon: {fileID: 0}
 --- !u!1 &3028391365772410580
 GameObject:
   m_ObjectHideFlags: 0

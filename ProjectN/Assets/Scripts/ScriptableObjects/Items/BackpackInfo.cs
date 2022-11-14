@@ -6,8 +6,9 @@ using UnityEngine;
 public class BackpackInfo : BaseItemInfo, IStorableItem
 {
     [SerializeField] private float _maxCarringWeight;
+
     private float _currentCarringWeight = 0f;
-    private List<BaseItemInfo> _storedItems;
+    private List<BaseItemInfo> _storedItems = new();
 
     public float MaxCarringWeight => _maxCarringWeight;
     public float CurrentCarringWeight => _currentCarringWeight;
@@ -15,19 +16,32 @@ public class BackpackInfo : BaseItemInfo, IStorableItem
 
     public void RemoveItem(BaseItemInfo item)
     {
-        if (item == null && _storedItems.Contains(item))
+        if (item != null && _storedItems.Contains(item))
+        {
             _storedItems.Remove(item);
+            _currentCarringWeight -= item.Weight;
+        }
     }
 
-    public void TryToAddItem(BaseItemInfo item)
+    public bool TryToAddItem(BaseItemInfo item)
     {
-        if(item == null && _currentCarringWeight + item.Weight <= _maxCarringWeight)
+        if(item != null && _currentCarringWeight + item.Weight <= _maxCarringWeight)
+        {
             _storedItems.Add(item);
+            _currentCarringWeight += item.Weight;
+            return true;
+        }
+        return false;
     }
 
-    public void TryToTransitItem(BaseItemInfo item, IStorableItem container)
+    public bool TryToTransitItem(BaseItemInfo item, IStorableItem container)
     {
-        container.TryToAddItem(item);
+        if (container.TryToAddItem(item))
+        {
+            RemoveItem(item);
+            return true;
+        }
+        return false;
     }
 
 }
