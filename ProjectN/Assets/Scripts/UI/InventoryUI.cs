@@ -48,8 +48,8 @@ public class InventoryUI : MonoBehaviour
     }
     private void UpdateItemLists()
     {
-        //_itemsInBackpack = PlayerUnitHandler.CurrentSelectedUnit.Inventory.ItemsInBackpack;
-        //_itemsInArmor = PlayerUnitHandler.CurrentSelectedUnit.Inventory.ItemsInArmor;
+        _itemsInBackpack = PlayerUnitHandler.CurrentSelectedUnit.Inventory.Backpack.StoredItems;
+        _itemsInArmor = PlayerUnitHandler.CurrentSelectedUnit.Inventory.Armor.StoredItems;
         _externalItems = PlayerUnitHandler.CurrentSelectedUnit.Inventory.GetItemsOnGround().ToList();
 
         _allItemsInInventory.Clear();
@@ -60,42 +60,19 @@ public class InventoryUI : MonoBehaviour
     {
         UpdateItemLists();
 
-        RenderBackpack();
-        RenderArmor();
-        RenderExternal();
+        RenderItem(_armorAreaUI, _itemsInArmor);
+        RenderItem(_backpackAreaUI, _itemsInBackpack);
+        RenderItem(_externalAreaUI, _externalItems);
     }
 
-    private void RenderArmor()
+    private void RenderItem(Transform area, List<BaseItemInfo> items)
     {
-        for (int i = 0; i < _itemsInArmor.Count; i++)
+        for (int i = 0; i < items.Count; i++)
         {
-            GameObject createdItem = Instantiate(_inventoryItemPrefab, _armorAreaUI);
-            createdItem.name = _itemsInArmor[i].Name;
-            createdItem.GetComponent<ItemInventoryPresenter>()._itemInfo = _itemsInArmor[i];
-            createdItem.GetComponent<Image>().sprite = _itemsInArmor[i].Sprite;
-            _renderedItems.Add(createdItem);
-        }
-    }
-
-    private void RenderBackpack()
-    {
-        for (int i = 0; i < _itemsInBackpack.Count; i++)
-        {
-            GameObject createdItem = Instantiate(_inventoryItemPrefab, _backpackAreaUI);
-            createdItem.name = _itemsInBackpack[i].Name;
-            createdItem.GetComponent<ItemInventoryPresenter>()._itemInfo = _itemsInBackpack[i];
-            createdItem.GetComponent<Image>().sprite = _itemsInBackpack[i].Sprite;
-            _renderedItems.Add(createdItem);
-        }
-    }
-    private void RenderExternal()
-    {
-        for (int i = 0; i < _externalItems.Count; i++)
-        {
-            GameObject createdItem = Instantiate(_inventoryItemPrefab, _externalAreaUI);
-            createdItem.name = _externalItems[i].Name;
-            createdItem.GetComponent<ItemInventoryPresenter>()._itemInfo = _externalItems[i];
-            createdItem.GetComponent<Image>().sprite = _externalItems[i].Sprite;
+            GameObject createdItem = Instantiate(_inventoryItemPrefab, area);
+            createdItem.name = items[i].Name;
+            createdItem.GetComponent<ItemInventoryPresenter>()._itemInfo = items[i];
+            createdItem.GetComponent<Image>().sprite = items[i].Sprite;
             _renderedItems.Add(createdItem);
         }
     }

@@ -8,11 +8,11 @@ public class UnitInventory : MonoBehaviour
     private const float MAX_PICKUP_RADIUS = 1.5f;
 
     [SerializeField] private BackpackInfo _backpack;
-    [SerializeField] private ArmorInfo _armor;
+    [SerializeField] private StorableArmorInfo _armor;
     [SerializeField] private WeaponInfo _weapon;
 
-    public BackpackInfo Backpack => _backpack;
-    public ArmorInfo Armor => _armor;
+    public IStorableItem Backpack => _backpack;
+    public IStorableItem Armor => _armor;
     public WeaponInfo Weapon => _weapon;
 
     public BaseItemInfo[] GetItemsOnGround()
