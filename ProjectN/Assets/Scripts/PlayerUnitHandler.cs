@@ -91,13 +91,6 @@ public class PlayerUnitHandler : MonoBehaviour
                         _currentSelectedUnit.ShootAtTarget(enemy);
                     }
                 }
-                else if (IsItem(hit) && _currentSelectedUnit.ActionUnits >= UnitBehaviour.INTERACTION_COST)
-                {
-                    if (Vector3.Distance(_currentSelectedUnit.transform.position, hit.collider.transform.position) < PICKABLE_RANGE)
-                    {
-                        _currentSelectedUnit.PickupItem(hit.collider.gameObject);
-                    }
-                }
             }    
         }
         //Rigth mouse button
@@ -136,12 +129,6 @@ public class PlayerUnitHandler : MonoBehaviour
         return false;
     }
 
-    private bool IsItem(RaycastHit2D hit)
-    {
-        if (hit.collider.gameObject.GetComponent<ItemScenePresenter>() != null)
-            return true;
-        return false;
-    }
     private bool IsEnemey(RaycastHit2D hit)
     {
         if (hit.collider.tag == "Enemy")

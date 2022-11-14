@@ -64,17 +64,20 @@
     <Compile Include="Assets\Scripts\UI\ItemInventoryPresenter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BaseItemInfo.cs" />
     <Compile Include="Assets\Scripts\UnitBehaviour.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
     <Compile Include="Assets\Scripts\UI\UnitStatsUI.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerUnitSelectionPanel.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\BackpackInfo.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Tiles\RuleBaseTile.cs" />
     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitHandler.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Items\BackpackInfo.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\ArmorInfo.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\IStorableItem.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\StorableArmorInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

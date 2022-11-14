@@ -29,12 +29,20 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
     {
         if (In(_inventory.BackpackAreaUI))
         {
-            PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryToTransitItem(_itemInfo, true);
+            if(_inventory.AllItemsInInventory.Contains(_itemInfo))
+            {
+                //PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryToPickupToBackpack(_itemInfo);
+            }
+            else
+            {
+                //PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryToTransitItemToBackpack(_itemInfo);
+            }
+            
             transform.SetParent(_inventory.BackpackAreaUI);
         }
         else if (In(_inventory.ArmorAreaUI))
         {
-            PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryToTransitItem(_itemInfo, false);
+            //PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryTransitToArmor(_itemInfo);
             transform.SetParent(_inventory.ArmorAreaUI);
         }
         else
@@ -49,6 +57,6 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
     private void Eject()
     {
         Destroy(gameObject);
-        PlayerUnitHandler.CurrentSelectedUnit.Inventory.RemoveItem(_itemInfo);
+        //PlayerUnitHandler.CurrentSelectedUnit.Inventory.DropItem(_itemInfo);
     }
 }

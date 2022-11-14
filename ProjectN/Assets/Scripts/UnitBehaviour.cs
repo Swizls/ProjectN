@@ -181,24 +181,6 @@ public class UnitBehaviour : MonoBehaviour
         _isMoving = true;
     }
 
-    public void PickupItem(GameObject item)
-    {
-        _inventory.AddItem(item.GetComponent<ItemScenePresenter>().Info);
-        Destroy(item);
-        _currentActionUnits -= INTERACTION_COST;
-
-        _audioComponent.clip = _pickupClip;
-        _audioComponent.Play();
-
-        unitValuesUpdated?.Invoke();
-    }
-
-    public void DropItem(BaseItemInfo item)
-    {
-        if (item != null)
-            _inventory.RemoveItem(item);
-    }
-
     public void ShootAtTarget(GameObject target)
     {
         if (!ObstacleCheckForShot(transform.position, target.transform.position))

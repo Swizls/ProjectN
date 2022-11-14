@@ -8721,10 +8721,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: M16
       objectReference: {fileID: 0}
-    - target: {fileID: 3560741223196106654, guid: ff63fab24658cd44481e8e85fa493ca7, type: 3}
-      propertyPath: _info
-      value: 
-      objectReference: {fileID: 11400000, guid: 338b41631b3107e4f892d4f664db8c29, type: 2}
     - target: {fileID: 3560741223196106655, guid: ff63fab24658cd44481e8e85fa493ca7, type: 3}
       propertyPath: m_RootOrder
       value: 2

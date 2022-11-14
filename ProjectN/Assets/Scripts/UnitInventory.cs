@@ -1,84 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UnitInventory : MonoBehaviour
 {
-    private float _currentCarringWeightInBackpack = 0f;
-    private float _currentCarringWeightInArmor = 0f;
+    private const float MAX_PICKUP_RADIUS = 1.5f;
 
-    private List<BaseItemInfo> _itemsInBackpack = new();
-    private List<BaseItemInfo> _itemsInArmor = new();
+    [SerializeField] private BackpackInfo _backpack;
+    [SerializeField] private ArmorInfo _armor;
+    [SerializeField] private WeaponInfo _weapon;
 
-    [SerializeField] private BackpackInfo _currentBackpack;
-    [SerializeField] private BackpackInfo _currentArmor;
-    private WeaponInfo _currentWeapon;
+    public BackpackInfo Backpack => _backpack;
+    public ArmorInfo Armor => _armor;
+    public WeaponInfo Weapon => _weapon;
 
-    public Action<BaseItemInfo> newItemAdded;
-
-    public BaseItemInfo CurrentBackpack => _currentBackpack;
-    public WeaponInfo CurrentWeapon => _currentWeapon;
-    public List<BaseItemInfo> ItemsInBackpack => _itemsInBackpack;
-    public List<BaseItemInfo> ItemsInArmor => _itemsInArmor;
-
-    public void AddItem(BaseItemInfo item)
+    public BaseItemInfo[] GetItemsOnGround()
     {
-        if(_currentCarringWeightInBackpack + item.Weight <= _currentBackpack.MaxCarringWeight)
-        {
-            _itemsInBackpack.Add(item);
-            _currentCarringWeightInBackpack += item.Weight;
-        }
-    }
-    public void RemoveItem(BaseItemInfo item)
-    {
-        if(_itemsInBackpack.Contains(item))
-        {
-            _itemsInBackpack.Remove(item);
-            _currentCarringWeightInBackpack -= item.Weight;
-        }
-        else
-        {
-            _itemsInArmor.Remove(item);
-            _currentCarringWeightInBackpack -= item.Weight;
-        }
-    }
 
-    public bool TryToTransitItem(BaseItemInfo item, bool toBackpack)
-    {
-        if (toBackpack)
-        {
-            if(_currentCarringWeightInBackpack + item.Weight <= _currentBackpack.MaxCarringWeight)
-            {
-                _itemsInArmor.Remove(item);
-                _itemsInBackpack.Add(item);
-                _currentCarringWeightInBackpack = CalculateCurrentCarringWeight(_itemsInBackpack);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            if(_currentCarringWeightInArmor + item.Weight <= _currentArmor.MaxCarringWeight)
-            {
-                _itemsInBackpack.Remove(item);
-                _itemsInArmor.Add(item);
-                _currentCarringWeightInArmor = CalculateCurrentCarringWeight(_itemsInArmor);
-                return true;
-            }
-        }
-        return false;
-    }
+        ItemScenePresenter[] items = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), MAX_PICKUP_RADIUS).
+                                                             GetComponents<ItemScenePresenter>();
 
-    private float CalculateCurrentCarringWeight(List<BaseItemInfo> items)
-    {
-        float currentWieght = 0;
-        foreach(var item in items)
-        {
-            currentWieght += item.Weight;
-        }
-        return currentWieght;
+        List<BaseItemInfo> itemsInfo = new();
+
+        foreach(var item in items) 
+            itemsInfo.Add(item.Info); 
+
+        return itemsInfo.ToArray();
     }
 }
