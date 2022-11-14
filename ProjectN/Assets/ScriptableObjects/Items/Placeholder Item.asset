@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd3e0ba4298aab14dab4a6c99053de2b, type: 3}
-  m_Name: ItemPlaceholder
+  m_Name: Placeholder Item
   m_EditorClassIdentifier: 
-  _itemName: Placeholder
+  _itemName: Default Name
   _sprite: {fileID: 21300000, guid: e4452d39298a6ea4abfc9e5d0bed8180, type: 3}
-  _type: 0
-  _weight: 0
+  _weight: 5

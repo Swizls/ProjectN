@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099b6d08ff2e4d741b46aa1bf31b9ef3, type: 3}
-  m_Name: M16
+  m_Script: {fileID: 11500000, guid: 2a0a36079cf51c84f844456631a43742, type: 3}
+  m_Name: Default Medicine
   m_EditorClassIdentifier: 
-  _itemName: M16
-  _sprite: {fileID: 21300000, guid: 53f747d9292022544880a367d15e5ccd, type: 3}
-  _weight: 4
-  _weaponBaseDamage: 25
-  _weaponMagazineCapacity: 30
+  _itemName: Small medkit
+  _sprite: {fileID: 21300000, guid: 5d585255d1813d84dafd83745112edd3, type: 3}
+  _weight: 1
+  _healPoints: 50

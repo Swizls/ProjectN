@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class ItemScenePresenter : MonoBehaviour
 {
-    [SerializeField] private ItemInfo _info;
+    [SerializeField] private BaseItemInfo _info;
 
     private SpriteRenderer _sprite;
 
-    public ItemInfo Info => _info;
+    public BaseItemInfo Info => _info;
 
     private void Start()
     {

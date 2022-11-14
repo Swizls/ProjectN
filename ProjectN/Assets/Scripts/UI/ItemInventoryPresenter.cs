@@ -9,7 +9,7 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private InventoryUI _inventory;
 
-    public IItemInfo _itemInfo;
+    public BaseItemInfo _itemInfo;
 
     private void Start()
     {
@@ -27,12 +27,14 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(In(_originalParent))
+        if (In(_inventory.BackpackAreaUI))
         {
-            transform.SetParent(_originalParent);
+            PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryToTransitItem(_itemInfo, true);
+            transform.SetParent(_inventory.BackpackAreaUI);
         }
         else if (In(_inventory.ArmorAreaUI))
         {
+            PlayerUnitHandler.CurrentSelectedUnit.Inventory.TryToTransitItem(_itemInfo, false);
             transform.SetParent(_inventory.ArmorAreaUI);
         }
         else

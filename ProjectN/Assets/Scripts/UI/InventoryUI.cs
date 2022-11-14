@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +12,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Transform _externalAreaUI;
 
     [SerializeField] private Transform _currentWeaponUI;
-
-    private List<IItemInfo> _itemsInBackpack = new();
-    private List<IItemInfo> _itemsInArmor = new();
 
     private List<GameObject> _renderedItems = new();
 
@@ -43,8 +41,27 @@ public class InventoryUI : MonoBehaviour
     }
     private void Render()
     {
-        _itemsInBackpack = PlayerUnitHandler.CurrentSelectedUnit.Inventory.Items;
-        for(int i = 0; i < _itemsInBackpack.Count; i++)
+        RenderBackpack();
+        RenderArmor();
+    }
+
+    private void RenderArmor()
+    {
+        List<BaseItemInfo> _itemsInArmor = PlayerUnitHandler.CurrentSelectedUnit.Inventory.ItemsInArmor;
+        for (int i = 0; i < _itemsInArmor.Count; i++)
+        {
+            GameObject createdItem = Instantiate(_inventoryItemPrefab, _armorAreaUI);
+            createdItem.name = _itemsInArmor[i].Name;
+            createdItem.GetComponent<ItemInventoryPresenter>()._itemInfo = _itemsInArmor[i];
+            createdItem.GetComponent<Image>().sprite = _itemsInArmor[i].Sprite;
+            _renderedItems.Add(createdItem);
+        }
+    }
+
+    private void RenderBackpack()
+    {
+        List<BaseItemInfo> _itemsInBackpack = PlayerUnitHandler.CurrentSelectedUnit.Inventory.ItemsInBackpack;
+        for (int i = 0; i < _itemsInBackpack.Count; i++)
         {
             GameObject createdItem = Instantiate(_inventoryItemPrefab, _backpackAreaUI);
             createdItem.name = _itemsInBackpack[i].Name;

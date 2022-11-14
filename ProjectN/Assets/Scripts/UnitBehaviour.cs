@@ -193,7 +193,7 @@ public class UnitBehaviour : MonoBehaviour
         unitValuesUpdated?.Invoke();
     }
 
-    public void DropItem(IItemInfo item)
+    public void DropItem(BaseItemInfo item)
     {
         if (item != null)
             _inventory.RemoveItem(item);

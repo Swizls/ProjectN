@@ -61,9 +61,8 @@
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
-    <Compile Include="Assets\Scripts\IItemInfo.cs" />
     <Compile Include="Assets\Scripts\UI\ItemInventoryPresenter.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\ItemInfo.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\BaseItemInfo.cs" />
     <Compile Include="Assets\Scripts\UnitBehaviour.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\UI\UnitStatsUI.cs" />
@@ -73,6 +72,9 @@
     <Compile Include="Assets\Scripts\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitHandler.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\BackpackInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />
