@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 6260055253261080707}
   - component: {fileID: 1007935285814966958}
   - component: {fileID: 5690119482139021200}
-  - component: {fileID: 1853709071470991123}
+  - component: {fileID: 915851885390843629}
+  - component: {fileID: 2339380163946927254}
+  - component: {fileID: 6366472040225935130}
   - component: {fileID: 2215461817019343689}
+  - component: {fileID: 1853709071470991123}
   m_Layer: 0
   m_Name: PlayerUnit
   m_TagString: PlayerUnit
@@ -172,13 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e842764f386ea0458dd22d817d0eebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _unitHealth: 100
   _unitDamage: 25
-  _walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
   _shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
   _pickupClip: {fileID: 8300000, guid: 2f2ddaf46d3212d4fa98a0e9f9de5f0c, type: 3}
---- !u!114 &1853709071470991123
+--- !u!114 &915851885390843629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,11 +187,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 568893800191457386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd1266bcd835e844b3a645a131f8275, type: 3}
+  m_Script: {fileID: 11500000, guid: eb22dc151aaf7a5448a6ec440f236c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 3311738852754781303}
-  actionUnits: {fileID: 8119727449051815793}
+  _speed: 5
+  _walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
+--- !u!114 &2339380163946927254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568893800191457386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab4c8d4f4ad42d41ac5b1d78b730231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthPoints: 100
+--- !u!114 &6366472040225935130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568893800191457386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b0fa984a4474e4ba6385017f2a4abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2215461817019343689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,9 +229,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f6bb877c9489d47b692b27fb193c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backpack: {fileID: 11400000, guid: fe2ec17dc164a7e478d59a5f1fe591c2, type: 2}
-  _armor: {fileID: 11400000, guid: ea8160b4d1c358b42817c7cac3f5b5ca, type: 2}
-  _weapon: {fileID: 0}
+  _currentBackpack: {fileID: 11400000, guid: 6a3e47806da88ff4489bd315f869acf0, type: 2}
+  _currentArmor: {fileID: 11400000, guid: 6a3e47806da88ff4489bd315f869acf0, type: 2}
+--- !u!114 &1853709071470991123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568893800191457386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd1266bcd835e844b3a645a131f8275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthText: {fileID: 3311738852754781303}
+  _actionUnitsText: {fileID: 8119727449051815793}
 --- !u!1 &3028391365772410580
 GameObject:
   m_ObjectHideFlags: 0

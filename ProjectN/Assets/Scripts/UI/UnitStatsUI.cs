@@ -22,7 +22,7 @@ public class UnitStatsUI : MonoBehaviour
 
     private void SetValues()
     {
-        health.text = PlayerUnitHandler.CurrentSelectedUnit.UnitHealth.ToString();
-        actionUnits.text = PlayerUnitHandler.CurrentSelectedUnit.ActionUnits.ToString();
+        health.text = PlayerUnitHandler.CurrentSelectedUnit.Health.HealthPoints.ToString();
+        actionUnits.text = PlayerUnitHandler.CurrentSelectedUnit.Actions.ActionUnits.ToString();
     }
 }

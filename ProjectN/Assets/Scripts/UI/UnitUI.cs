@@ -23,9 +23,9 @@ public class UnitUI : MonoBehaviour
 
     private void SetValues()
     {
-        if(health != null)
-            health.text = unitBase.UnitHealth.ToString();
-        if(actionUnits != null)
-            actionUnits.text = unitBase.ActionUnits.ToString();
+        if(_healthText != null && _unit.Health != null)
+            _healthText.text = _unit.Health.HealthPoints.ToString();
+        if(_actionUnitsText != null)
+            _actionUnitsText.text = _unit.Actions.ActionUnits.ToString();
     }
 }

@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 8741842260121654960}
   - component: {fileID: 8455456376737321535}
   - component: {fileID: 8157956013380244415}
+  - component: {fileID: 8451399927926522885}
   - component: {fileID: 5709042692366240195}
   - component: {fileID: 7215463631897397175}
   - component: {fileID: 8238634607049633256}
@@ -528,12 +529,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e842764f386ea0458dd22d817d0eebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _unitHealth: 100
   _unitDamage: 25
-  _walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
-  _shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
-  _pickupClip: {fileID: 8300000, guid: 2f2ddaf46d3212d4fa98a0e9f9de5f0c, type: 3}
+--- !u!114 &8451399927926522885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870511133471231791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b0fa984a4474e4ba6385017f2a4abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5709042692366240195
 MonoBehaviour:
   m_ObjectHideFlags: 0

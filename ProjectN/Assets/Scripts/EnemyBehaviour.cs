@@ -25,11 +25,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         foreach(UnitBehaviour unit in PlayerUnitHandler.AllPlayerUnits)
         {
-            if (_unitBase.ObstacleCheckForShot(transform.position, unit.transform.position))
-            {
-                _unitBase.ShootAtTarget(unit.gameObject);
-                return;
-            }   
+            _unitBase.Actions.Execute(new ShootAtTargetAction(unit.gameObject));
+            return;
         }
     }
 }
