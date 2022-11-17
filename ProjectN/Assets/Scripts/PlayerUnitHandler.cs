@@ -19,8 +19,8 @@ public class PlayerUnitHandler : MonoBehaviour
 
     private bool _isInvetoryOpen = false;
 
-    public static List<UnitBehaviour> AllPlayerUnits => allPlayerUnits;
-    public static UnitBehaviour CurrentSelectedUnit => _currentSelectedUnit;
+    public static List<Unit> AllPlayerUnits => allPlayerUnits;
+    public static Unit CurrentSelectedUnit => _currentSelectedUnit;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class PlayerUnitHandler : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
         _mainCamera = Camera.main;
 
-        allPlayerUnits = FindObjectsOfType<UnitBehaviour>().Where(unit => unit.tag != "Enemy").ToList();
+        allPlayerUnits = FindObjectsOfType<Unit>().Where(unit => unit.tag != "Enemy").ToList();
         _currentSelectedUnit = allPlayerUnits[0];
     }
 
@@ -92,7 +92,7 @@ public class PlayerUnitHandler : MonoBehaviour
             return true;
         return false;
     }
-    public static void SelectUnit(UnitBehaviour unit)
+    public static void SelectUnit(Unit unit)
     {
         _currentSelectedUnit = unit;
         _currentSelectedUnit.unitValuesUpdated.Invoke();
@@ -100,7 +100,7 @@ public class PlayerUnitHandler : MonoBehaviour
     private void SelectUnit(RaycastHit2D hit)
     {
         if (hit.collider.tag == "PlayerUnit")
-            _currentSelectedUnit = hit.collider.GetComponent<UnitBehaviour>();
+            _currentSelectedUnit = hit.collider.GetComponent<Unit>();
         _currentSelectedUnit.unitValuesUpdated.Invoke();
     }
     private GameObject GetTarget()

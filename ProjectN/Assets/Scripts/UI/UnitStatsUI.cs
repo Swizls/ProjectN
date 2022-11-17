@@ -8,7 +8,7 @@ public class UnitStatsUI : MonoBehaviour
 
     private void Start()
     {
-        foreach(UnitBehaviour unit in PlayerUnitHandler.AllPlayerUnits)
+        foreach(Unit unit in PlayerUnitHandler.AllPlayerUnits)
         {
             unit.unitValuesUpdated += SetValues;
         }

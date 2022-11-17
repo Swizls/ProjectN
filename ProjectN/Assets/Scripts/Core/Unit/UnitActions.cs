@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -17,10 +18,24 @@ public class UnitActions : MonoBehaviour
 
         _audio = GetComponent<AudioSource>();
     }
+    private void OnEnable()
+    {
+        EndTurnHandler.turnEnd += OnTurnEnd;
+    }
+
+    private void OnDisable()
+    {
+        EndTurnHandler.turnEnd -= OnTurnEnd;
+    }
     public bool TryExecute(IAction action)
     {
         bool result = action.TryExecute(gameObject.GetComponent<Unit>(), ref _currentActionUnits);
         PlayerUnitHandler.CurrentSelectedUnit.unitValuesUpdated?.Invoke();
         return result;
+    }
+
+    private void OnTurnEnd()
+    {
+        _currentActionUnits = _startActionPoints;
     }
 }
