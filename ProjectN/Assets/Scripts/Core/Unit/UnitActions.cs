@@ -17,8 +17,8 @@ public class UnitActions : MonoBehaviour
 
         _audio = GetComponent<AudioSource>();
     }
-    public void Execute(IAction action)
+    public bool TryExecute(IAction action)
     {
-        action.TryExecute(PlayerUnitHandler.CurrentSelectedUnit, ref _currentActionUnits);
+        return action.TryExecute(gameObject.GetComponent<Unit>(), ref _currentActionUnits);
     }
 }

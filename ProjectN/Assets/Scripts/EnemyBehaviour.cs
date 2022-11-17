@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    private UnitBehaviour _unitBase;
+    private Unit _unit;
 
     private void Start()
     {
-        _unitBase = GetComponent<UnitBehaviour>();
+        _unit = GetComponent<Unit>();
     }
 
     private void OnEnable()
@@ -23,10 +23,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnEndTurn()
     {
-        foreach(UnitBehaviour unit in PlayerUnitHandler.AllPlayerUnits)
+        foreach(Unit playerUnit in PlayerUnitHandler.AllPlayerUnits)
         {
-            _unitBase.Actions.Execute(new ShootAtTargetAction(unit.gameObject));
-            return;
+            if(_unit.Actions.TryExecute(new ShootAtTargetAction(playerUnit))) 
+                return;
         }
     }
 }

@@ -7,11 +7,11 @@ public class ShootAtTargetAction : IAction
 {
     private ActionData data;
 
-    private GameObject _target;
+    private Unit _target;
 
     public ActionData Data => data;
 
-    public ShootAtTargetAction(GameObject target)
+    public ShootAtTargetAction(Unit target)
     {
         data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
         if (data == null)
@@ -21,9 +21,9 @@ public class ShootAtTargetAction : IAction
 
     public bool TryExecute(Unit unit, ref int actionUnits)
     {
-        if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap))
+        if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= data.Cost)
         {
-            _target.GetComponent<UnitHealth>().ApplyDamage(PlayerUnitHandler.CurrentSelectedUnit.UnitDamage);
+            _target.Health.ApplyDamage(unit.UnitDamage);
             actionUnits -= data.Cost;
 
             unit.Actions.Audio.clip = data.Clip;

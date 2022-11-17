@@ -50,22 +50,15 @@ public class PlayerUnitHandler : MonoBehaviour
                 }
                 else
                 {
-                    GameObject enemy = GetTarget();
-                    _currentSelectedUnit.Actions.Execute(new ShootAtTargetAction(enemy));
+                    Unit enemy = GetTarget().GetComponent<Unit>();
+                    _currentSelectedUnit.Actions.TryExecute(new ShootAtTargetAction(enemy));
                 }
-                //else if (IsItem(hit) && _currentSelectedUnit.Actions.ActionUnits >= Unit.INTERACTION_COST)
-                //{
-                //    if (Vector3.Distance(_currentSelectedUnit.transform.position, hit.collider.transform.position) < PICKABLE_RANGE)
-                //    {
-                //        _currentSelectedUnit.PickupItem(hit.collider.gameObject);
-                //    }
-                //}
             }    
         }
         //Rigth mouse button
         if (Input.GetMouseButtonDown(1) && !_currentSelectedUnit.Movement.IsMoving && !_isInvetoryOpen)
         {
-             _currentSelectedUnit.Actions.Execute(new MoveAction());
+             _currentSelectedUnit.Actions.TryExecute(new MoveAction());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -115,12 +108,8 @@ public class PlayerUnitHandler : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(Input.mousePosition),
                                              _mainCamera.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
-        {
             if (hit.collider.tag == "Enemy")
-            {
                 return hit.collider.gameObject;
-            }
-        }
         return null;
     }
 }
