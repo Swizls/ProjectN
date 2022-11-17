@@ -19,6 +19,8 @@ public class UnitActions : MonoBehaviour
     }
     public bool TryExecute(IAction action)
     {
-        return action.TryExecute(gameObject.GetComponent<Unit>(), ref _currentActionUnits);
+        bool result = action.TryExecute(gameObject.GetComponent<Unit>(), ref _currentActionUnits);
+        PlayerUnitHandler.CurrentSelectedUnit.unitValuesUpdated?.Invoke();
+        return result;
     }
 }
