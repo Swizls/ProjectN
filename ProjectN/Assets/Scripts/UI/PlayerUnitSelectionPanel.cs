@@ -7,12 +7,12 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
 {
     [SerializeField] private GameObject buttonPrefab;
 
-    private Dictionary<GameObject, UnitBase> unitSelectionButtons = new Dictionary<GameObject, UnitBase>();
-    private List<UnitBase> allPlayerUnits;
+    private Dictionary<GameObject, Unit> unitSelectionButtons = new Dictionary<GameObject, Unit>();
+    private List<Unit> allPlayerUnits;
 
     private void Start()
     {
-        allPlayerUnits = PlayerUnitControl.AllPlayerUnits;
+        allPlayerUnits = PlayerUnitHandler.AllPlayerUnits;
         CreateButtons();
     }
     
@@ -41,7 +41,7 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
 
     public void SelectUnit(GameObject button)
     {
-        if(!PlayerUnitControl.CurrentSelectedUnit.IsMoving)
-            PlayerUnitControl.SelectUnit(unitSelectionButtons[button]);
+        if(!PlayerUnitHandler.CurrentSelectedUnit.Movement.IsMoving)
+            PlayerUnitHandler.SelectUnit(unitSelectionButtons[button]);
     }
 }

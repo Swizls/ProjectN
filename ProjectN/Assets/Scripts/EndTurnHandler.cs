@@ -7,5 +7,5 @@ public class EndTurnHandler : MonoBehaviour
 {
     public static Action turnEnd;
 
-    public void EndTurn() => turnEnd?.Invoke();
+    public static void EndTurn() => turnEnd?.Invoke();
 }
