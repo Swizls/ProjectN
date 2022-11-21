@@ -176,8 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitDamage: 25
-  _shotClip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
-  _pickupClip: {fileID: 8300000, guid: 2f2ddaf46d3212d4fa98a0e9f9de5f0c, type: 3}
 --- !u!114 &915851885390843629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,8 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f6bb877c9489d47b692b27fb193c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentBackpack: {fileID: 11400000, guid: 6a3e47806da88ff4489bd315f869acf0, type: 2}
-  _currentArmor: {fileID: 11400000, guid: 6a3e47806da88ff4489bd315f869acf0, type: 2}
+  _backpackInfo: {fileID: 11400000, guid: fe2ec17dc164a7e478d59a5f1fe591c2, type: 2}
+  _armorInfo: {fileID: 11400000, guid: ea8160b4d1c358b42817c7cac3f5b5ca, type: 2}
+  _weaponInfo: {fileID: 0}
 --- !u!114 &1853709071470991123
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,4 +16,4 @@ MonoBehaviour:
   _sprite: {fileID: 0}
   _weight: 0
   _armorPoitns: 0
-  _maxCarringWeight: 0
+  _maxCarringWeight: 5

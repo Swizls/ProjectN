@@ -57,36 +57,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Core\Unit\UnitActions.cs" />
-    <Compile Include="Assets\Scripts\Core\Actions\ShootAtTargetAction.cs" />
-    <Compile Include="Assets\Scripts\Core\ActionData.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Actions\ShootAtTargetAction.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\ActionData.cs" />
     <Compile Include="Assets\Scripts\UI\PathVisualizer.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\StorableArmorInfo.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\ArmorInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Items\IStorableItem.cs" />
-    <Compile Include="Assets\Scripts\Core\Actions\MoveAction.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Actions\MoveAction.cs" />
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
     <Compile Include="Assets\Scripts\Core\IMovable.cs" />
     <Compile Include="Assets\Scripts\Core\IAction.cs" />
     <Compile Include="Assets\Scripts\UI\ItemInventoryPresenter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BaseItemInfo.cs" />
+    <Compile Include="Assets\Scripts\Storable.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Unit.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\UnitHealth.cs" />
     <Compile Include="Assets\Scripts\UI\UnitStatsUI.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerUnitSelectionPanel.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BackpackInfo.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\IStorableItemInfo.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Tiles\RuleBaseTile.cs" />
     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerUnitHandler.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitMovement.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\Core\Unit\UnitHealth.cs" />
-    <Compile Include="Assets\Scripts\Core\Unit\Unit.cs" />
+    <Compile Include="Assets\Scripts\UI\BaseState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -48,7 +48,7 @@ public class PlayerUnitHandler : MonoBehaviour
                 {
                     SelectUnit(hit);
                 }
-                else
+                else if(IsEnemey(hit))
                 {
                     Unit enemy = GetTarget().GetComponent<Unit>();
                     _currentSelectedUnit.Actions.TryExecute(new ShootAtTargetAction(enemy));
