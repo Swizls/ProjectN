@@ -88,7 +88,6 @@
     <Compile Include="Assets\Scripts\PlayerUnitHandler.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitMovement.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\UI\BaseState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

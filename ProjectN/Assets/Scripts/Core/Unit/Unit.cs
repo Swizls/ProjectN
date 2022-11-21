@@ -7,8 +7,6 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(UnitInventory))]
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private int _unitDamage;
-
     private UnitInventory _inventory;
     private UnitHealth _health;
     private UnitMovement _movement;
@@ -24,8 +22,6 @@ public class Unit : MonoBehaviour
     public UnitActions Actions => _actions;
 
     public Tilemap Tilemap => _tilemap;
-
-    public int UnitDamage => _unitDamage;
 
 
     private void Start()

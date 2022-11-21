@@ -23,7 +23,7 @@ public class ShootAtTargetAction : IAction
     {
         if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= data.Cost)
         {
-            _target.Health.ApplyDamage(unit.UnitDamage);
+            _target.Health.ApplyDamage(unit.Inventory.UnitDamage);
             actionUnits -= data.Cost;
 
             unit.Actions.Audio.clip = data.Clip;

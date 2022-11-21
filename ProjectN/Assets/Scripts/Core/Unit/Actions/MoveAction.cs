@@ -7,7 +7,7 @@ public class MoveAction : IAction
 {
     private ActionData data;
 
-    private Pathfinder _pathFinder = new Pathfinder();
+    private readonly Pathfinder _pathFinder = new Pathfinder();
 
     public ActionData Data => data;
 
