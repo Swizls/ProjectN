@@ -14,16 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   m_PixelRect:
     serializedVersion: 2
-    x: 2249
-    y: 302.5
-    width: 1206
-    height: 715
+<<<<<<< HEAD
+<<<<<<< HEAD
+    x: 0
+    y: 43
+    width: 1920
+    height: 997
   m_ShowMode: 4
   m_Title:
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 0
+>>>>>>> develop
+=======
+    x: 1920
+    y: 147
+    width: 1440
+    height: 817
+  m_ShowMode: 4
+  m_Title: Game
+  m_RootView: {fileID: 12}
+  m_MinSize: {x: 875, y: 300}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_Maximized: 1
+>>>>>>> develop
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -215,13 +230,38 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 921
-    height: 665
-  m_MinSize: {x: 403, y: 492}
-  m_MaxSize: {x: 10001, y: 14042}
+<<<<<<< HEAD
+<<<<<<< HEAD
+    width: 1467
+    height: 947
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
   controlID: 92
 --- !u!114 &10
+=======
+  controlID: 398
+=======
+  controlID: 19
+>>>>>>> develop
+=======
+    width: 1200
+    height: 949
+  m_MinSize: {x: 880, y: 237}
+  m_MaxSize: {x: 4000, y: 4021}
+  vertical: 0
+  controlID: 31151
+>>>>>>> develop
+=======
+    width: 705
+    height: 1026
+  m_MinSize: {x: 100, y: 200}
+  m_MaxSize: {x: 8096, y: 16192}
+  vertical: 1
+  controlID: 38
+>>>>>>> develop
+--- !u!114 &7
+>>>>>>> develop
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,10 +333,37 @@ MonoBehaviour:
     m_Tooltip:
   m_Pos:
     serializedVersion: 2
-    x: 2249
-    y: 726.5
-    width: 920
-    height: 250
+    x: 1182
+    y: 0
+    width: 258
+    height: 767
+  m_MinSize: {x: 100, y: 200}
+  m_MaxSize: {x: 8096, y: 16192}
+  vertical: 1
+  controlID: 116
+--- !u!114 &11
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: SceneHierarchyWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    y: 801
+    width: 1465
+    height: 198
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter:
@@ -410,6 +477,47 @@ MonoBehaviour:
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
 --- !u!114 &13
+=======
+    y: 522
+    width: 1100
+    height: 245
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 16}
+=======
+    y: 644
+    width: 1467
+    height: 303
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 17}
+>>>>>>> develop
+=======
+    y: 723
+    width: 686
+    height: 358
+  m_MinSize: {x: 100, y: 119}
+  m_MaxSize: {x: 4000, y: 4019}
+=======
+    y: 0
+    width: 258
+    height: 270
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+>>>>>>> develop
+  m_ActualView: {fileID: 20}
+>>>>>>> develop
+  m_Panes:
+  - {fileID: 20}
+  m_Selected: 0
+<<<<<<< HEAD
+  m_LastSelected: 2
+--- !u!114 &11
+>>>>>>> develop
+=======
+  m_LastSelected: 0
+--- !u!114 &12
+>>>>>>> develop
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -502,6 +610,85 @@ MonoBehaviour:
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
 --- !u!114 &15
+=======
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1181, y: 725}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 1
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -590.5
+    m_HBaseRangeMax: 590.5
+    m_VBaseRangeMin: -362.5
+    m_VBaseRangeMax: 362.5
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 1
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 1181
+      height: 725
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 590.5, y: 362.5}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -590.5
+      y: -362.5
+      width: 1181
+      height: 725
+    m_MinimalGUI: 1
+  m_defaultScale: 1
+  m_LastWindowPixelSize: {x: 1181, y: 746}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000001000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+--- !u!114 &13
+>>>>>>> develop
+=======
+--- !u!114 &15
+>>>>>>> develop
+=======
+--- !u!114 &23
+>>>>>>> develop
+=======
+--- !u!114 &19
+>>>>>>> develop
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -537,9 +724,33 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    m_Target: {x: -3.0477502, y: -0.95052874, z: -0.46967953}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: -3.0477502, y: -0.95052874, z: -0.46967953}
+=======
+    m_Target: {x: -1.1546719, y: 1.9726611, z: -0.0295382}
+    speed: 2
+    m_Value: {x: -1.1546719, y: 1.9726611, z: -0.0295382}
+>>>>>>> develop
+=======
+    m_Target: {x: 20.777754, y: 101.04393, z: -2.0533285}
+    speed: 2
+    m_Value: {x: 21.695639, y: 97.0717, z: -1.9588507}
+>>>>>>> develop
+=======
+    m_Target: {x: -4.2657876, y: -1.5033721, z: 6.256824}
+    speed: 2
+    m_Value: {x: -4.2682643, y: -1.4776156, z: 6.255041}
+>>>>>>> develop
+=======
+    m_Target: {x: 98.3682, y: 23.39117, z: -2.9942842}
+    speed: 2
+    m_Value: {x: 98.3682, y: 23.39117, z: -2.9942842}
+>>>>>>> develop
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -589,9 +800,33 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_Size:
-    m_Target: 10
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    m_Target: 3.7971106
     speed: 2
-    m_Value: 10
+    m_Value: 3.7971106
+=======
+    m_Target: 7.1811633
+    speed: 2
+    m_Value: 7.1811633
+>>>>>>> develop
+=======
+    m_Target: 219.40088
+    speed: 2
+    m_Value: 209.95299
+>>>>>>> develop
+=======
+    m_Target: 3.7842298
+    speed: 2
+    m_Value: 3.9625442
+>>>>>>> develop
+=======
+    m_Target: 248.28845
+    speed: 2
+    m_Value: 248.28845
+>>>>>>> develop
   m_Ortho:
     m_Target: 0
     speed: 2
