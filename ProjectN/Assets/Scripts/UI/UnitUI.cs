@@ -1,31 +1,39 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(UnitBase))]
+[RequireComponent(typeof(Unit))]
 public class UnitUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI health;
-    [SerializeField] private TextMeshProUGUI actionUnits;
+    [SerializeField] private TextMeshProUGUI _healthText;
+    [SerializeField] private TextMeshProUGUI _actionUnitsText;
 
-    private UnitBase unitBase;
+    private Unit _unit;
 
     private void Start()
     {
-        unitBase = GetComponent<UnitBase>();
-        unitBase.unitValuesUpdated += SetValues;
+        _unit = GetComponent<Unit>();
+        _unit.unitValuesUpdated += SetValues;
         SetValues();
+    }
+    private void OnEnable()
+    {
+        if(_unit != null)
+        {
+            _unit.unitValuesUpdated += SetValues;
+            SetValues();
+        }
     }
 
     private void OnDisable()
     {
-        unitBase.unitValuesUpdated -= SetValues;
+        _unit.unitValuesUpdated -= SetValues;
     }
 
     private void SetValues()
     {
-        if(health != null)
-            health.text = unitBase.UnitHealth.ToString();
-        if(actionUnits != null)
-            actionUnits.text = unitBase.ActionUnits.ToString();
+        if (_healthText != null && _unit.Health != null)
+            _healthText.text = _unit.Health.HealthPoints.ToString();
+        if (_actionUnitsText != null && _unit.Actions != null)
+            _actionUnitsText.text = _unit.Actions.ActionUnits.ToString();
     }
 }
