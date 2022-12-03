@@ -67,7 +67,6 @@
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\MoveAction.cs" />
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
-    <Compile Include="Assets\Scripts\MobBase.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
     <Compile Include="Assets\Scripts\Core\IMovable.cs" />
     <Compile Include="Assets\Scripts\Core\IAction.cs" />

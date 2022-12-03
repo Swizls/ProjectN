@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UnitHealth : MonoBehaviour
 {
-    [SerializeField] int _healthPoints;
+    [SerializeField] private int _healthPoints;
 
     public Action damageTaken;
 
