@@ -16,6 +16,7 @@ public class ShootAtTargetAction : IAction
         data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
         if (data == null)
             throw new System.Exception("Data for this action don't exsist");
+
         _target = target;
     }
 
@@ -34,9 +35,7 @@ public class ShootAtTargetAction : IAction
     }
     public bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
     {
-        List<Vector3Int> pointsList = GetShotTrajectory(startPosFloat, targetPosFloat, tilemap);
-
-        foreach (Vector3Int point in pointsList)
+        foreach (Vector3Int point in GetShotTrajectory(startPosFloat, targetPosFloat, tilemap))
         {
             RuleBaseTile tile = tilemap.GetTile<RuleBaseTile>(point);
             if (!tile.isPassable)
@@ -47,23 +46,26 @@ public class ShootAtTargetAction : IAction
         }
         return true;
     }
-    private List<Vector3Int> GetShotTrajectory(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
+    private List<Vector3Int> GetShotTrajectory(Vector3 startPos, Vector3 targetPos, Tilemap tilemap)
     {
         List<Vector3Int> pointsList = new();
+        Vector3Int targetPosInt = tilemap.WorldToCell(targetPos);
+        Vector3Int currentPointInt = tilemap.WorldToCell(startPos);
 
-        Vector3Int startPosInt = tilemap.WorldToCell(startPosFloat);
-        Vector3Int targetPosInt = tilemap.WorldToCell(targetPosFloat);
+        pointsList.Add(currentPointInt);
 
-        Vector3 normalizedDireciton = (targetPosFloat - startPosFloat).normalized;
-        Vector3Int roundedDirection = new((int)Mathf.Sign(normalizedDireciton.x), (int)Mathf.Sign(normalizedDireciton.y), 0);
+        Vector3 direction = (targetPos - startPos).normalized;
+        Vector3 nextpoint = currentPointInt;
 
-        Vector3Int tileForCheck = startPosInt;
-
-        while (tileForCheck.x != targetPosInt.x || tileForCheck.y != targetPosInt.y)
+        while(currentPointInt != targetPosInt)
         {
-            pointsList.Add(tileForCheck);
-            if (tileForCheck.x != targetPosInt.x) tileForCheck.x += roundedDirection.x;
-            if (tileForCheck.y != targetPosInt.y) tileForCheck.y += roundedDirection.y;
+            if(currentPointInt.x != targetPosInt.x)
+                nextpoint.x += direction.x;
+            if(currentPointInt.y != targetPosInt.y)
+                nextpoint.y += direction.y;
+
+            currentPointInt = tilemap.WorldToCell(nextpoint);
+            pointsList.Add(currentPointInt);
         }
         return pointsList;
     }

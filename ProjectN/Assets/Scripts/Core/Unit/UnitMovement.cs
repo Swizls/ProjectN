@@ -38,12 +38,12 @@ public class UnitMovement : MonoBehaviour
         {
             if (path != null && path.Count != 0 && _isMoving)
             {
-                if (Vector3.Distance(transform.position, path[path.Count - 1]) > MIN_DISTANCE)
+                if (Vector3.Distance(transform.position, path[^1]) > MIN_DISTANCE)
                 {
                     if (Vector3.Distance(transform.position, path[_currentPathIndex]) > MIN_DISTANCE)
                     {
                         Vector3 moveDirerction = (path[_currentPathIndex] - transform.position).normalized;
-                        transform.position = transform.position + moveDirerction * _speed * Time.deltaTime;
+                        transform.position = transform.position + _speed * Time.deltaTime * moveDirerction;
 
                         if (Mathf.Round(moveDirerction.x) != 1)
                             _sprite.flipX = true;
