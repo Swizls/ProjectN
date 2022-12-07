@@ -18,6 +18,7 @@ public class UnitActions : MonoBehaviour
 
         _audio = GetComponent<AudioSource>();
     }
+
     private void OnEnable()
     {
         EndTurnHandler.turnEnd += OnTurnEnd;
@@ -27,16 +28,14 @@ public class UnitActions : MonoBehaviour
     {
         EndTurnHandler.turnEnd -= OnTurnEnd;
     }
+
     public bool TryExecute(IAction action)
     {
         bool result = action.TryExecute(gameObject.GetComponent<Unit>(), ref _currentActionUnits);
         if(result)
-            PlayerUnitHandler.CurrentSelectedUnit.unitValuesUpdated?.Invoke();
+            PlayerUnitControl.Instance.CurrentSelectedUnit.unitValuesUpdated?.Invoke();
         return result;
     }
 
-    private void OnTurnEnd()
-    {
-        _currentActionUnits = _startActionPoints;
-    }
+    private void OnTurnEnd() => _currentActionUnits = _startActionPoints;
 }

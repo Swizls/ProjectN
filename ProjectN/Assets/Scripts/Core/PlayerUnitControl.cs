@@ -1,29 +1,29 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(LineRenderer))]
-public class PlayerUnitHandler : MonoBehaviour
+public class PlayerUnitControl : UnitControl
 {
-    private static List<Unit> allPlayerUnits;
-    private static Unit _currentSelectedUnit;
+    public static PlayerUnitControl Instance;
 
-    private static GameObject _inventoryUI;
-    private static Camera _mainCamera;
+    private GameObject _inventoryUI;
+    private Camera _mainCamera;
 
     private bool _isInvetoryOpen = false;
 
-    public static List<Unit> AllPlayerUnits => allPlayerUnits;
-    public static Unit CurrentSelectedUnit => _currentSelectedUnit;
-
     private void Awake()
     {
+        Instance = this;
+
         _inventoryUI = Resources.FindObjectsOfTypeAll<InventoryUI>().First().gameObject;
         _mainCamera = Camera.main;
 
-        allPlayerUnits = FindObjectsOfType<Unit>().Where(unit => !unit.CompareTag("Enemy")).ToList();
-        _currentSelectedUnit = allPlayerUnits[0];
+        _allControlableUnits = FindObjectsOfType<Unit>().Where(unit => unit.CompareTag("PlayerUnit")).ToList();
+        _currentUnit = _allControlableUnits[0];
+
+        foreach (Unit unit in _allControlableUnits)
+            unit.unitDied += OnUnitDeath;
     }
 
     private void Update() => UnitControl();
@@ -31,7 +31,7 @@ public class PlayerUnitHandler : MonoBehaviour
     private void UnitControl()
     {
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !_currentSelectedUnit.Movement.IsMoving && !_isInvetoryOpen)
+        if (Input.GetMouseButtonDown(0) && !_currentUnit.Movement.IsMoving && !_isInvetoryOpen)
         { 
             RaycastHit2D hit = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(Input.mousePosition),
                                                  _mainCamera.ScreenToWorldPoint(Input.mousePosition));
@@ -44,14 +44,14 @@ public class PlayerUnitHandler : MonoBehaviour
                 else if(IsEnemey(hit))
                 {
                     Unit enemy = GetTarget().GetComponent<Unit>();
-                    _currentSelectedUnit.Actions.TryExecute(new ShootAtTargetAction(enemy));
+                    _currentUnit.Actions.TryExecute(new ShootAtTargetAction(enemy));
                 }
             }    
         }
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !_currentSelectedUnit.Movement.IsMoving && !_isInvetoryOpen)
+        if (Input.GetMouseButtonDown(1) && !_currentUnit.Movement.IsMoving && !_isInvetoryOpen)
         {
-             _currentSelectedUnit.Actions.TryExecute(new MoveAction());
+            _currentUnit.Actions.TryExecute(new MoveAction());
         }
         //Keyboard
         if (Input.GetKeyDown(KeyCode.E))
@@ -86,17 +86,7 @@ public class PlayerUnitHandler : MonoBehaviour
             return true;
         return false;
     }
-    public static void SelectUnit(Unit unit)
-    {
-        _currentSelectedUnit = unit;
-        _currentSelectedUnit.unitValuesUpdated.Invoke();
-    }
-    private void SelectUnit(RaycastHit2D hit)
-    {
-        if (hit.collider.CompareTag("PlayerUnit"))
-            _currentSelectedUnit = hit.collider.GetComponent<Unit>();
-        _currentSelectedUnit.unitValuesUpdated.Invoke();
-    }
+
     private GameObject GetTarget()
     {
         RaycastHit2D hit = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(Input.mousePosition),
@@ -105,5 +95,18 @@ public class PlayerUnitHandler : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
                 return hit.collider.gameObject;
         return null;
+    }
+
+    private void SelectUnit(RaycastHit2D hit)
+    {
+        if (hit.collider.CompareTag("PlayerUnit"))
+            _currentUnit = hit.collider.GetComponent<Unit>();
+        _currentUnit.unitValuesUpdated.Invoke();
+    }
+
+    public void SelectUnit(Unit unit)
+    {
+        _currentUnit = unit;
+        _currentUnit.unitValuesUpdated.Invoke();
     }
 }

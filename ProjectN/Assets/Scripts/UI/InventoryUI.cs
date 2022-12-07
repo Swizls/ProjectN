@@ -31,9 +31,9 @@ public class InventoryUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if(PlayerUnitHandler.CurrentSelectedUnit != null)
+        if(PlayerUnitControl.Instance != null)
         {
-            _unitInventory = PlayerUnitHandler.CurrentSelectedUnit.Inventory;
+            _unitInventory = PlayerUnitControl.Instance.CurrentSelectedUnit.Inventory;
             Render();
         }
     }
