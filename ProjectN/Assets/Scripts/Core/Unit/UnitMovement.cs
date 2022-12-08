@@ -14,6 +14,7 @@ public class UnitMovement : MonoBehaviour
     private bool _isAudioPlayed = false;
 
     public bool IsMoving => _isMoving;
+    public SpriteRenderer Sprite => _sprite;
 
     private void Start()
     {

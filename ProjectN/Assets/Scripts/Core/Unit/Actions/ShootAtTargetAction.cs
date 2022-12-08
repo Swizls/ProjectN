@@ -15,7 +15,7 @@ public class ShootAtTargetAction : IAction
     {
         data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
         if (data == null)
-            throw new System.Exception("Data for this action don't exsist");
+            throw new System.Exception("Data for shot action doesn't exsist");
 
         _target = target;
     }
@@ -27,12 +27,22 @@ public class ShootAtTargetAction : IAction
             _target.Health.ApplyDamage(unit.Inventory.UnitDamage);
             actionUnits -= data.Cost;
 
+            if(unit.transform.position.x <= _target.transform.position.x)
+            {
+                unit.Movement.Sprite.flipX = false;
+            }
+            else
+            {
+                unit.Movement.Sprite.flipX = true;
+            }
+
             unit.Actions.Audio.clip = data.Clip;
             unit.Actions.Audio.Play();
             return true;
         }
         return false;
     }
+
     public bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
     {
         foreach (Vector3Int point in GetShotTrajectory(startPosFloat, targetPosFloat, tilemap))
@@ -46,6 +56,7 @@ public class ShootAtTargetAction : IAction
         }
         return true;
     }
+
     private List<Vector3Int> GetShotTrajectory(Vector3 startPos, Vector3 targetPos, Tilemap tilemap)
     {
         List<Vector3Int> pointsList = new();

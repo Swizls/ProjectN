@@ -17,7 +17,7 @@ public class MoveAction : IAction
     {
         data = Resources.Load<ActionData>("ScriptableObjects/ActionData/MoveData");
         if(data == null)
-            throw new System.Exception("Data for this action doesn't exsist");
+            throw new System.Exception("Data for move action doesn't exsist");
 
         _targetPosition = targetPosition;
     }
