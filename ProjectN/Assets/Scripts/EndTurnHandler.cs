@@ -5,7 +5,21 @@ using System;
 
 public class EndTurnHandler : MonoBehaviour
 {
-    public static Action turnEnd;
+    public static Action playerTurn;
+    public static Action enemyTurn;
 
-    public static void EndTurn() => turnEnd?.Invoke();
+    public static bool isPlayerTurn;
+
+    private void Start() => isPlayerTurn = true;
+
+    public static void EndTurn()
+    {
+        isPlayerTurn = !isPlayerTurn;
+
+        if (isPlayerTurn)
+            playerTurn?.Invoke();
+        else
+            enemyTurn?.Invoke();
+    } 
+
 }

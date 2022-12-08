@@ -20,26 +20,40 @@ public class EnemyUnitControl : UnitControl
 
     private void OnEnable()
     {
-        EndTurnHandler.turnEnd += OnEndTurn;
+        EndTurnHandler.enemyTurn += OnTurnStart;
     }
 
     private void OnDisable()
     {
-        EndTurnHandler.turnEnd -= OnEndTurn;
+        EndTurnHandler.enemyTurn -= OnTurnStart;
     }
 
-    private void UnitControl()
+    private IEnumerator UnitControl()
     {
         for(int i = 0; i < _allControlableUnits.Count; i++)
         {
             _currentUnit = _allControlableUnits[i];
-            TryAttack();
+            if (TryAttack())
+            {
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                Move();
+                yield return new WaitForSeconds(3);
+            }
         }
+        EndTurnHandler.EndTurn();
     }
 
-    private void OnEndTurn()
-    { 
-        UnitControl();
+    private void Move()
+    {
+        _currentUnit.Actions.TryExecute(new MoveAction(PlayerUnitControl.Instance.CurrentSelectedUnit.transform.position));
+    }
+
+    private void OnTurnStart()
+    {
+        StartCoroutine(UnitControl());
     }
 
     private bool TryAttack()

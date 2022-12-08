@@ -35,7 +35,7 @@ public class PathVisualizer : MonoBehaviour
                 _lineRenderer.positionCount = path.Length;
                 _lineRenderer.SetPositions(path);
 
-                if (PlayerUnitControl.Instance.CurrentSelectedUnit.Actions.ActionUnits >= path.Length * new MoveAction().Data.Cost)
+                if (PlayerUnitControl.Instance.CurrentSelectedUnit.Actions.ActionUnits >= path.Length * new MoveAction(Input.mousePosition).Data.Cost)
                 {
                     _lineRenderer.startColor = Color.green;
                     _lineRenderer.endColor = Color.green;

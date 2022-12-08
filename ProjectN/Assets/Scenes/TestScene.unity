@@ -7188,8 +7188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1db69db7501ed4ba0478beaff82664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camSpeed: 5
-  camScrollSpeed: 100
+  _camSpeed: 10
+  _camScrollSpeed: 100
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -8550,6 +8550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1469775322}
+  - component: {fileID: 1469775323}
   m_Layer: 0
   m_Name: EnemyUnitHandler
   m_TagString: Untagged
@@ -8572,6 +8573,18 @@ Transform:
   m_Father: {fileID: 868591081}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1469775323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469775321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8e0703c47df1d4eb051860f524387b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1561359958
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,21 +7,34 @@ public class MoveAction : IAction
 {
     private ActionData data;
 
+    private readonly Vector3 _targetPosition;
+
     private readonly Pathfinder _pathFinder = new Pathfinder();
 
     public ActionData Data => data;
 
-    public MoveAction()
+    public MoveAction(Vector3 targetPosition)
     {
         data = Resources.Load<ActionData>("ScriptableObjects/ActionData/MoveData");
         if(data == null)
             throw new System.Exception("Data for this action doesn't exsist");
+
+        _targetPosition = targetPosition;
     }
     public bool TryExecute(Unit unit, ref int currentActionUnits)
     {
-        List<Vector3> path = GetPath(unit.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), unit.Tilemap);
-        if (path != null && path.Count * data.Cost <= currentActionUnits)
+        int maxPathLength = currentActionUnits / data.Cost;
+
+        List<Vector3> path = GetPath(unit.transform.position, _targetPosition, unit.Tilemap);
+        if (path != null)
         {
+            if(path.Count > maxPathLength)
+            {
+                for(int i = path.Count - 1; i >= maxPathLength; i--)
+                {
+                    path.Remove(path[i]);
+                }
+            }
             currentActionUnits -= data.Cost * path.Count;
             unit.Movement.StartMove(path);
             return true;

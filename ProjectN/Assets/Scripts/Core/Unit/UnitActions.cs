@@ -21,12 +21,12 @@ public class UnitActions : MonoBehaviour
 
     private void OnEnable()
     {
-        EndTurnHandler.turnEnd += OnTurnEnd;
+        EndTurnHandler.playerTurn += OnTurnEnd;
     }
 
     private void OnDisable()
     {
-        EndTurnHandler.turnEnd -= OnTurnEnd;
+        EndTurnHandler.playerTurn -= OnTurnEnd;
     }
 
     public bool TryExecute(IAction action)

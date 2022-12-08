@@ -26,7 +26,11 @@ public class PlayerUnitControl : UnitControl
             unit.unitDied += OnUnitDeath;
     }
 
-    private void Update() => UnitControl();
+    private void Update()
+    {
+        if(EndTurnHandler.isPlayerTurn)
+            UnitControl();
+    }
 
     private void UnitControl()
     {
@@ -51,7 +55,7 @@ public class PlayerUnitControl : UnitControl
         //Rigth mouse button
         if (Input.GetMouseButtonDown(1) && !_currentUnit.Movement.IsMoving && !_isInvetoryOpen)
         {
-            _currentUnit.Actions.TryExecute(new MoveAction());
+            _currentUnit.Actions.TryExecute(new MoveAction(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
         }
         //Keyboard
         if (Input.GetKeyDown(KeyCode.E))

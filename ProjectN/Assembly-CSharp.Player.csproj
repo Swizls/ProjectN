@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\ArmorInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
+    <Compile Include="Assets\Scripts\Core\EnemyUnitControl.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\MoveAction.cs" />
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
@@ -83,12 +84,11 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BackpackInfo.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\IStorableItemInfo.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Tiles\RuleBaseTile.cs" />
+    <Compile Include="Assets\Scripts\Core\UnitControl.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\Core\PlayerUnitControl.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitMovement.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\Core\EnemyUnitControl.cs" />
-    <Compile Include="Assets\Scripts\Core\UnitControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />
