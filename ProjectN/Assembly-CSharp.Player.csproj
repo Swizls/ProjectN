@@ -70,7 +70,7 @@
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
     <Compile Include="Assets\Scripts\Core\IMovable.cs" />
-    <Compile Include="Assets\Scripts\Core\IAction.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Actions\IAction.cs" />
     <Compile Include="Assets\Scripts\UI\ItemInventoryPresenter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BaseItemInfo.cs" />
     <Compile Include="Assets\Scripts\Storable.cs" />

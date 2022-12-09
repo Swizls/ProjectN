@@ -24,7 +24,8 @@ public class ShootAtTargetAction : IAction
     {
         if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= data.Cost)
         {
-            _target.Health.ApplyDamage(unit.Inventory.UnitDamage);
+            _target.Health.ApplyDamage(unit.Inventory.WeaponInfo.Damage);
+
             actionUnits -= data.Cost;
 
             if(unit.transform.position.x <= _target.transform.position.x)

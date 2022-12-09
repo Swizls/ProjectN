@@ -228,8 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backpackInfo: {fileID: 11400000, guid: fe2ec17dc164a7e478d59a5f1fe591c2, type: 2}
   _armorInfo: {fileID: 11400000, guid: ea8160b4d1c358b42817c7cac3f5b5ca, type: 2}
-  _weaponInfo: {fileID: 0}
-  _unitDamage: 20
+  _weaponInfo: {fileID: 11400000, guid: 338b41631b3107e4f892d4f664db8c29, type: 2}
 --- !u!114 &1853709071470991123
 MonoBehaviour:
   m_ObjectHideFlags: 0

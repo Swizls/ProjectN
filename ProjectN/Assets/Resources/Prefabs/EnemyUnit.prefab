@@ -597,8 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backpackInfo: {fileID: 0}
   _armorInfo: {fileID: 0}
-  _weaponInfo: {fileID: 0}
-  _unitDamage: 15
+  _weaponInfo: {fileID: 11400000, guid: 338b41631b3107e4f892d4f664db8c29, type: 2}
 --- !u!1 &8791231728323808185
 GameObject:
   m_ObjectHideFlags: 0

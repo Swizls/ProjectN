@@ -34,19 +34,22 @@ public class EnemyUnitControl : UnitControl
 
     private IEnumerator UnitControl()
     {
-        for(int i = 0; i < _allControlableUnits.Count; i++)
+        if(PlayerUnitControl.Instance.AllControlableUnits != null)
         {
-            _currentUnit = _allControlableUnits[i];
-            while (_currentUnit.Actions.ActionUnits >= MOVE_COST)
+            for (int i = 0; i < _allControlableUnits.Count; i++)
             {
-                if (TryAttack())
+                _currentUnit = _allControlableUnits[i];
+                while (_currentUnit.Actions.ActionUnits >= MOVE_COST)
                 {
-                    yield return new WaitForSeconds(1);
-                }
-                else
-                {
-                    Move(FindFiringPosition(GetClosestTarget()));
-                    yield return new WaitForSeconds(3);
+                    if (TryAttack())
+                    {
+                        yield return new WaitForSeconds(1);
+                    }
+                    else
+                    {
+                        Move(FindFiringPosition(GetClosestTarget()));
+                        yield return new WaitForSeconds(3);
+                    }
                 }
             }
         }
@@ -58,6 +61,7 @@ public class EnemyUnitControl : UnitControl
         List<Vector3> pathToClosestTarget = _pathFinder.FindPath(_currentUnit.transform.position,
                                                                 PlayerUnitControl.Instance.AllControlableUnits[0].transform.position,
                                                                 _currentUnit.Tilemap);
+        
         Unit target = PlayerUnitControl.Instance.AllControlableUnits[0];
 
         for(int i = 0; i < PlayerUnitControl.Instance.AllControlableUnits.Count; i++)

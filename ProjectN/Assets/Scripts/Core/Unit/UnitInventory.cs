@@ -11,8 +11,6 @@ public class UnitInventory : MonoBehaviour
     [SerializeField] private ArmorInfo _armorInfo;
     [SerializeField] private WeaponInfo _weaponInfo;
 
-    [SerializeField] private int _unitDamage;
-
     private Storable _backpack;
     private Storable _armor;
 
@@ -21,8 +19,7 @@ public class UnitInventory : MonoBehaviour
     public Storable Backpack => _backpack;
     public Storable Armor => _armor;
     public List<BaseItemInfo> ExternalItems { get { return GetItemsOnGround().ToList(); } }
-    public WeaponInfo Weapon => _weaponInfo;
-    public int UnitDamage => _unitDamage;
+    public WeaponInfo WeaponInfo => _weaponInfo;
 
     private void Start()
     {
