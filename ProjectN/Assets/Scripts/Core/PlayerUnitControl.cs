@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,11 @@ public class PlayerUnitControl : UnitControl
     private GameObject _inventoryUI;
     private Camera _mainCamera;
 
+    public Action OpenInvetory;
+
     private bool _isInvetoryOpen = false;
+
+    public bool IsInventoryOpen => _isInvetoryOpen;
 
     private void Awake()
     {
@@ -61,7 +66,7 @@ public class PlayerUnitControl : UnitControl
         if (Input.GetKeyDown(KeyCode.E))
         {
             _isInvetoryOpen = !_isInvetoryOpen;
-            _inventoryUI.SetActive(_isInvetoryOpen);
+            OpenInvetory?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {

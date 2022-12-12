@@ -34,12 +34,12 @@ public class EnemyUnitControl : UnitControl
 
     private IEnumerator UnitControl()
     {
-        if(PlayerUnitControl.Instance.AllControlableUnits != null)
+        for (int i = 0; i < _allControlableUnits.Count; i++)
         {
-            for (int i = 0; i < _allControlableUnits.Count; i++)
+            _currentUnit = _allControlableUnits[i];
+            while (_currentUnit.Actions.ActionUnits >= MOVE_COST)
             {
-                _currentUnit = _allControlableUnits[i];
-                while (_currentUnit.Actions.ActionUnits >= MOVE_COST)
+                if (PlayerUnitControl.Instance.AllControlableUnits.Count > 0)
                 {
                     if (TryAttack())
                     {
@@ -51,6 +51,10 @@ public class EnemyUnitControl : UnitControl
                         yield return new WaitForSeconds(3);
                     }
                 }
+                else
+                {
+                    break;
+                }
             }
         }
         EndTurnHandler.EndTurn();
@@ -61,13 +65,13 @@ public class EnemyUnitControl : UnitControl
         List<Vector3> pathToClosestTarget = _pathFinder.FindPath(_currentUnit.transform.position,
                                                                 PlayerUnitControl.Instance.AllControlableUnits[0].transform.position,
                                                                 _currentUnit.Tilemap);
-        
+
         Unit target = PlayerUnitControl.Instance.AllControlableUnits[0];
 
-        for(int i = 0; i < PlayerUnitControl.Instance.AllControlableUnits.Count; i++)
+        for (int i = 0; i < PlayerUnitControl.Instance.AllControlableUnits.Count; i++)
         {
             List<Vector3> pathToUnit = _pathFinder.FindPath(_currentUnit.transform.position,
-                                                            PlayerUnitControl.Instance.AllControlableUnits[i].transform.position, 
+                                                            PlayerUnitControl.Instance.AllControlableUnits[i].transform.position,
                                                             _currentUnit.Tilemap);
 
             if (pathToClosestTarget.Count > pathToUnit.Count)

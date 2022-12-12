@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\UI\UIStates\UIStateInventory.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitActions.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\ShootAtTargetAction.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ActionData.cs" />
@@ -78,7 +79,9 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
+    <Compile Include="Assets\Scripts\UI\UIStates\UIStateGameUI.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitHealth.cs" />
+    <Compile Include="Assets\Scripts\UI\UIStates\UIState.cs" />
     <Compile Include="Assets\Scripts\UI\UnitStatsUI.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerUnitSelectionPanel.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BackpackInfo.cs" />
@@ -88,6 +91,8 @@
     <Compile Include="Assets\Scripts\Core\Unit\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\Core\PlayerUnitControl.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitMovement.cs" />
+    <Compile Include="Assets\Scripts\UI\UIStates\UIStateEnemyTurn.cs" />
+    <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
   </ItemGroup>
   <ItemGroup>
