@@ -4,13 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(Unit))]
 public class UnitUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _healthText;
-    [SerializeField] private TextMeshProUGUI _actionUnitsText;
+    private HealthBar _healthBar;
 
     private Unit _unit;
 
     private void Start()
     {
+        _healthBar = GetComponentInChildren<HealthBar>();
         _unit = GetComponent<Unit>();
         _unit.unitValuesUpdated += SetValues;
         SetValues();
@@ -31,9 +31,7 @@ public class UnitUI : MonoBehaviour
 
     private void SetValues()
     {
-        if (_healthText != null && _unit.Health != null)
-            _healthText.text = _unit.Health.HealthPoints.ToString();
-        if (_actionUnitsText != null && _unit.Actions != null)
-            _actionUnitsText.text = _unit.Actions.ActionUnits.ToString();
+        if(_healthBar != null)
+            _healthBar.SetScale(_unit.Health.HealthPoints);
     }
 }
