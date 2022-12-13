@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateEnemyTurn.cs" />
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
+    <Compile Include="Assets\Scripts\Core\PlayerInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

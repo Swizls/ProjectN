@@ -68,17 +68,9 @@ public class PlayerUnitControl : UnitControl
             _isInvetoryOpen = !_isInvetoryOpen;
             OpenInvetory?.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(0);
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             EndTurnHandler.EndTurn();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
         }
     }
 
