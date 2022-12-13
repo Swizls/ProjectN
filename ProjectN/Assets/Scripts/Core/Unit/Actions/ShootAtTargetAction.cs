@@ -24,22 +24,23 @@ public class ShootAtTargetAction : IAction
     {
         if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= data.Cost)
         {
-            _target.Health.ApplyDamage(unit.Inventory.WeaponInfo.Damage);
-
-            actionUnits -= data.Cost;
-
-            if(unit.transform.position.x <= _target.transform.position.x)
+            if(unit.Inventory.Weapon.TryShoot(_target))
             {
-                unit.Movement.Sprite.flipX = false;
-            }
-            else
-            {
-                unit.Movement.Sprite.flipX = true;
-            }
+                actionUnits -= data.Cost;
 
-            unit.Actions.Audio.clip = data.Clip;
-            unit.Actions.Audio.Play();
-            return true;
+                if(unit.transform.position.x <= _target.transform.position.x)
+                {
+                    unit.Movement.Sprite.flipX = false;
+                }
+                else
+                {
+                    unit.Movement.Sprite.flipX = true;
+                }
+
+                unit.Actions.Audio.clip = data.Clip;
+                unit.Actions.Audio.Play();
+                return true;
+            }
         }
         return false;
     }

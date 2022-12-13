@@ -63,6 +63,10 @@ public class PlayerUnitControl : UnitControl
             _currentUnit.Actions.TryExecute(new MoveAction(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
         }
         //Keyboard
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _currentUnit.Actions.TryExecute(new ReloadAction());
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
             _isInvetoryOpen = !_isInvetoryOpen;
