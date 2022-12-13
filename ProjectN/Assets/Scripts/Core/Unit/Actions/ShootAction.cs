@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class ShootAtTargetAction : IAction
+public class ShootAction : IAction
 {
     private ActionData _data;
 
@@ -11,7 +11,7 @@ public class ShootAtTargetAction : IAction
 
     public ActionData Data => _data;
 
-    public ShootAtTargetAction(Unit target)
+    public ShootAction(Unit target)
     {
         _data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
         if (_data == null)

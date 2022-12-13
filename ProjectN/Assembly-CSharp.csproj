@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateInventory.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitActions.cs" />
-    <Compile Include="Assets\Scripts\Core\Unit\Actions\ShootAtTargetAction.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Actions\ShootAction.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ActionData.cs" />
     <Compile Include="Assets\Scripts\UI\PathVisualizer.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\StorableArmorInfo.cs" />

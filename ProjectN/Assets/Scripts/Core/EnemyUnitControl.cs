@@ -152,7 +152,7 @@ public class EnemyUnitControl : UnitControl
     {
         foreach (Unit playerUnit in PlayerUnitControl.Instance.AllControlableUnits)
         {
-            if (_currentUnit.Actions.TryExecute(new ShootAtTargetAction(playerUnit)))
+            if (_currentUnit.Actions.TryExecute(new ShootAction(playerUnit)))
                 return true;
         }
         return false;

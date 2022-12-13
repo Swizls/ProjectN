@@ -53,7 +53,7 @@ public class PlayerUnitControl : UnitControl
                 else if(IsEnemey(hit))
                 {
                     Unit enemy = GetTarget().GetComponent<Unit>();
-                    _currentUnit.Actions.TryExecute(new ShootAtTargetAction(enemy));
+                    _currentUnit.Actions.TryExecute(new ShootAction(enemy));
                 }
             }    
         }

@@ -17,4 +17,4 @@ MonoBehaviour:
   _weight: 4
   _damage: 30
   _magazineCapacity: 30
-  _accuracy: 75
+  _accuracy: 0.75

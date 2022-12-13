@@ -94,23 +94,20 @@ public class Pathfinder
         List<PathNode> neighbourList = new List<PathNode>();
         RuleBaseTile tile;
 
+        bool isRightBlocked = false;
+        bool isLeftBlocked = false;
+        bool isUpBlocked = false;
+        bool isDownBlocked = false;
+
         //Left
         tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y, 0));
         if (tile != null && tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y));
         }
-        //Left up
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
-        if (tile != null && tile.isPassable)
+        else
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
-        }
-        //Left down
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
-        if (tile != null && tile.isPassable)
-        {
-            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
+            isLeftBlocked = true;
         }
         //Right
         tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y, 0));
@@ -118,17 +115,9 @@ public class Pathfinder
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y));
         }
-        //Right up
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
-        if (tile != null && tile.isPassable)
+        else
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y + 1));
-        }
-        //Right down
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
-        if (tile != null && tile.isPassable)
-        { 
-            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y - 1));
+            isRightBlocked = true;
         }
         //Up
         tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
@@ -136,11 +125,43 @@ public class Pathfinder
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y + 1));
         }
+        else
+        {
+            isUpBlocked = true;
+        }
         //Down
         tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x, currentNode.y - 1, 0));
         if (tile != null && tile.isPassable)
         {
             neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y - 1));
+        }
+        else
+        {
+            isDownBlocked = true;
+        }
+        //Left up
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
+        if ((!isUpBlocked && !isLeftBlocked) && (tile != null && tile.isPassable))
+        {
+            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
+        }
+        //Left down
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
+        if ((!isDownBlocked && !isLeftBlocked) && (tile != null && tile.isPassable))
+        {
+            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
+        }
+        //Right up
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
+        if ((!isUpBlocked && !isRightBlocked) && (tile != null && tile.isPassable))
+        {
+            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y + 1));
+        }
+        //Right down
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
+        if ((!isDownBlocked && !isRightBlocked) && (tile != null && tile.isPassable))
+        { 
+            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y - 1));
         }
 
         foreach(PathNode neighbourNode in neighbourList)
