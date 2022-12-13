@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d3660a6b2f1764db71091477c3c0ad, type: 3}
   m_Name: ReloadData
   m_EditorClassIdentifier: 
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 71e09ba237392e24da93704d0695e3ec, type: 3}
   cost: 2

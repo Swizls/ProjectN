@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\ActionData.cs" />
     <Compile Include="Assets\Scripts\UI\PathVisualizer.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\StorableArmorInfo.cs" />
+    <Compile Include="Assets\Scripts\Core\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\ArmorInfo.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
+    <Compile Include="Assets\Scripts\Core\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Actions\ReloadAction.cs" />
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateGameUI.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitHealth.cs" />
     <Compile Include="Assets\Scripts\UI\UIStates\UIState.cs" />
@@ -94,9 +97,6 @@
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateEnemyTurn.cs" />
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\Core\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\Core\Weapon.cs" />
-    <Compile Include="Assets\Scripts\Core\Unit\Actions\ReloadAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -29,9 +29,7 @@ public class UnitHealth : MonoBehaviour
         damageTaken?.Invoke();
 
         if (_healthPoints <= 0)
-        {
             Death();
-        }
     }
     public void Death()
     {
