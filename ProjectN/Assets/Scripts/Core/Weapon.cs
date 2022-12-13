@@ -21,18 +21,26 @@ public class Weapon
     {
         if(_currentBulletCount > 0)
         {
-            target.Health.ApplyDamage(_damage);
-            _currentBulletCount --;
+            if(_accuracy >= Random.Range(0, 100))
+            { 
+                target.Health.ApplyDamage(_damage);
+            }
             Debug.Log("Bullets count: " + _currentBulletCount);
+            _currentBulletCount --;
             return true;
         }
 
         return false;
     }
 
-    public void Reload()
+    public bool TryReload()
     {
+        if (_currentBulletCount == _magazineMaxCapacity)
+            return false;
+
         _currentBulletCount = _magazineMaxCapacity;
         Debug.Log("Weapon reloaded. Bullets count: " + _currentBulletCount);
+
+        return true;
     }
 }

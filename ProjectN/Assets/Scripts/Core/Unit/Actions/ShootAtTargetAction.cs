@@ -5,16 +5,16 @@ using UnityEngine.Tilemaps;
 
 public class ShootAtTargetAction : IAction
 {
-    private ActionData data;
+    private ActionData _data;
 
     private Unit _target;
 
-    public ActionData Data => data;
+    public ActionData Data => _data;
 
     public ShootAtTargetAction(Unit target)
     {
-        data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
-        if (data == null)
+        _data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
+        if (_data == null)
             throw new System.Exception("Data for shot action doesn't exsist");
 
         _target = target;
@@ -22,11 +22,11 @@ public class ShootAtTargetAction : IAction
 
     public bool TryExecute(Unit unit, ref int actionUnits)
     {
-        if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= data.Cost)
+        if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= _data.Cost)
         {
             if(unit.Inventory.Weapon.TryShoot(_target))
             {
-                actionUnits -= data.Cost;
+                actionUnits -= _data.Cost;
 
                 if(unit.transform.position.x <= _target.transform.position.x)
                 {
@@ -37,7 +37,7 @@ public class ShootAtTargetAction : IAction
                     unit.Movement.Sprite.flipX = true;
                 }
 
-                unit.Actions.Audio.clip = data.Clip;
+                unit.Actions.Audio.clip = _data.Clip;
                 unit.Actions.Audio.Play();
                 return true;
             }

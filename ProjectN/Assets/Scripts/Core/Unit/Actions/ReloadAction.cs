@@ -8,9 +8,24 @@ public class ReloadAction : IAction
 
     public ActionData Data => _data;
 
+    public ReloadAction()
+    {
+        _data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ReloadData");
+        if (_data == null)
+            throw new System.Exception("Data for shot action doesn't exsist");
+    }
+
     public bool TryExecute(Unit unit, ref int actionUnits)
     {
-        unit.Inventory.Weapon.Reload();
-        return true;
+        if (unit.Inventory.Weapon.TryReload() && actionUnits >= _data.Cost)
+        {
+            unit.Actions.Audio.clip = _data.Clip;
+            unit.Actions.Audio.Play();
+
+            actionUnits -= _data.Cost;
+            return true;
+        }
+
+        return false;
     }
 }

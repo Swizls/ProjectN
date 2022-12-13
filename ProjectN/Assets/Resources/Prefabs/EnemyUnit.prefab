@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _walkClip: {fileID: 0}
+  _walkClip: {fileID: 8300000, guid: 82f7dec8aab84124c83ba611793b71ee, type: 3}
 --- !u!114 &4444459475199645333
 MonoBehaviour:
   m_ObjectHideFlags: 0
