@@ -2,12 +2,16 @@
 
 public class Weapon
 {
-    private readonly int _damage;
-    private readonly int _accuracy;
-    
-    private int _currentBulletCount;
+    private const float ACCURACY_REDUCE_PER_TILE = 0.02f;
+    private const int DISTANCE_WITHOUT_ACCURACY_DEBUFF = 5;
 
+    private readonly int _damage;
+
+    private readonly float _accuracy;
+    
     private readonly int _magazineMaxCapacity;
+
+    private int _currentBulletCount;
 
     public Weapon(WeaponInfo info)
     {
@@ -17,19 +21,26 @@ public class Weapon
         _currentBulletCount = info.MagazineCapacity;
     }
 
-    public bool TryShoot(Unit target)
+    public bool TryShoot(Unit target, int distanceToTarget)
     {
+        float finalHitChance = _accuracy;
+        if(distanceToTarget > DISTANCE_WITHOUT_ACCURACY_DEBUFF)
+        {
+            finalHitChance = _accuracy - ((distanceToTarget - DISTANCE_WITHOUT_ACCURACY_DEBUFF) * ACCURACY_REDUCE_PER_TILE);
+        }
+        if(finalHitChance <= 0)
+        {
+            finalHitChance = 0.01f;
+        }
         if(_currentBulletCount > 0)
         {
-            if(_accuracy >= Random.Range(0, 100))
+            if(finalHitChance >= Random.Range(0, 1f))
             { 
                 target.Health.ApplyDamage(_damage);
             }
-            Debug.Log("Bullets count: " + _currentBulletCount);
             _currentBulletCount --;
             return true;
         }
-
         return false;
     }
 
@@ -39,8 +50,6 @@ public class Weapon
             return false;
 
         _currentBulletCount = _magazineMaxCapacity;
-        Debug.Log("Weapon reloaded. Bullets count: " + _currentBulletCount);
-
         return true;
     }
 }

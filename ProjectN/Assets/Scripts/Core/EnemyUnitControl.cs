@@ -106,7 +106,7 @@ public class EnemyUnitControl : UnitControl
         return firingPoint;
     }
 
-    public bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
+    private bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
     {
         foreach (Vector3Int point in GetShotTrajectory(startPosFloat, targetPosFloat, tilemap))
         {

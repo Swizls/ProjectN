@@ -24,7 +24,8 @@ public class ShootAtTargetAction : IAction
     {
         if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= _data.Cost)
         {
-            if(unit.Inventory.Weapon.TryShoot(_target))
+            int distanceToTarget = GetShotTrajectory(unit.transform.position, _target.transform.position, unit.Tilemap).Count;
+            if (unit.Inventory.Weapon.TryShoot(_target, distanceToTarget))
             {
                 actionUnits -= _data.Cost;
 
@@ -82,5 +83,4 @@ public class ShootAtTargetAction : IAction
         }
         return pointsList;
     }
-
 }

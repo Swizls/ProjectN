@@ -8,9 +8,9 @@ public class WeaponInfo : BaseItemInfo
     [SerializeField] private int _damage;
     [SerializeField] private int _magazineCapacity;
 
-    [Range(1, 100)][SerializeField] private int _accuracy;
+    [Range(0, 1)][SerializeField] private float _accuracy;
 
     public int Damage => _damage;
     public int MagazineCapacity => _magazineCapacity;
-    public int Accuracy => _accuracy;
+    public float Accuracy => _accuracy;
 }
