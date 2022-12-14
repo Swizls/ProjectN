@@ -112,10 +112,7 @@ public class EnemyUnitControl : UnitControl
         {
             RuleBaseTile tile = tilemap.GetTile<RuleBaseTile>(point);
             if (!tile.isPassable)
-            {
-                Debug.LogWarning("Obstacle check for a shot is: false! There is obstacle. Obstacle position: " + point);
                 return false;
-            }
         }
         return true;
     }

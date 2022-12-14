@@ -19,8 +19,14 @@ public class UnitInventory : MonoBehaviour
 
     public Storable Backpack => _backpack;
     public Storable Armor => _armor;
-    public List<BaseItemInfo> ExternalItems { get { return GetItemsOnGround().ToList(); } }
     public Weapon Weapon => _weapon;
+    public List<BaseItemInfo> ExternalItems 
+    { 
+        get 
+        { 
+            return GetItemsOnGround().ToList(); 
+        } 
+    }
 
     private void Start()
     {

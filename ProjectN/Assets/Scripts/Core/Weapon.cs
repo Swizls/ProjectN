@@ -4,6 +4,7 @@ public class Weapon
 {
     private const float ACCURACY_REDUCE_PER_TILE = 0.02f;
     private const int DISTANCE_WITHOUT_ACCURACY_DEBUFF = 5;
+    private const float MIN_HITCHANCE = 0.01f;
 
     private readonly int _damage;
 
@@ -30,7 +31,7 @@ public class Weapon
         }
         if(finalHitChance <= 0)
         {
-            finalHitChance = 0.01f;
+            finalHitChance = MIN_HITCHANCE;
         }
         if(_currentBulletCount > 0)
         {

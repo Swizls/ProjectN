@@ -21,5 +21,4 @@ public class EndTurnHandler : MonoBehaviour
         else
             enemyTurn?.Invoke();
     } 
-
 }

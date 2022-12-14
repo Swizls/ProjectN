@@ -15,5 +15,4 @@ public abstract class UnitControl : MonoBehaviour
         _allControlableUnits.Remove(unit);
         unit.unitDied -= OnUnitDeath;
     }
-
 }

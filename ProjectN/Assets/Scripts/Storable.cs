@@ -32,7 +32,6 @@ public class Storable
         if(container.TryToAdd(item))
         {
             _storedItems.Remove(item);
-            Debug.Log("Item added");
             return true;
         }
         return false;
