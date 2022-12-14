@@ -71,7 +71,6 @@
     <Compile Include="Assets\Scripts\Core\Unit\Actions\MoveAction.cs" />
     <Compile Include="Assets\Scripts\EndTurnHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
-    <Compile Include="Assets\Scripts\Core\IMovable.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\IAction.cs" />
     <Compile Include="Assets\Scripts\UI\ItemInventoryPresenter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BaseItemInfo.cs" />
@@ -80,6 +79,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\WeaponInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\MedicineInfo.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Core\Weapon.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\ReloadAction.cs" />
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateGameUI.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateEnemyTurn.cs" />
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\Core\IMovable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -11,12 +11,6 @@ public class PlayerUnitControl : UnitControl
     private GameObject _inventoryUI;
     private Camera _mainCamera;
 
-    public Action OpenInvetory;
-
-    private bool _isInvetoryOpen = false;
-
-    public bool IsInventoryOpen => _isInvetoryOpen;
-
     private void Awake()
     {
         Instance = this;
@@ -31,51 +25,30 @@ public class PlayerUnitControl : UnitControl
             unit.unitDied += OnUnitDeath;
     }
 
-    private void Update()
+    public void ExecuteOrder()
     {
-        if(EndTurnHandler.isPlayerTurn)
-            UnitControl();
-    }
-
-    private void UnitControl()
-    {
-        //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !_currentUnit.Movement.IsMoving && !_isInvetoryOpen)
-        { 
-            RaycastHit2D hit = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(Input.mousePosition),
+        RaycastHit2D hit = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(Input.mousePosition),
                                                  _mainCamera.ScreenToWorldPoint(Input.mousePosition));
-            if(hit.collider != null)
+        if (hit.collider != null)
+        {
+            if (IsUnit(hit))
             {
-                if (IsUnit(hit))
-                {
-                    SelectUnit(hit);
-                }
-                else if(IsEnemey(hit))
-                {
-                    Unit enemy = GetTarget().GetComponent<Unit>();
-                    _currentUnit.Actions.TryExecute(new ShootAction(enemy));
-                }
-            }    
+                SelectUnit(hit);
+            }
+            else if (IsEnemey(hit))
+            {
+                Unit enemy = GetTarget().GetComponent<Unit>();
+                _currentUnit.Actions.TryExecute(new ShootAction(enemy));
+            }
         }
-        //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !_currentUnit.Movement.IsMoving && !_isInvetoryOpen)
-        {
-            _currentUnit.Actions.TryExecute(new MoveAction(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
-        }
-        //Keyboard
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _currentUnit.Actions.TryExecute(new ReloadAction());
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            _isInvetoryOpen = !_isInvetoryOpen;
-            OpenInvetory?.Invoke();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EndTurnHandler.EndTurn();
-        }
+    }
+    public void MoveOrder()
+    {
+        _currentUnit.Actions.TryExecute(new MoveAction(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+    }
+    public void ReloadOrder()
+    {
+        _currentUnit.Actions.TryExecute(new ReloadAction());
     }
 
     private bool IsUnit(RaycastHit2D hit)

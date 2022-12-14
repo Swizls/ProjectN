@@ -29,7 +29,7 @@ public class UIHandler : MonoBehaviour
         _currentState = new UIStateGameUI(this);
         _currentState.SetFlags();
 
-        PlayerUnitControl.Instance.OpenInvetory += OnOpenInvetory;
+        PlayerInput.Instance.OpenInvetory += OnOpenInvetory;
     }
 
     private void OnEnable()
@@ -37,8 +37,8 @@ public class UIHandler : MonoBehaviour
         EndTurnHandler.enemyTurn += OnTurnEnd;
         EndTurnHandler.playerTurn += OnTurnEnd;
 
-        if(PlayerUnitControl.Instance != null)
-            PlayerUnitControl.Instance.OpenInvetory += OnOpenInvetory;
+        if(PlayerInput.Instance != null)
+            PlayerInput.Instance.OpenInvetory += OnOpenInvetory;
     }
 
     private void OnDisable()
@@ -46,7 +46,7 @@ public class UIHandler : MonoBehaviour
         EndTurnHandler.enemyTurn -= OnTurnEnd;
         EndTurnHandler.playerTurn -= OnTurnEnd;
 
-        PlayerUnitControl.Instance.OpenInvetory -= OnOpenInvetory;
+        PlayerInput.Instance.OpenInvetory -= OnOpenInvetory;
     }
 
     private void OnTurnEnd()
@@ -59,7 +59,7 @@ public class UIHandler : MonoBehaviour
 
     private void OnOpenInvetory()
     {
-        if(PlayerUnitControl.Instance.IsInventoryOpen)
+        if(PlayerInput.Instance.IsInventoryOpen)
             SwitchState<UIStateInventory>();
         else
             SwitchState<UIStateGameUI>();
