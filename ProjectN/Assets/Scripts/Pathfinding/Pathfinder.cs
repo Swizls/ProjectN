@@ -15,7 +15,7 @@ public class Pathfinder
         Vector3Int startPos = tileMap.WorldToCell(startPosFloat);
         Vector3Int endPos = tileMap.WorldToCell(endPosFloat);
         RuleBaseTile targetTile = tileMap.GetTile<RuleBaseTile>(endPos);
-        if (targetTile != null && targetTile.isPassable)
+        if (CanPass(targetTile, new PathNode(endPos.x, endPos.y)))
         {
             PathNode startNode = new PathNode(startPos.x, startPos.y);
             PathNode endNode = new PathNode(endPos.x, endPos.y);
@@ -94,83 +94,106 @@ public class Pathfinder
         List<PathNode> neighbourList = new List<PathNode>();
         RuleBaseTile tile;
 
+        PathNode nextNode = currentNode;
+
         bool isRightBlocked = false;
         bool isLeftBlocked = false;
         bool isUpBlocked = false;
         bool isDownBlocked = false;
 
         //Left
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y, 0));
-        if (tile != null && tile.isPassable)
+        nextNode = new PathNode(currentNode.x - 1, currentNode.y);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if (CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         else
         {
             isLeftBlocked = true;
         }
         //Right
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y, 0));
-        if (tile != null && tile.isPassable)
+        nextNode = new PathNode(currentNode.x + 1, currentNode.y);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if (CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         else
         {
             isRightBlocked = true;
         }
         //Up
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x, currentNode.y + 1, 0));
-        if (tile != null && tile.isPassable)
+        nextNode = new PathNode(currentNode.x, currentNode.y + 1);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+         if (CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y + 1));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         else
         {
             isUpBlocked = true;
         }
         //Down
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x, currentNode.y - 1, 0));
-        if (tile != null && tile.isPassable)
+        nextNode = new PathNode(currentNode.x, currentNode.y - 1);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if (CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x, currentNode.y - 1));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         else
         {
             isDownBlocked = true;
         }
         //Left up
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y + 1, 0));
-        if ((!isUpBlocked && !isLeftBlocked) && (tile != null && tile.isPassable))
+        nextNode = new PathNode(currentNode.x - 1, currentNode.y + 1);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if ((!isUpBlocked && !isLeftBlocked) && CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y + 1));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         //Left down
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x - 1, currentNode.y - 1, 0));
-        if ((!isDownBlocked && !isLeftBlocked) && (tile != null && tile.isPassable))
+        nextNode = new PathNode(currentNode.x - 1, currentNode.y - 1);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if ((!isDownBlocked && !isLeftBlocked) && CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x - 1, currentNode.y - 1));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         //Right up
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y + 1, 0));
-        if ((!isUpBlocked && !isRightBlocked) && (tile != null && tile.isPassable))
+        nextNode = new PathNode(currentNode.x + 1, currentNode.y + 1);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if ((!isUpBlocked && !isRightBlocked) && CanPass(tile, nextNode))
         {
-            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y + 1));
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
         //Right down
-        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(currentNode.x + 1, currentNode.y - 1, 0));
-        if ((!isDownBlocked && !isRightBlocked) && (tile != null && tile.isPassable))
-        { 
-            neighbourList.Add(PathNode.GetNode(currentNode.x + 1, currentNode.y - 1));
+        nextNode = new PathNode(currentNode.x + 1, currentNode.y - 1);
+        tile = tileMap.GetTile<RuleBaseTile>(new Vector3Int(nextNode.x, nextNode.y, 0));
+        if ((!isDownBlocked && !isRightBlocked) && CanPass(tile, nextNode))
+        {
+            neighbourList.Add(PathNode.GetNode(nextNode.x, nextNode.y));
         }
 
-        foreach(PathNode neighbourNode in neighbourList)
+        foreach (PathNode neighbourNode in neighbourList)
         {
             neighbourNode.gCost = int.MaxValue;
         }
 
         return neighbourList;
     }
+
+    private bool CanPass(RuleBaseTile tile, PathNode node)
+    {
+        Collider2D hit = Physics2D.OverlapBox(new Vector2(node.x, node.y), new Vector2(0.2f, 0.2f), 0);
+
+        if (hit != null)
+            if (hit.TryGetComponent(out Object obj))
+                if (!obj.IsPassable)
+                    return false;
+
+        return tile != null && tile.isPassable;
+    }
+
     private PathNode GetLowestFCostNode()
     {
         PathNode lowestFCostNode = openList[0];
