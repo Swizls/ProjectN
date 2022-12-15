@@ -4,5 +4,12 @@ using UnityEngine;
 
 public class LootCrate : MonoBehaviour
 {
-    private Storable _storable;
+    [SerializeField] private List<BaseItemInfo> _items = new List<BaseItemInfo>();
+
+    public List<BaseItemInfo> Items => _items;
+
+    private void RemoveItem(BaseItemInfo item)
+    {
+        _items.Remove(item);
+    }
 }

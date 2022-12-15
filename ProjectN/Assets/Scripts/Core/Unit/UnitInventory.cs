@@ -15,18 +15,14 @@ public class UnitInventory : MonoBehaviour
     private Storable _backpack;
     private Storable _armor;
 
+    private List<BaseItemInfo> _externalItems = new();
+
     private List<ItemScenePresenter> _itemPresenters;
 
     public Storable Backpack => _backpack;
     public Storable Armor => _armor;
     public Weapon Weapon => _weapon;
-    public List<BaseItemInfo> ExternalItems 
-    { 
-        get 
-        { 
-            return GetItemsOnGround().ToList(); 
-        } 
-    }
+    public List<BaseItemInfo> ExternalItems => _externalItems;
 
     private void Start()
     {
@@ -53,10 +49,16 @@ public class UnitInventory : MonoBehaviour
         {
             if(item.Info == itemInfo)
             {
-                item.PickedUp();
+                item.Pickup();
             }
         }
     }
+
+    public void GetItemsFromStorage(List<BaseItemInfo> items)
+    {
+        _externalItems = items;
+    }
+
     public BaseItemInfo[] GetItemsOnGround()
     {
         _itemPresenters = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), MAX_PICKUP_RADIUS).

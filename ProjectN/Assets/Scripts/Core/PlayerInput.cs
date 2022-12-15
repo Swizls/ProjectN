@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,8 +36,7 @@ public class PlayerInput : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _isInvetoryOpen = !_isInvetoryOpen;
-            OpenInvetory?.Invoke();
+            OpenInventory();
         }
         if (Input.GetKeyDown(KeyCode.Space) && EndTurnHandler.isPlayerTurn)
         {
@@ -50,5 +50,11 @@ public class PlayerInput : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+
+    public void OpenInventory()
+    {
+        _isInvetoryOpen = !_isInvetoryOpen;
+        OpenInvetory?.Invoke();
     }
 }

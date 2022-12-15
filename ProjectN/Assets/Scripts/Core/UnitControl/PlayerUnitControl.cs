@@ -31,6 +31,10 @@ public class PlayerUnitControl : UnitControl
                                                  _mainCamera.ScreenToWorldPoint(Input.mousePosition));
         if (hit.collider != null)
         {
+            if (IsInteractable(hit, out IInteractable interactable))
+            {
+                interactable.Interact(_currentUnit);
+            }
             if (IsUnit(hit))
             {
                 SelectUnit(hit);
@@ -42,6 +46,8 @@ public class PlayerUnitControl : UnitControl
             }
         }
     }
+
+
     public void MoveOrder()
     {
         _currentUnit.Actions.TryExecute(new MoveAction(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
@@ -51,18 +57,25 @@ public class PlayerUnitControl : UnitControl
         _currentUnit.Actions.TryExecute(new ReloadAction());
     }
 
+    private bool IsInteractable(RaycastHit2D hit, out IInteractable interactable)
+    {
+        if (hit.collider.GetComponent<Object>())
+        {
+            interactable = hit.collider.GetComponent<IInteractable>();
+            return true;
+        }
+        interactable = null;
+        return false;
+    }
+
     private bool IsUnit(RaycastHit2D hit)
     {
-        if (hit.collider.CompareTag("PlayerUnit")) 
-            return true;
-        return false;
+        return hit.collider.CompareTag("PlayerUnit");
     }
 
     private bool IsEnemey(RaycastHit2D hit)
     {
-        if (hit.collider.CompareTag("Enemy"))
-            return true;
-        return false;
+        return hit.collider.CompareTag("Enemy");
     }
 
     private GameObject GetTarget()

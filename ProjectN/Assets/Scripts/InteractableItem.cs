@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractableItem : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    public void Interact(Unit unit)
     {
         var item = GetComponent<BaseItemInfo>();
     }
