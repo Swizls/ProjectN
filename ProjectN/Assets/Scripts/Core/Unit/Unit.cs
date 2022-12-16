@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
     private Tilemap _tilemap;
 
     public Action unitValuesUpdated;
+    public Action<Unit> unitDied;
 
     public UnitMovement Movement => _movement;
     public UnitInventory Inventory => _inventory;
@@ -42,13 +43,17 @@ public class Unit : MonoBehaviour
     {
         if(_health != null)
             _health.damageTaken += unitValuesUpdated;
-        EndTurnHandler.turnEnd += OnTurnEnd;
+        EndTurnHandler.playerTurn += OnTurnEnd;
     }
 
     private void OnDisable()
     {
-        EndTurnHandler.turnEnd -= OnTurnEnd;
+        EndTurnHandler.playerTurn -= OnTurnEnd;
         _health.damageTaken -= unitValuesUpdated;
+    }
+    private void OnDestroy()
+    {
+        unitDied?.Invoke(this);
     }
 
     private void OnTurnEnd()

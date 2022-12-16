@@ -24,16 +24,11 @@ public class InventoryUI : MonoBehaviour
     public Transform ArmorAreaUI => _armorAreaUI;
     public Transform ExternalAreaUI => _externalAreaUI;
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
-        if(PlayerUnitHandler.CurrentSelectedUnit != null)
+        if(PlayerUnitControl.Instance != null)
         {
-            _unitInventory = PlayerUnitHandler.CurrentSelectedUnit.Inventory;
+            _unitInventory = PlayerUnitControl.Instance.CurrentSelectedUnit.Inventory;
             Render();
         }
     }

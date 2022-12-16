@@ -8,7 +8,7 @@ public class UnitStatsUI : MonoBehaviour
 
     private void Start()
     {
-        foreach(Unit unit in PlayerUnitHandler.AllPlayerUnits)
+        foreach(Unit unit in PlayerUnitControl.Instance.AllControlableUnits)
         {
             unit.unitValuesUpdated += SetValues;
         }
@@ -17,12 +17,12 @@ public class UnitStatsUI : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerUnitHandler.CurrentSelectedUnit.unitValuesUpdated -= SetValues;
+        PlayerUnitControl.Instance.CurrentSelectedUnit.unitValuesUpdated -= SetValues;
     }
 
     private void SetValues()
     {
-        health.text = PlayerUnitHandler.CurrentSelectedUnit.Health.HealthPoints.ToString();
-        actionUnits.text = PlayerUnitHandler.CurrentSelectedUnit.Actions.ActionUnits.ToString();
+        health.text = PlayerUnitControl.Instance.CurrentSelectedUnit.Health.HealthPoints.ToString();
+        actionUnits.text = PlayerUnitControl.Instance.CurrentSelectedUnit.Actions.ActionUnits.ToString();
     }
 }

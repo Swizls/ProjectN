@@ -15,5 +15,6 @@ MonoBehaviour:
   _itemName: M16
   _sprite: {fileID: 21300000, guid: 53f747d9292022544880a367d15e5ccd, type: 3}
   _weight: 4
-  _weaponBaseDamage: 25
-  _weaponMagazineCapacity: 30
+  _damage: 30
+  _magazineCapacity: 30
+  _accuracy: 0.75

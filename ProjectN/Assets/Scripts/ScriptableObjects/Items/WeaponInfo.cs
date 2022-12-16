@@ -5,9 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Default Weapon", menuName = "Items/Weapon")]
 public class WeaponInfo : BaseItemInfo
 {
-    [SerializeField] private int _weaponBaseDamage;
-    [SerializeField] private int _weaponMagazineCapacity;
+    [SerializeField] private int _damage;
+    [SerializeField] private int _magazineCapacity;
 
-    public int WeaponBaseDamage => _weaponBaseDamage;
-    public int WeaponMagazineCapacity => _weaponMagazineCapacity;
+    [Range(0, 1)][SerializeField] private float _accuracy;
+
+    public int Damage => _damage;
+    public int MagazineCapacity => _magazineCapacity;
+    public float Accuracy => _accuracy;
 }
