@@ -20,12 +20,12 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         //Left mouse button
-        if (Input.GetMouseButtonDown(0) && !PlayerUnitControl.Instance.CurrentSelectedUnit.Movement.IsMoving && !_isInvetoryOpen)
+        if (Input.GetMouseButtonDown(0) && !PlayerUnitControl.Instance.CurrentUnit.Movement.IsMoving && !_isInvetoryOpen)
         {
             PlayerUnitControl.Instance.ExecuteOrder();
         }
         //Rigth mouse button
-        if (Input.GetMouseButtonDown(1) && !PlayerUnitControl.Instance.CurrentSelectedUnit.Movement.IsMoving && !_isInvetoryOpen)
+        if (Input.GetMouseButtonDown(1) && !PlayerUnitControl.Instance.CurrentUnit.Movement.IsMoving && !_isInvetoryOpen)
         {
             PlayerUnitControl.Instance.MoveOrder();
         }
@@ -54,6 +54,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OpenInventory()
     {
+        PlayerUnitControl.Instance.CurrentUnit.Inventory.GetItemsOnGround();
         _isInvetoryOpen = !_isInvetoryOpen;
         OpenInvetory?.Invoke();
     }

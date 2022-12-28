@@ -8,7 +8,7 @@ public class LootCrate : MonoBehaviour
 
     public List<BaseItemInfo> Items => _items;
 
-    private void RemoveItem(BaseItemInfo item)
+    public void RemoveItem(BaseItemInfo item)
     {
         _items.Remove(item);
     }

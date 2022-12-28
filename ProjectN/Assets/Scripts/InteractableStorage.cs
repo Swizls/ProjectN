@@ -17,7 +17,7 @@ public class InteractableStorage : MonoBehaviour, IInteractable
     {
         if (Vector3.Distance(transform.position, unit.transform.position) < DISTANCE_TO_INTERACT)
         {
-            unit.Inventory.GetItemsFromStorage(_lootCrate.Items);
+            unit.Inventory.GetItemsFromStorage(_lootCrate);
             PlayerInput.Instance.OpenInventory();
         }
     }

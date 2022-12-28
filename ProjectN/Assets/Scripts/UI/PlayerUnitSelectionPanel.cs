@@ -41,7 +41,7 @@ public class PlayerUnitSelectionPanel : MonoBehaviour
 
     public void SelectUnit(GameObject button)
     {
-        if(!PlayerUnitControl.Instance.CurrentSelectedUnit.Movement.IsMoving)
+        if(!PlayerUnitControl.Instance.CurrentUnit.Movement.IsMoving)
             PlayerUnitControl.Instance.SelectUnit(_unitSelectionButtons[button]);
     }
 }
