@@ -17,7 +17,17 @@ public class PathVisualizer : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
-    private void Update() => VisualizePath();
+    private void Update()
+    {
+        if (EndTurnHandler.isPlayerTurn)
+        {
+            VisualizePath();
+        }
+        else
+        {
+            _lineRenderer.positionCount = 0;
+        }
+    }
 
     private void VisualizePath()
     {

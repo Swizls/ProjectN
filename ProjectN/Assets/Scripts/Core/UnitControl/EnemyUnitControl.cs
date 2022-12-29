@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using ShotUtilites;
 
 public class EnemyUnitControl : UnitControl
 {
@@ -97,47 +97,13 @@ public class EnemyUnitControl : UnitControl
 
         for (int i = 0; i < path.Count; i++)
         {
-            if (ObstacleCheckForShot(path[i], target.transform.position, _currentUnit.Tilemap))
+            if (ShotUtilities.ObstacleCheckForShot(path[i], target.transform.position, _currentUnit.Tilemap))
             {
                 firingPoint = path[i];
                 break;
             }
         }
         return firingPoint;
-    }
-
-    private bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
-    {
-        foreach (Vector3Int point in GetShotTrajectory(startPosFloat, targetPosFloat, tilemap))
-        {
-            RuleBaseTile tile = tilemap.GetTile<RuleBaseTile>(point);
-            if (!tile.isPassable)
-                return false;
-        }
-        return true;
-    }
-    private List<Vector3Int> GetShotTrajectory(Vector3 startPos, Vector3 targetPos, Tilemap tilemap)
-    {
-        List<Vector3Int> pointsList = new();
-        Vector3Int targetPosInt = tilemap.WorldToCell(targetPos);
-        Vector3Int currentPointInt = tilemap.WorldToCell(startPos);
-
-        pointsList.Add(currentPointInt);
-
-        Vector3 direction = (targetPos - startPos).normalized;
-        Vector3 nextpoint = currentPointInt;
-
-        while (currentPointInt != targetPosInt)
-        {
-            if (currentPointInt.x != targetPosInt.x)
-                nextpoint.x += direction.x;
-            if (currentPointInt.y != targetPosInt.y)
-                nextpoint.y += direction.y;
-
-            currentPointInt = tilemap.WorldToCell(nextpoint);
-            pointsList.Add(currentPointInt);
-        }
-        return pointsList;
     }
 
     private void OnTurnStart()
