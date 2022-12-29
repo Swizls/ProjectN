@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using ShotUtilites;
 
 public class ShootAction : IAction
 {
@@ -22,10 +21,11 @@ public class ShootAction : IAction
 
     public bool TryExecute(Unit unit, ref int actionUnits)
     {
-        if(ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= _data.Cost)
+        if(ShotUtilities.ObstacleCheckForShot(unit.transform.position, _target.transform.position, unit.Tilemap) && unit.Actions.ActionUnits >= _data.Cost)
         {
-            int distanceToTarget = GetShotTrajectory(unit.transform.position, _target.transform.position, unit.Tilemap).Count;
-            if (unit.Inventory.Weapon.TryShoot(_target, distanceToTarget))
+            List<Vector3Int> shotTrajectory = ShotUtilities.GetShotTrajectory(unit.transform.position, _target.transform.position, unit.Tilemap);
+
+            if (unit.Inventory.Weapon.TryShoot(_target, shotTrajectory.Count, ShotUtilities.GetObstaclesOnTrajectory(shotTrajectory)))
             {
                 actionUnits -= _data.Cost;
 
@@ -44,40 +44,5 @@ public class ShootAction : IAction
             }
         }
         return false;
-    }
-
-    public bool ObstacleCheckForShot(Vector3 startPosFloat, Vector3 targetPosFloat, Tilemap tilemap)
-    {
-        foreach (Vector3Int point in GetShotTrajectory(startPosFloat, targetPosFloat, tilemap))
-        {
-            RuleBaseTile tile = tilemap.GetTile<RuleBaseTile>(point);
-            if (!tile.isPassable)
-                return false;
-        }
-        return true;
-    }
-
-    private List<Vector3Int> GetShotTrajectory(Vector3 startPos, Vector3 targetPos, Tilemap tilemap)
-    {
-        List<Vector3Int> pointsList = new();
-        Vector3Int targetPosInt = tilemap.WorldToCell(targetPos);
-        Vector3Int currentPointInt = tilemap.WorldToCell(startPos);
-
-        pointsList.Add(currentPointInt);
-
-        Vector3 direction = (targetPos - startPos).normalized;
-        Vector3 nextpoint = currentPointInt;
-
-        while(currentPointInt != targetPosInt)
-        {
-            if(currentPointInt.x != targetPosInt.x)
-                nextpoint.x += direction.x;
-            if(currentPointInt.y != targetPosInt.y)
-                nextpoint.y += direction.y;
-
-            currentPointInt = tilemap.WorldToCell(nextpoint);
-            pointsList.Add(currentPointInt);
-        }
-        return pointsList;
     }
 }

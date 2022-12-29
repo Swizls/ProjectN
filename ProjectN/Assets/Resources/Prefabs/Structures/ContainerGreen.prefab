@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 34820712608675861}
   - component: {fileID: 8317964009512943197}
   - component: {fileID: 7209380750096981020}
-  - component: {fileID: 8434111285914066637}
   m_Layer: 0
-  m_Name: WoodenTable
+  m_Name: ContainerGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +58,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &7209380750096981020
 MonoBehaviour:
@@ -74,19 +73,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPassable: 0
---- !u!114 &8434111285914066637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3163419529494607183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66415dcf05043ee40a8857e6887dbb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _accuracyReduce: 0.2
 --- !u!1 &7905706737883717593
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,12 +146,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd34f7bf2792a3b499025b2764814c88, type: 3}
+  m_Sprite: {fileID: 21300000, guid: befd3e808f76b6144ab1e31cde09bfa4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
