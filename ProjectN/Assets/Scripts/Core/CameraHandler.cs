@@ -46,7 +46,7 @@ public class CameraHandler : MonoBehaviour
     }
     private void FollowToEnemyUnits()
     {
-        Vector3 unitPosition = EnemyUnitControl.Instance.CurrentSelectedUnit.transform.position;
+        Vector3 unitPosition = EnemyUnitControl.Instance.CurrentUnit.transform.position;
 
         transform.position = new(unitPosition.x, unitPosition.y, -10);
     }

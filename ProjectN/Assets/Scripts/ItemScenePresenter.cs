@@ -14,7 +14,7 @@ public class ItemScenePresenter : MonoBehaviour
         _sprite.sprite = _info.Sprite;
     }
 
-    public void PickedUp()
+    public void Pickup()
     {
         Destroy(gameObject);
     }

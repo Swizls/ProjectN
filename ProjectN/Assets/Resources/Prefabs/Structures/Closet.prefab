@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8353322177763678048}
   - component: {fileID: 3639423227223498843}
   - component: {fileID: 1952120088683667357}
-  - component: {fileID: 9047228449761443002}
+  - component: {fileID: 2117773622128562241}
   m_Layer: 0
   m_Name: Closet
   m_TagString: Untagged
@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7231b6186ed3104ebf79dba7eaafc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _items: []
 --- !u!114 &1952120088683667357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85a9e03e9b1eef49aff6204338fa594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9047228449761443002
+--- !u!114 &2117773622128562241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

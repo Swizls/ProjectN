@@ -21,9 +21,9 @@ public class PathVisualizer : MonoBehaviour
 
     private void VisualizePath()
     {
-        if (PlayerUnitControl.Instance.CurrentSelectedUnit != null)
+        if (PlayerUnitControl.Instance.CurrentUnit != null)
         {
-            Vector3[] path = _pathfinder.FindPath(PlayerUnitControl.Instance.CurrentSelectedUnit.transform.position,
+            Vector3[] path = _pathfinder.FindPath(PlayerUnitControl.Instance.CurrentUnit.transform.position,
                                                     _mainCamera.ScreenToWorldPoint(Input.mousePosition), _tilemap)?.ToArray();
             if (path != null)
             {
@@ -35,7 +35,7 @@ public class PathVisualizer : MonoBehaviour
                 _lineRenderer.positionCount = path.Length;
                 _lineRenderer.SetPositions(path);
 
-                if (PlayerUnitControl.Instance.CurrentSelectedUnit.Actions.ActionUnits >= path.Length * new MoveAction(Input.mousePosition).Data.Cost)
+                if (PlayerUnitControl.Instance.CurrentUnit.Actions.ActionUnits >= path.Length * new MoveAction(Input.mousePosition).Data.Cost)
                 {
                     _lineRenderer.startColor = Color.green;
                     _lineRenderer.endColor = Color.green;

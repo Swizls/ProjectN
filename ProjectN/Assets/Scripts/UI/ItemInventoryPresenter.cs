@@ -19,16 +19,19 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
         _draggingParent = _inventory.transform;
         _originalParent = transform.parent;
 
-        _allPossibleParents = new HashSet<Transform> {_inventory.BackpackAreaUI, _inventory.ArmorAreaUI, _inventory.ExternalAreaUI };
+        _allPossibleParents = new HashSet<Transform> {_inventory.BackpackAreaUI, _inventory.ArmorAreaUI, _inventory.ExternalAreaUI};
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         transform.SetParent(_draggingParent);
     }
+
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
     }
+
     public void OnEndDrag(PointerEventData eventData)
     {
         Transform _newParent = FindParent();
@@ -49,6 +52,7 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
             }
         }
     }
+
     private Transform FindParent()
     {
         foreach (Transform parent in _allPossibleParents)
@@ -57,6 +61,7 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
 
         return null;
     }
+
     private bool In(Transform rectForCheck)
     {
         return RectTransformUtility.RectangleContainsScreenPoint((RectTransform)rectForCheck, transform.position);

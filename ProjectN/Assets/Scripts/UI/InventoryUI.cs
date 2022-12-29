@@ -28,7 +28,7 @@ public class InventoryUI : MonoBehaviour
     {
         if(PlayerUnitControl.Instance != null)
         {
-            _unitInventory = PlayerUnitControl.Instance.CurrentSelectedUnit.Inventory;
+            _unitInventory = PlayerUnitControl.Instance.CurrentUnit.Inventory;
             Render();
         }
     }
@@ -80,7 +80,14 @@ public class InventoryUI : MonoBehaviour
                 bool result = _unitInventory.Backpack.TryToAdd(item);
                 if (result)
                 {
-                    _unitInventory.Pickup(item);
+                    if (_unitInventory.IsStorageOpened)
+                    {
+                        _unitInventory.PickupFromStorage(item);
+                    }
+                    else
+                    {
+                        _unitInventory.PickupFromGround(item);
+                    }
                 }
                 return result;
             }
@@ -89,7 +96,7 @@ public class InventoryUI : MonoBehaviour
                 bool result = _unitInventory.Armor.TryToAdd(item);
                 if (result)
                 {
-                    _unitInventory.Pickup(item);
+                    _unitInventory.PickupFromGround(item);
                 }
                 return result;
             }

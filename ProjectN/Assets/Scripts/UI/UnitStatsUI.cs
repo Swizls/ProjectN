@@ -17,12 +17,12 @@ public class UnitStatsUI : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerUnitControl.Instance.CurrentSelectedUnit.unitValuesUpdated -= SetValues;
+        PlayerUnitControl.Instance.CurrentUnit.unitValuesUpdated -= SetValues;
     }
 
     private void SetValues()
     {
-        health.text = PlayerUnitControl.Instance.CurrentSelectedUnit.Health.HealthPoints.ToString();
-        actionUnits.text = PlayerUnitControl.Instance.CurrentSelectedUnit.Actions.ActionUnits.ToString();
+        health.text = PlayerUnitControl.Instance.CurrentUnit.Health.HealthPoints.ToString();
+        actionUnits.text = PlayerUnitControl.Instance.CurrentUnit.Actions.ActionUnits.ToString();
     }
 }

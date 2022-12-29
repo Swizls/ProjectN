@@ -15,18 +15,19 @@ public class UnitInventory : MonoBehaviour
     private Storable _backpack;
     private Storable _armor;
 
+    private List<BaseItemInfo> _externalItems = new();
+
     private List<ItemScenePresenter> _itemPresenters;
 
+    private bool _isStorageOpened = false;
+
+    public LootCrate CurrentOpenedStorage;
+
+    public bool IsStorageOpened => _isStorageOpened;
     public Storable Backpack => _backpack;
     public Storable Armor => _armor;
     public Weapon Weapon => _weapon;
-    public List<BaseItemInfo> ExternalItems 
-    { 
-        get 
-        { 
-            return GetItemsOnGround().ToList(); 
-        } 
-    }
+    public List<BaseItemInfo> ExternalItems => _externalItems;
 
     private void Start()
     {
@@ -47,18 +48,32 @@ public class UnitInventory : MonoBehaviour
             }
         }
     }
-    public void Pickup(BaseItemInfo itemInfo)
+    public void PickupFromGround(BaseItemInfo itemInfo)
     {
         foreach(ItemScenePresenter item in _itemPresenters)
         {
             if(item.Info == itemInfo)
             {
-                item.PickedUp();
+                item.Pickup();
             }
         }
     }
+
+    public void PickupFromStorage(BaseItemInfo itemInfo)
+    {
+        CurrentOpenedStorage.RemoveItem(itemInfo);
+    }
+
+    public void GetItemsFromStorage(LootCrate storage)
+    {
+        _isStorageOpened = true;
+        CurrentOpenedStorage = storage;
+        _externalItems = storage.Items;
+    }
+
     public BaseItemInfo[] GetItemsOnGround()
     {
+        _isStorageOpened = false; 
         _itemPresenters = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), MAX_PICKUP_RADIUS).
                                        GetComponents<ItemScenePresenter>().ToList();
         List<BaseItemInfo> itemsInfo = new();

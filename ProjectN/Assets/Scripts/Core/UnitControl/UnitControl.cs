@@ -8,7 +8,7 @@ public abstract class UnitControl : MonoBehaviour
     protected Unit _currentUnit;
 
     public List<Unit> AllControlableUnits => _allControlableUnits;
-    public Unit CurrentSelectedUnit => _currentUnit;
+    public Unit CurrentUnit => _currentUnit;
 
     protected void OnUnitDeath(Unit unit)
     {
