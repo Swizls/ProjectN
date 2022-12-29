@@ -14,9 +14,9 @@ public class MoveAction : IAction
 
     public MoveAction(Vector3 targetPosition)
     {
-        data = Resources.Load<ActionData>("ScriptableObjects/ActionData/MoveData");
+        data = Resources.Load<ActionData>("ScriptableObjects/ActionData/" + nameof(MoveAction));
         if(data == null)
-            throw new System.Exception("Data for move action doesn't exsist");
+            throw new System.Exception($"Data for {nameof(MoveAction)} doesn't exsist");
 
         _targetPosition = targetPosition;
     }

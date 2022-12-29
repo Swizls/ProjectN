@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateInventory.cs" />
+    <Compile Include="Assets\Scripts\Core\ShotUtilities.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitActions.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\ShootAction.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ActionData.cs" />
@@ -95,15 +96,16 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\IStorableItemInfo.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Tiles\RuleBaseTile.cs" />
     <Compile Include="Assets\Scripts\Core\UnitControl\UnitControl.cs" />
+    <Compile Include="Assets\Scripts\Core\Cover.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\LootCrate.cs" />
     <Compile Include="Assets\Scripts\Core\UnitControl\PlayerUnitControl.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitMovement.cs" />
     <Compile Include="Assets\Scripts\UI\UIStates\UIStateEnemyTurn.cs" />
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
+    <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\Core\Cover.cs" />
-    <Compile Include="Assets\Scripts\Core\Unit\Actions\ShotUtilities.cs" />
+    <Compile Include="Assets\Scripts\Core\Unit\Actions\InteractionAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />
