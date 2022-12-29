@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19d3660a6b2f1764db71091477c3c0ad, type: 3}
-  m_Name: ShootAction 1
+  m_Name: ShootAction
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 102db1bc22ea2b34e8c1ee85445a6a6e, type: 3}
   cost: 5

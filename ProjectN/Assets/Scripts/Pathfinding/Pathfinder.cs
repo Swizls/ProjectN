@@ -38,10 +38,13 @@ public class Pathfinder
                 foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
                 {
                     bool isNeighbourNodeInList = false;
-                    foreach(PathNode node in closedList)
+                    foreach (PathNode node in closedList)
                     {
-                        if (neighbourNode.x == node.x && neighbourNode.y == node.y) isNeighbourNodeInList = true;
-                        break;
+                        if (neighbourNode.x == node.x && neighbourNode.y == node.y)
+                        {
+                            isNeighbourNodeInList = true;
+                            break;
+                        }
                     }
                     if (isNeighbourNodeInList)
                     {
