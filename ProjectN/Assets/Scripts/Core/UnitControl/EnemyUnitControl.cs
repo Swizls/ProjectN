@@ -47,8 +47,17 @@ public class EnemyUnitControl : UnitControl
                     }
                     else
                     {
-                        Move(FindFiringPosition(GetClosestTarget()));
-                        yield return new WaitForSeconds(3);
+                        Unit closestTarget = GetClosestTarget();
+                        if(closestTarget != null)
+                        {
+                            Move(FindFiringPosition(closestTarget));
+                            yield return new WaitForSeconds(3);
+                        }
+                        else
+                        {
+                            yield return new WaitForSeconds(1);
+                            break;
+                        }
                     }
                 }
                 else
@@ -62,25 +71,23 @@ public class EnemyUnitControl : UnitControl
 
     private Unit GetClosestTarget()
     {
-        List<Vector3> pathToClosestTarget = _pathFinder.FindPath(_currentUnit.transform.position,
-                                                                PlayerUnitControl.Instance.AllControlableUnits[0].transform.position,
-                                                                _currentUnit.Tilemap);
-
-        Unit target = PlayerUnitControl.Instance.AllControlableUnits[0];
+        Unit target = null;
+        List<Vector3> lastPathToUnit = new();
 
         for (int i = 0; i < PlayerUnitControl.Instance.AllControlableUnits.Count; i++)
         {
             List<Vector3> pathToUnit = _pathFinder.FindPath(_currentUnit.transform.position,
                                                             PlayerUnitControl.Instance.AllControlableUnits[i].transform.position,
                                                             _currentUnit.Tilemap);
-
-            if (pathToClosestTarget.Count > pathToUnit.Count)
+            if(pathToUnit != null)
             {
-                pathToClosestTarget = pathToUnit;
-                target = PlayerUnitControl.Instance.AllControlableUnits[i];
+                if (lastPathToUnit.Count < pathToUnit.Count)
+                {
+                    lastPathToUnit = pathToUnit;
+                    target = PlayerUnitControl.Instance.AllControlableUnits[i];
+                }
             }
         }
-
         return target;
     }
 
