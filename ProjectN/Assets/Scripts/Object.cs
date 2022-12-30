@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    [SerializeField] private bool _isPassable;
-
-    public bool IsPassable => _isPassable;
+    public bool IsPassable;
 }

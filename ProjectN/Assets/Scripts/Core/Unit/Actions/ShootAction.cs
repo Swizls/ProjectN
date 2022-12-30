@@ -12,7 +12,7 @@ public class ShootAction : IAction
 
     public ShootAction(Unit target)
     {
-        _data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ShootData");
+        _data = Resources.Load<ActionData>("ScriptableObjects/ActionData/" + nameof(ShootAction));
         if (_data == null)
             throw new System.Exception("Data for shot action doesn't exsist");
 

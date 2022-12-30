@@ -26,7 +26,7 @@ public class Pathfinder
             startNode.hCost = CalculateDistanceCost(startNode, endNode);
             startNode.CalculateFCost();
 
-            while(openList.Count > 0)
+            while(openList.Count > 0 && closedList.Count < 10000)
             {
                 PathNode currentNode = GetLowestFCostNode();
 
@@ -38,10 +38,13 @@ public class Pathfinder
                 foreach (PathNode neighbourNode in GetNeighboursList(currentNode, tileMap))
                 {
                     bool isNeighbourNodeInList = false;
-                    foreach(PathNode node in closedList)
+                    foreach (PathNode node in closedList)
                     {
-                        if (neighbourNode.x == node.x && neighbourNode.y == node.y) isNeighbourNodeInList = true;
-                        break;
+                        if (neighbourNode.x == node.x && neighbourNode.y == node.y)
+                        {
+                            isNeighbourNodeInList = true;
+                            break;
+                        }
                     }
                     if (isNeighbourNodeInList)
                     {
@@ -184,7 +187,7 @@ public class Pathfinder
 
     private bool CanPass(RuleBaseTile tile, PathNode node)
     {
-        Collider2D hit = Physics2D.OverlapBox(new Vector2(node.x, node.y), new Vector2(0.2f, 0.2f), 0);
+        Collider2D hit = Physics2D.OverlapPoint(new Vector2(node.x, node.y));
 
         if (hit != null)
             if (hit.TryGetComponent(out Object obj))
