@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -43,16 +43,18 @@ namespace ShotUtilites
         public static Cover[] GetObstaclesOnTrajectory(List<Vector3Int> trajectory)
         {
             List<Cover> _allObstacles = new();
+        public static Cover[] GetCoversOnTrajectory(List<Vector3Int> trajectory)
+        {
+            List<Cover> _allCovers = new();
             for(int i = 2; i < trajectory.Count; i++)
             {
                 Collider2D collider = Physics2D.OverlapPoint(new Vector2(trajectory[i].x, trajectory[i].y));
-                if (collider != null && collider.TryGetComponent(out Cover obstacle))
+                if (collider != null && collider.TryGetComponent(out Cover cover))
                 {
-                    _allObstacles.Add(obstacle);
+                    _allCovers.Add(cover);
                 }
             }
-            return _allObstacles.ToArray();
-
+            return _allCovers.ToArray();
         }
     }
 }

@@ -25,7 +25,7 @@ public class ShootAction : IAction
         {
             List<Vector3Int> shotTrajectory = ShotUtilities.GetShotTrajectory(unit.transform.position, _target.transform.position, unit.Tilemap);
 
-            if (unit.Inventory.Weapon.TryShoot(_target, shotTrajectory.Count, ShotUtilities.GetObstaclesOnTrajectory(shotTrajectory)))
+            if (unit.Inventory.Weapon.TryShoot(_target, shotTrajectory.Count, ShotUtilities.GetCoversOnTrajectory(shotTrajectory)))
             {
                 actionUnits -= _data.Cost;
 
