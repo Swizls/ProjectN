@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
+    <Compile Include="Assets\Scripts\Core\Interfaces\IObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

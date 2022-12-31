@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 34820712608675861}
   - component: {fileID: 8317964009512943197}
-  - component: {fileID: 7209380750096981020}
   - component: {fileID: 8434111285914066637}
   m_Layer: 0
   m_Name: WoodenTable
@@ -61,19 +60,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7209380750096981020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3163419529494607183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531404fc4bf3635419544dafa8794784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPassable: 0
 --- !u!114 &8434111285914066637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +73,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _accuracyReduce: 0.2
+  _isPassable: 0
+  _CanShootThrough: 1
 --- !u!1 &7905706737883717593
 GameObject:
   m_ObjectHideFlags: 0

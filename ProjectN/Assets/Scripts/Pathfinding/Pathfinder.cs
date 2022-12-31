@@ -190,7 +190,7 @@ public class Pathfinder
         Collider2D hit = Physics2D.OverlapPoint(new Vector2(node.x, node.y));
 
         if (hit != null)
-            if (hit.TryGetComponent(out Object obj))
+            if (hit.TryGetComponent(out IObject obj))
                 if (!obj.IsPassable)
                     return false;
 
@@ -206,6 +206,7 @@ public class Pathfinder
         }
         return lowestFCostNode;
     }
+
     private int CalculateDistanceCost(PathNode a, PathNode b)
     {
         int xDistance = Mathf.Abs(a.x - b.x);

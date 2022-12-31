@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 866023645822349767}
   - component: {fileID: 6475926835177245018}
-  - component: {fileID: 7195327366858764267}
   - component: {fileID: 95816885189874586}
   m_Layer: 0
   m_Name: Table
@@ -61,19 +60,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7195327366858764267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2676143313982837743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531404fc4bf3635419544dafa8794784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPassable: 0
 --- !u!114 &95816885189874586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +73,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _accuracyReduce: 0.2
+  _isPassable: 0
+  _CanShootThrough: 1
 --- !u!1 &4167034872580494533
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,7 +47,6 @@ public class PlayerUnitControl : UnitControl
         }
     }
 
-
     public void MoveOrder()
     {
         _currentUnit.Actions.TryExecute(new MoveAction(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
@@ -59,13 +58,9 @@ public class PlayerUnitControl : UnitControl
 
     private bool IsInteractable(RaycastHit2D hit, out IInteractable interactable)
     {
-        if (hit.collider.GetComponent<Object>())
-        {
-            interactable = hit.collider.GetComponent<IInteractable>();
-            return true;
-        }
-        interactable = null;
-        return false;
+        bool result = hit.collider.TryGetComponent(out IInteractable interactableComponent);
+        interactable = interactableComponent;
+        return result;
     }
 
     private bool IsUnit(RaycastHit2D hit)
