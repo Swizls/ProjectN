@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4058943553319698449}
   - component: {fileID: 7180762949018287059}
   m_Layer: 0
-  m_Name: 2x1RedDoor
+  m_Name: 2x1RedDoorH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
