@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 6639198038314705944}
   - component: {fileID: 3402405756726338128}
   - component: {fileID: 7112533332184214883}
-  - component: {fileID: 4058943553319698449}
   - component: {fileID: 7180762949018287059}
   m_Layer: 0
   m_Name: 2x1RedDoorH
@@ -242,19 +241,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4058943553319698449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8628377355085506882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531404fc4bf3635419544dafa8794784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsPassable: 0
 --- !u!114 &7180762949018287059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,3 +255,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _openedDoor: {fileID: 21300000, guid: a64088ecc9614914682ad2534974af9f, type: 3}
   _closedDoor: {fileID: 21300000, guid: 4f2b1091a0f9b044a99ac88a4bbbe9d9, type: 3}
+  _isOpened: 0
