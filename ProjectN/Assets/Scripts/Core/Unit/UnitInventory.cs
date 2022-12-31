@@ -21,7 +21,7 @@ public class UnitInventory : MonoBehaviour
 
     private bool _isStorageOpened = false;
 
-    public LootCrate CurrentOpenedStorage;
+    [HideInInspector] public LootCrate CurrentOpenedStorage;
 
     public bool IsStorageOpened => _isStorageOpened;
     public Storable Backpack => _backpack;

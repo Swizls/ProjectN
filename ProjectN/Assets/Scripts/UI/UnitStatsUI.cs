@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class UnitStatsUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI health;
-    [SerializeField] private TextMeshProUGUI actionUnits;
+    [SerializeField] private HealthBar _health;
+    [SerializeField] private TextMeshProUGUI _actionUnits;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class UnitStatsUI : MonoBehaviour
 
     private void SetValues()
     {
-        health.text = PlayerUnitControl.Instance.CurrentUnit.Health.HealthPoints.ToString();
-        actionUnits.text = PlayerUnitControl.Instance.CurrentUnit.Actions.ActionUnits.ToString();
+        _health.SetScale(PlayerUnitControl.Instance.CurrentUnit.Health.HealthPoints);
+        _actionUnits.text = PlayerUnitControl.Instance.CurrentUnit.Actions.ActionUnits.ToString();
     }
 }
