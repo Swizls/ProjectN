@@ -1,9 +1,6 @@
-using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(LineRenderer))]
 public class PlayerUnitControl : UnitControl
 {
     public static PlayerUnitControl Instance;

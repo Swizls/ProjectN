@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PathVisualizer : MonoBehaviour
+[RequireComponent(typeof(LineRenderer))]
+public class OrderVisualizer : MonoBehaviour
 {
     private Camera _mainCamera;
     private Pathfinder _pathfinder = new Pathfinder();
@@ -20,13 +21,9 @@ public class PathVisualizer : MonoBehaviour
     private void Update()
     {
         if (EndTurnHandler.isPlayerTurn)
-        {
             VisualizePath();
-        }
         else
-        {
             _lineRenderer.positionCount = 0;
-        }
     }
 
     private void VisualizePath()

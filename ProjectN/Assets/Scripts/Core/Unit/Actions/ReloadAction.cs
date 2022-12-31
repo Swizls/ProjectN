@@ -5,14 +5,15 @@ using UnityEngine;
 public class ReloadAction : IAction
 {
     private ActionData _data;
+    private const string path = "ScriptableObjects/ActionData/";
 
     public ActionData Data => _data;
 
     public ReloadAction()
     {
-        _data = Resources.Load<ActionData>("ScriptableObjects/ActionData/ReloadData");
+        _data = Resources.Load<ActionData>(path + nameof(ReloadAction));
         if (_data == null)
-            throw new System.Exception("Data for shot action doesn't exsist");
+            throw new System.Exception($"Data for {nameof(ReloadAction)} doesn't exsist");
     }
 
     public bool TryExecute(Unit unit, ref int actionUnits)

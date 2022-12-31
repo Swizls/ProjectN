@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\Core\Unit\UnitActions.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Actions\ShootAction.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ActionData.cs" />
-    <Compile Include="Assets\Scripts\UI\PathVisualizer.cs" />
+    <Compile Include="Assets\Scripts\UI\OrderVisualizer.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\StorableArmorInfo.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\Core\PlayerInput.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\IStorableItemInfo.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Tiles\RuleBaseTile.cs" />
     <Compile Include="Assets\Scripts\Core\UnitControl\UnitControl.cs" />
-    <Compile Include="Assets\Scripts\Core\Cover.cs" />
+    <Compile Include="Assets\Scripts\Cover.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitInventory.cs" />
     <Compile Include="Assets\Scripts\LootCrate.cs" />
     <Compile Include="Assets\Scripts\Core\UnitControl\PlayerUnitControl.cs" />
