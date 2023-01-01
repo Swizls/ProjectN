@@ -64,9 +64,11 @@
     <Compile Include="Assets\Scripts\UI\OrderVisualizer.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\StorableArmorInfo.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
+    <Compile Include="Assets\Scripts\Exit.cs" />
     <Compile Include="Assets\Scripts\Core\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Core\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\Core\Interfaces\IObject.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\ArmorInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
     <Compile Include="Assets\Scripts\Core\UnitControl\EnemyUnitControl.cs" />
@@ -106,7 +108,6 @@
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
-    <Compile Include="Assets\Scripts\Core\Interfaces\IObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />
