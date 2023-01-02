@@ -67,7 +67,7 @@
     <Compile Include="Assets\Scripts\Exit.cs" />
     <Compile Include="Assets\Scripts\Core\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Core\CameraHandler.cs" />
-    <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Core\Interfaces\IObject.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\ArmorInfo.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="Assets\Scripts\Core\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\Scripts\UI\UnitUI.cs" />
     <Compile Include="Assets\Scripts\Core\Interfaces\IAction.cs" />
-    <Compile Include="Assets\Scripts\UI\ItemInventoryPresenter.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\ItemInventoryPresenter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\BaseItemInfo.cs" />
     <Compile Include="Assets\Scripts\Storable.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\Unit.cs" />
@@ -100,6 +100,7 @@
     <Compile Include="Assets\Scripts\Core\UnitControl\UnitControl.cs" />
     <Compile Include="Assets\Scripts\Cover.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitInventory.cs" />
+    <Compile Include="Assets\Scripts\Core\Interfaces\IInventoryUI.cs" />
     <Compile Include="Assets\Scripts\LootCrate.cs" />
     <Compile Include="Assets\Scripts\Core\UnitControl\PlayerUnitControl.cs" />
     <Compile Include="Assets\Scripts\Core\Unit\UnitMovement.cs" />
@@ -108,6 +109,9 @@
     <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\ItemScenePresenter.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\BackpackUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\ArmorUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\ExternalUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\TextMesh Pro\Shaders\TMPro.cginc" />

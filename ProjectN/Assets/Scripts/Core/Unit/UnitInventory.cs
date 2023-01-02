@@ -10,7 +10,6 @@ public class UnitInventory : MonoBehaviour
     [SerializeField] private BackpackInfo _backpackInfo;
     [SerializeField] private ArmorInfo _armorInfo;
     [SerializeField] private WeaponInfo _weaponInfo;
-    [SerializeField] private Weapon _weapon;
 
     private Storable _backpack;
     private Storable _armor;
@@ -21,19 +20,20 @@ public class UnitInventory : MonoBehaviour
 
     private bool _isStorageOpened = false;
 
+    public Weapon Weapon;
+
     [HideInInspector] public LootCrate CurrentOpenedStorage;
 
     public bool IsStorageOpened => _isStorageOpened;
     public Storable Backpack => _backpack;
     public Storable Armor => _armor;
-    public Weapon Weapon => _weapon;
     public List<BaseItemInfo> ExternalItems => _externalItems;
 
     private void Start()
     {
         if(_weaponInfo != null)
         {
-            _weapon = new(_weaponInfo);
+            Weapon = new(_weaponInfo);
         }
         if(_backpackInfo != null)
         {
