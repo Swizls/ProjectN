@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour
 
         _tilemap = FindObjectOfType<Tilemap>();
 
-        _health.damageTaken += unitValuesUpdated;
+        _health.healthValueChanged += unitValuesUpdated;
 
         unitValuesUpdated?.Invoke();
     }
@@ -42,14 +42,14 @@ public class Unit : MonoBehaviour
     private void OnEnable()
     {
         if(_health != null)
-            _health.damageTaken += unitValuesUpdated;
+            _health.healthValueChanged += unitValuesUpdated;
         EndTurnHandler.playerTurn += OnTurnEnd;
     }
 
     private void OnDisable()
     {
         EndTurnHandler.playerTurn -= OnTurnEnd;
-        _health.damageTaken -= unitValuesUpdated;
+        _health.healthValueChanged -= unitValuesUpdated;
     }
     private void OnDestroy()
     {

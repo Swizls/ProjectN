@@ -48,6 +48,15 @@ public class UnitInventory : MonoBehaviour
             }
         }
     }
+    public void ItemRemove(BaseItemInfo item)
+    {
+        if (_backpack.StoredItems.Contains(item))
+            _backpack.StoredItems.Remove(item);
+
+        if (_armor.StoredItems.Contains(item))
+            _armor.StoredItems.Remove(item);
+    }
+
     public void PickupFromGround(BaseItemInfo itemInfo)
     {
         foreach(ItemScenePresenter item in _itemPresenters)
@@ -57,6 +66,33 @@ public class UnitInventory : MonoBehaviour
                 item.Pickup();
             }
         }
+    }
+    
+    public bool IsItemInInventory(BaseItemInfo item)
+    {
+        return _backpack.StoredItems.Contains(item) || _armor.StoredItems.Contains(item);
+    }
+
+    public bool IsHealItemInInventory(out MedicineInfo healItem)
+    {
+        foreach (BaseItemInfo item in _backpack.StoredItems)
+        {
+            if(item is MedicineInfo)
+            {
+                healItem = (MedicineInfo)item;
+                return true;
+            }
+        }
+        foreach (BaseItemInfo item in _armor.StoredItems)
+        {
+            if (item is MedicineInfo)
+            {
+                healItem = (MedicineInfo)item;
+                return true;
+            }
+        }
+        healItem = null;
+        return false;
     }
 
     public void PickupFromStorage(BaseItemInfo itemInfo)

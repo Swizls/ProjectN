@@ -53,6 +53,11 @@ public class PlayerUnitControl : UnitControl
         _currentUnit.Actions.TryExecute(new ReloadAction());
     }
 
+    public void HealOrder()
+    {
+        _currentUnit.Actions.TryExecute(new HealAction());
+    }
+
     private bool IsInteractable(RaycastHit2D hit, out IInteractable interactable)
     {
         bool result = hit.collider.TryGetComponent(out IInteractable interactableComponent);
