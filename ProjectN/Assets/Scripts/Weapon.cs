@@ -8,12 +8,16 @@ public class Weapon
     private const float MAX_ACCURACY_REDUCE_FROM_COVERS = 0.9f;
 
     private readonly int _damage;
-
     private readonly float _accuracy;
     
     private readonly int _magazineMaxCapacity;
-
     private int _currentBulletCount;
+
+    private readonly Sprite _sprite;
+
+    public Sprite Sprite => _sprite;
+    public int MagazineMaxCapacity => _magazineMaxCapacity;
+    public int CurrentBulletCount => _currentBulletCount;
 
     public Weapon(WeaponInfo info)
     {
@@ -21,6 +25,7 @@ public class Weapon
         _accuracy = info.Accuracy;
         _magazineMaxCapacity = info.MagazineCapacity;
         _currentBulletCount = info.MagazineCapacity;
+        _sprite = info.Sprite;
     }
 
     public bool TryShoot(Unit target, int distanceToTarget, Cover[] obstacles)

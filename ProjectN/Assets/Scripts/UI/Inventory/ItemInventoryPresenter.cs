@@ -47,9 +47,14 @@ public class ItemInventoryPresenter : MonoBehaviour, IBeginDragHandler, IDragHan
             IInventoryUI newComponent = newParent.GetComponent<IInventoryUI>();
             if(_inventory.WeaponUI == newParent && _itemInfo is WeaponInfo)
             {
-                if(!_inventory.TryEquipWeapon((WeaponInfo)_itemInfo, _originalParent))
+                if(newComponent.TryInteract(_itemInfo))
+                {
+                    Destroy(gameObject);
+                }
+                else
                 {
                     transform.SetParent(_originalParent);
+
                 }
             }
             else

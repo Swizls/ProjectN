@@ -10,13 +10,9 @@ public class ExternalUI : MonoBehaviour, IInventoryUI
     {
         var unitInventory = PlayerUnitControl.Instance.CurrentUnit.Inventory;
         if (to is BackpackUI)
-        {
             return unitInventory.Backpack.TryToAdd(item);
-        }
         else if (to is ArmorUI)
-        {
             return unitInventory.Armor.TryToAdd(item);
-        }
         return false;
     }
 }

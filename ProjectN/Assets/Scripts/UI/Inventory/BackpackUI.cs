@@ -7,7 +7,7 @@ public class BackpackUI : MonoBehaviour, IInventoryUI
         return TryTransitItem(item, to);
     }
 
-    private static bool TryTransitItem(BaseItemInfo item, IInventoryUI to)
+    private bool TryTransitItem(BaseItemInfo item, IInventoryUI to)
     {
         var unitInventory = PlayerUnitControl.Instance.CurrentUnit.Inventory;
         if (to is ArmorUI)
