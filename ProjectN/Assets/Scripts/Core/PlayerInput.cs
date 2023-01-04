@@ -50,6 +50,10 @@ public class PlayerInput : MonoBehaviour
         {
             Application.Quit();
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            PlayerUnitControl.Instance.HealOrder();
+        }
     }
 
     public void OpenInventory()

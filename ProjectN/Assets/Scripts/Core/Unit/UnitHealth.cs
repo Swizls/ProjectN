@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class UnitHealth : MonoBehaviour
 {
+    private const int DEFAULT_HEALTH = 100;
     [SerializeField] private int _healthPoints;
 
     private ParticleSystem _particles;
 
-    public Action damageTaken;
+    public Action healthValueChanged;
 
     public int HealthPoints => _healthPoints;
 
@@ -18,6 +19,18 @@ public class UnitHealth : MonoBehaviour
         _particles = GetComponentInChildren<ParticleSystem>();
     }
 
+    public void Heal(int value)
+    {
+        if (value < 0)
+            throw new ArgumentOutOfRangeException();
+
+        _healthPoints += value;
+
+        if(_healthPoints > DEFAULT_HEALTH)
+            _healthPoints = DEFAULT_HEALTH;
+
+        healthValueChanged?.Invoke();
+    }
     public void ApplyDamage(int damage)
     {
         if (damage < 0)
@@ -26,7 +39,7 @@ public class UnitHealth : MonoBehaviour
         _healthPoints -= damage;
         _particles.Play();
 
-        damageTaken?.Invoke();
+        healthValueChanged?.Invoke();
 
         if (_healthPoints <= 0)
             Death();

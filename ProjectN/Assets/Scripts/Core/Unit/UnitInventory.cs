@@ -10,7 +10,6 @@ public class UnitInventory : MonoBehaviour
     [SerializeField] private BackpackInfo _backpackInfo;
     [SerializeField] private ArmorInfo _armorInfo;
     [SerializeField] private WeaponInfo _weaponInfo;
-    [SerializeField] private Weapon _weapon;
 
     private Storable _backpack;
     private Storable _armor;
@@ -21,19 +20,20 @@ public class UnitInventory : MonoBehaviour
 
     private bool _isStorageOpened = false;
 
+    public Weapon Weapon;
+
     [HideInInspector] public LootCrate CurrentOpenedStorage;
 
     public bool IsStorageOpened => _isStorageOpened;
     public Storable Backpack => _backpack;
     public Storable Armor => _armor;
-    public Weapon Weapon => _weapon;
     public List<BaseItemInfo> ExternalItems => _externalItems;
 
     private void Start()
     {
         if(_weaponInfo != null)
         {
-            _weapon = new(_weaponInfo);
+            Weapon = new(_weaponInfo);
         }
         if(_backpackInfo != null)
         {
@@ -48,6 +48,15 @@ public class UnitInventory : MonoBehaviour
             }
         }
     }
+    public void ItemRemove(BaseItemInfo item)
+    {
+        if (_backpack.StoredItems.Contains(item))
+            _backpack.StoredItems.Remove(item);
+
+        if (_armor.StoredItems.Contains(item))
+            _armor.StoredItems.Remove(item);
+    }
+
     public void PickupFromGround(BaseItemInfo itemInfo)
     {
         foreach(ItemScenePresenter item in _itemPresenters)
@@ -57,6 +66,33 @@ public class UnitInventory : MonoBehaviour
                 item.Pickup();
             }
         }
+    }
+    
+    public bool IsItemInInventory(BaseItemInfo item)
+    {
+        return _backpack.StoredItems.Contains(item) || _armor.StoredItems.Contains(item);
+    }
+
+    public bool IsHealItemInInventory(out MedicineInfo healItem)
+    {
+        foreach (BaseItemInfo item in _backpack.StoredItems)
+        {
+            if(item is MedicineInfo)
+            {
+                healItem = (MedicineInfo)item;
+                return true;
+            }
+        }
+        foreach (BaseItemInfo item in _armor.StoredItems)
+        {
+            if (item is MedicineInfo)
+            {
+                healItem = (MedicineInfo)item;
+                return true;
+            }
+        }
+        healItem = null;
+        return false;
     }
 
     public void PickupFromStorage(BaseItemInfo itemInfo)

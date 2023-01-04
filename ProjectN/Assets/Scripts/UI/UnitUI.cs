@@ -12,21 +12,21 @@ public class UnitUI : MonoBehaviour
     {
         _healthBar = GetComponentInChildren<HealthBar>();
         _unit = GetComponent<Unit>();
-        _unit.Health.damageTaken += SetValues;
+        _unit.Health.healthValueChanged += SetValues;
         SetValues();
     }
     private void OnEnable()
     {
         if(_unit != null)
         {
-            _unit.Health.damageTaken += SetValues;
+            _unit.Health.healthValueChanged += SetValues;
             SetValues();
         }
     }
 
     private void OnDisable()
     {
-        _unit.Health.damageTaken -= SetValues;
+        _unit.Health.healthValueChanged -= SetValues;
     }
 
     private void SetValues()

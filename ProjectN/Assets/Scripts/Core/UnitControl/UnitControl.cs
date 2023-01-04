@@ -10,7 +10,7 @@ public abstract class UnitControl : MonoBehaviour
     public List<Unit> AllControlableUnits => _allControlableUnits;
     public Unit CurrentUnit => _currentUnit;
 
-    protected void OnUnitDeath(Unit unit)
+    protected virtual void OnUnitDeath(Unit unit)
     {
         _allControlableUnits.Remove(unit);
         unit.unitDied -= OnUnitDeath;
